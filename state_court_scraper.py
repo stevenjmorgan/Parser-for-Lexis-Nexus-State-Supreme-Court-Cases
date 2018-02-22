@@ -12,8 +12,8 @@
 ## 9/19/2011
 ##
 ## modified for state courts by
-## Michael Nelson
-## Spring, 2012
+## Steven Morgan
+## Summer, 2017
 
 import os, re, csv, string, operator, datetime
 
