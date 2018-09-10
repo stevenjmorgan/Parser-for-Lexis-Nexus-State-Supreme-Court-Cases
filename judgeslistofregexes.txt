@@ -27,4 +27,866 @@ aS'and in the judgment'
 p13
 aS'was an appointed'
 p14
+aS'S93A0786'
+p15
+aS'S93X0787'
+p16
+aS'III-A'
+p17
+aS'I-V'
+p18
+aS'Parts V\\(C\\), VI, VII and VIII'
+p19
+aS' VII'
+p20
+aS'Parts V\\(C\\), VI, VII, and VIII'
+p21
+aS'Parts I, II, IV and V\\(A\\)'
+p22
+aS'Part III and V\\(B\\)'
+p23
+ag19
+aS'Messrs\\.'
+p24
+aS' stead'
+p25
+aS'MOTION FOR EXPEDITED APPEAL IS GRANTED'
+p26
+aS'REQUEST FOR ORAL ARGUMENT IS DENIED'
+p27
+aS'Section IV\\(D\\)'
+p28
+aS'parts I, II, and III'
+p29
+aS'respect|RESPECT|Respect'
+p30
+aS'action was submitted'
+p31
+aS'Subscribing to the Opinion and Assigning Additional Reasons'
+p32
+aS'Pursuant to Ariz\\. Const\\. art\\. VI|pursuant to Ariz\\. Const\\. art\\. VI|Pursuant to Ariz\\. Const\\. art\\. 6|pursuant to Ariz\\. Const\\. art\\. 6'
+p33
+aS'Arizona Constitution'
+p34
+aS'Pursuant to art\\. VI\\.|Pursuant to article VI'
+p35
+aS'pursuant|Pursuant'
+p36
+aS' and Justices'
+p37
+aS'None'
+p38
+aS'\xe2\x80\x94'
+p39
+aS'PANEL: '
+p40
+aS'\\$110W\\.'
+p41
+aS' but, on administrative leave,'
+p42
+aS'Ex parte Reneau L\\. Gates \\(re\\: v\\. Palm Harbor Homes\\, Inc\\.\\, et al\\.\\)'
+p43
+aS'All the|all the|ALL THE'
+p44
+aS'Circuit|circuit|CIRCUIT'
+p45
+aS'except'
+p46
+aS'Special Justices'
+p47
+aS'Terminix International v\\. Jackson'
+p48
+aS'Special Justice'
+p49
+aS'We Concur|WE CONCUR|We concur'
+p50
+aS'Associate Justice'
+p51
+aS'Point II'
+p52
+aS'Special Chief Justice'
+p53
+aS'Chief Justice'
+p54
+aS'Justice\\.'
+p55
+aS'affirmance|Affirmance|AFFIRMANCE'
+p56
+aS"'s|'S"
+p57
+aS'\\(No\\.\\s\\d*\\)'
+p58
+aS'AFFIRMED|Affirmed|affirmed'
+p59
+aS'AFFIRM|Affirm|affirm'
+p60
+aS'grant the petition'
+p61
+aS'petition|Petition|PETITION'
+p62
+aS'Granted|granted|GRANTED'
+p63
+aS'abstaining|Abstaining|ABSTAINING'
+p64
+aS'No\\.\\s\\d*'
+p65
+aS'Senior'
+p66
+aS'Supr\\.|Supr'
+p67
+ag39
+ag54
+aS'Chief Judge'
+p68
+aS' but '
+p69
+aS'Justices|JUSTICES|justices'
+p70
+aS'JUSTICE\\.'
+p71
+aS'JUSTICE|Justice|justice'
+p72
+aS'announced|Announced|ANNOUNCED'
+p73
+aS'\\*Link to the text of the note'
+p74
+aS'Ariz\\.Const\\.'
+p75
+aS'art\\. VI'
+p76
+aS' art\\.'
+p77
+aS'Link to the text of the note'
+p78
+aS'to the'
+p79
+aS'prior'
+p80
+aS'oral argument|argument'
+p81
+aS'resigned'
+p82
+aS'chief|Chief|CHIEF'
+p83
+aS'AUTHOR'
+p84
+aS'nonrecusal|NONRECUSAL|Nonrecusal'
+p85
+aS'deeming'
+p86
+aS'temporary'
+p87
+aS'filed:'
+p88
+aS'filed a|file a'
+p89
+aS'President'
+p90
+aS'Intermediate|intermediate|INTERMEDIATE'
+p91
+aS'Associate|ASSOCIATE|associate'
+p92
+aS'reasons|REASONS|Reasons|reason|REASON|Reason'
+p93
+aS'Superior'
+p94
+aS'constituting the'
+p95
+aS'En Banc|en Banc'
+p96
+aS'In Banc'
+p97
+aS'cases|Cases|CASES'
+p98
+aS'agreement|Agreement|AGREEMENT'
+p99
+aS'"'
+p100
+aS' all | All | ALL '
+p101
+aS'Present|PRESENT|present'
+p102
+aS'APPEALS'
+p103
+aS' THE'
+p104
+aS'\xc3\x81'
+p105
+aS'WITHOUT'
+p106
+aS'WITH'
+p107
+aS'ASSIGNED BY REASON OF VACANCY|VACANCY|Vacancy'
+p108
+aS'THIS'
+p109
+aS'PELICONES|Pelicones'
+p110
+aS'member|Member|MEMBER'
+p111
+aS'disposition|Disposition|DISPOSITION'
+p112
+aS' right| Right| RIGHT'
+p113
+aS'DISSENTS'
+p114
+aS'WRITTEN|written|Written'
+p115
+aS'WITHOUT|without'
+p116
+aS' took| TOOK| Took'
+p117
+aS'Rule IV'
+p118
+aS' IV'
+p119
+aS'C\\. J\\.,'
+p120
+aS' J\\.,'
+p121
+aS'assigned|Assigned|ASSIGNED|ASSIGNS|Assigns|assigns'
+p122
+aS' as '
+p123
+aS'"Agreement to Arbitrate"'
+p124
+aS'Arbitrate"'
+p125
+aS'files a'
+p126
+aS'former|Former|FORMER'
+p127
+aS'C\\.J\\.,|Sp\\.JJ|Sp\\.J\\.|Sp\\. J\\.|C\\.J,|J\\.P\\.T\\.|CJ,||A\\.J\\.V\\.C\\.J\\.,|JJ\\.,|Sp\\.J\\.|Js,|JS,|JJ\\.,|JJ,|D\\.J\\.,|P\\.J\\.,|P\\.\\sJ\\.,|C\\.J\\.,|J\\.,|J\\.| J,|C\\. J\\.,'
+p128
+aS'C\\.J\\.|C\\.J|CJ|JJ\\.|Js|JS|JJ\\.|JJ|D\\.J\\.|P\\.J\\.|P\\.\\sJ\\.|C\\.J\\.|J\\.|J\\.|C\\. J\\.'
+p129
+ag129
+aS'Sp\\.J\\.'
+p130
+aS'Part II\\.A'
+p131
+aS'Part II\\.B'
+p132
+aS'Parts II'
+p133
+aS'Parts I'
+p134
+aS'Part II'
+p135
+aS'Part I'
+p136
+aS'WoWe'
+p137
+aS'foregoing|Foregoing|FOREGOING'
+p138
+aS' for| For| FOR'
+p139
+aS'[\\(\\[].*?[\\)\\]]'
+p140
+aS'III'
+p141
+aS'II\\(\\w\\)'
+p142
+aS'III\\(\\w\\)'
+p143
+aS' II'
+p144
+ag141
+aS'Associate'
+p145
+aS'Vice'
+p146
+aS'\\[\\**\\d*\\]'
+p147
+aS'Arbitrate|arbitrate|ARBITRATE'
+p148
+aS'\xc2'
+p149
+aS'BENCH|Bench|bench'
+p150
+aS'(Before: |BEFORE: )'
+p151
+aS'\xa0'
+p152
+aS'\\/'
+p153
+aS'\\(see p'
+p154
+aS'\\(\\d\\)'
+p155
+aS'\\d'
+p156
+aS'\\('
+p157
+aS'\\)'
+p158
+aS'\\sI,'
+p159
+aS' or '
+p160
+aS' BY'
+p161
+aS' FOR'
+p162
+aS'I;'
+p163
+aS'Voting|VOTING|voting'
+p164
+aS'Surrogate'
+p165
+aS"'"
+p166
+aS'judgment'
+p167
+aS'unanimous view of the court'
+p168
+aS'unanimous'
+p169
+aS'Took no|Took No|took no|TOOK NO'
+p170
+aS' No,'
+p171
+aS'separately|Separately|SEPARATELY'
+p172
+aS'separate|Separate|SEPARATE'
+p173
+aS'in place of'
+p174
+aS'sections,'
+p175
+aS'Sections,'
+p176
+aS'sections'
+p177
+aS'section,'
+p178
+aS'Section,'
+p179
+aS'section'
+p180
+aS'constituting,'
+p181
+aS'en banc,|en banc|En banc|En Banc|EN BANC'
+p182
+aS'\\['
+p183
+aS'\\]'
+p184
+aS'concurs in the result, without opinion\\.'
+p185
+aS'all concurring'
+p186
+aS'See separate opinion'
+p187
+aS'concurring|Concurring|CONCURRING'
+p188
+aS'concurrence|Concurrence|CONCURRENCE|Concurrence:'
+p189
+aS'concurred'
+p190
+aS'concur in'
+p191
+aS'Concurs:|CONCURs:'
+p192
+aS'concurs|Concurs|CONCURS'
+p193
+aS'concur|Concur'
+p194
+aS'does'
+p195
+aS'consideration'
+p196
+aS'Md\\.'
+p197
+aS'Temporarily'
+p198
+aS'Link to, text thee'
+p199
+aS'assigns reasons'
+p200
+aS'Appeals'
+p201
+aS'retired|RETIRED|Retired|Ret|ret\\.'
+p202
+aS'assigned|Assigned|ASSIGNED|assignment|Assignment|ASSIGNNMENT'
+p203
+aS'The '
+p204
+aS' sat'
+p205
+aS'delivered'
+p206
+aS'PARTICIPATING'
+p207
+aS'participating'
+p208
+ag207
+ag208
+aS'Participating'
+p209
+aS'did not participate'
+p210
+aS'did not sit'
+p211
+aS'did not'
+p212
+aS'Maricopa County'
+p213
+aS'County'
+p214
+aS'WRITTEN BY:|Written by:'
+p215
+aS'herein'
+p216
+aS'not participate'
+p217
+aS'participate'
+p218
+aS'Presiding|PRESIDING'
+p219
+aS'specially|Specially|SPECIALLY'
+p220
+aS'special|Special|SPECIAL'
+p221
+aS'pro-tem|Pro-Tem|PRO-TEM'
+p222
+aS'concurring'
+p223
+aS'Concurring'
+p224
+ag185
+aS'no opinion'
+p225
+aS'opinion\\.'
+p226
+aS'OPINIONS|OPINIONs|opinions|Opinions'
+p227
+aS'opinion|Opinion|OPINION'
+p228
+aS' full '
+p229
+aS'statement'
+p230
+aS'files|file|FILES|FILE'
+p231
+aS'Judicial Circuit'
+p232
+aS'Part III'
+p233
+aS'no part|NO PART|No Part'
+p234
+aS'part|Part|PART'
+p235
+aS'which|Which|WHICH'
+p236
+aS'DENIED|denied'
+p237
+aS'Majority|majority|MAJORITY'
+p238
+aS'Heard|heard|HEARD'
+p239
+aS'joining|JOINING|Joining'
+p240
+aS'joined|JOINED|Joined'
+p241
+aS'joins|JOINS|Joins'
+p242
+aS'join|JOIN|Join'
+p243
+aS'takes|taking|Taking|TAKING'
+p244
+aS' that'
+p245
+aS'as to the rationale'
+p246
+aS'the judgment'
+p247
+aS'rationale'
+p248
+aS'T\\.Y\\.|T\\. Y\\.'
+p249
+aS'A\\.M\\.'
+p250
+aS'F\\.E\\.'
+p251
+aS'N\\.C\\.'
+p252
+aS'Paul H\\.'
+p253
+aS'Russell A\\.'
+p254
+aS'G\\. Barry'
+p255
+aS' A\\.| B\\.| C\\.| D\\.| E\\.| F\\.| G\\.| H\\.| I\\.| J\\.| K\\.| L\\.| M\\.| N\\.| O\\.| P\\.| Q\\.| R\\.| S\\.| T\\.| U\\.| V\\.| W\\.| X\\.| Y\\.| Z\\.|'
+p256
+ag256
+ag256
+ag256
+aS'BEFORE'
+p257
+aS'would'
+p258
+aS'this'
+p259
+aS'only'
+p260
+aS'without'
+p261
+aS'with'
+p262
+aS' out'
+p263
+aS'also'
+p264
+aS' of'
+p265
+aS' view'
+p266
+aS' Not'
+p267
+aS' not'
+p268
+aS' NOT'
+p269
+aS' whom'
+p270
+aS' who'
+p271
+aS'filed'
+p272
+aS'expressing'
+p273
+aS'but dissents'
+p274
+aS'but dissent'
+p275
+aS'but not the dissent'
+p276
+aS'dissented'
+p277
+aS'issued'
+p278
+aS'foregoing'
+p279
+aS'agree'
+p280
+aS'Opposed|opposed|OPPOSED'
+p281
+aS'dissents'
+p282
+aS'dissenting'
+p283
+aS'DISSENTING'
+p284
+aS'ENTIRE COURT'
+p285
+aS' as'
+p286
+aS'reversal'
+p287
+aS'none'
+p288
+aS'Twelfth|Eleventh|Fifth|Tenth|Ninth|Eigth|Seventh|Sixth'
+p289
+aS'Mr'
+p290
+aS'remand'
+p291
+aS'overruling'
+p292
+aS'rehearing'
+p293
+aS'OPINION'
+p294
+aS'COURT'
+p295
+aS'ONLY'
+p296
+aS'IN RESULT'
+p297
+aS' IN '
+p298
+aS'Dissenting'
+p299
+aS'Dissents'
+p300
+aS'dissent'
+p301
+aS'Dissent'
+p302
+aS'recuses|RECUSES|Recuses'
+p303
+aS'recused|RECUSED|Recused'
+p304
+aS'recuse|RECUSE|Recuse'
+p305
+aS'SEPARATELY'
+p306
+aS'PRO-TEM'
+p307
+aS'reserves'
+p308
+aS'is disqualified|disqualified|disqualification'
+p309
+aS'recused themselves'
+p310
+aS'recused|Recused'
+p311
+aS'deceased'
+p312
+aS'in the result'
+p313
+aS'the result'
+p314
+aS'result|Result|RESULT'
+p315
+aS' acting '
+p316
+aS' and '
+p317
+aS' AND '
+p318
+aS' in a'
+p319
+aS'in the'
+p320
+aS' In | in '
+p321
+aS' in,'
+p322
+ag265
+aS' OF'
+p323
+aS' from'
+p324
+aS'herself'
+p325
+aS'himself'
+p326
+aS'themselves'
+p327
+aS'expresses'
+p328
+aS'ii'
+p329
+aS' cases| Cases'
+p330
+aS'case|Case'
+p331
+aS' by'
+p332
+aS'heard'
+p333
+aS'considered'
+p334
+aS'decided'
+p335
+aS'time'
+p336
+aS'submission'
+p337
+aS'\\&'
+p338
+aS'were designated'
+p339
+aS'is designated|designated|designation'
+p340
+aS' All |ALL '
+p341
+aS'is sitting'
+p342
+aS'sitting|SITTING|Sitting'
+p343
+aS' sit'
+p344
+aS' superior'
+p345
+aS' under'
+p346
+aS'WHOLE|Whole|whole'
+p347
+aS'deny'
+p348
+aS'Matter|MATTER|matter'
+p349
+aS' otherwise|Otherwise|OTHERWISE'
+p350
+aS' leave'
+p351
+aS' others| other| Other| OTHER'
+p352
+aS' vote|votes to'
+p353
+aS'RSA'
+p354
+aS'memorandum'
+p355
+aS'took no'
+p356
+aS'syllabus'
+p357
+aS'Appellate District'
+p358
+aS'District|district'
+p359
+aS'Administrative'
+p360
+aS'i-v'
+p361
+aS'follows'
+p362
+aS'Judicial'
+p363
+aS'By:'
+p364
+aS'Panel:'
+p365
+aS':\\s'
+p366
+aS':'
+p367
+aS'authored|Authored|AUTHORED'
+p368
+aS' to '
+p369
+aS'DISSENT'
+p370
+aS' each'
+p371
+aS'Jr|jr|JR'
+p372
+aS'denial'
+p373
+aS'Sr|sr|SR'
+p374
+aS'Deceased|deceased|DECEASED'
+p375
+aS'lead|LEAD|Lead'
+p376
+aS' was | WAS | Was'
+p377
+aS' other'
+p378
+aS'writing'
+p379
+aS'Writ|writ|WRIT'
+p380
+aS'take|TAKE|Take'
+p381
+aS'Issued|issued|ISSUED'
+p382
+aS'Madame|MADAME|madame'
+p383
+aS'Visiting|VISITING|visiting'
+p384
+aS'acting|ACTING|Acting'
+p385
+aS'having|Having|HAVING'
+p386
+aS'reverse'
+p387
+aS' is '
+p388
+aS'Third'
+p389
+aS' John '
+p390
+ag369
+aS', to '
+p391
+aS' ir '
+p392
+aS'Modification'
+p393
+aS'Vacation'
+p394
+aS',d,'
+p395
+aS'Division Two|Two'
+p396
+aS'dS'
+p397
+aS'NOTE'
+p398
+aS'dI'
+p399
+aS'dX'
+p400
+aS'were'
+p401
+aS'pursuant'
+p402
+aS'determination '
+p403
+aS'Division One'
+p404
+aS'article IV'
+p405
+aS'Article|ARTICLE|article'
+p406
+aS'Arizona'
+p407
+aS'Second'
+p408
+aS'Council'
+p409
+aS'Chairperson'
+p410
+aS'not on panel|on panel|panel'
+p411
+aS'Division Four'
+p412
+aS'to conviction|conviction'
+p413
+aS'to sentence|sentence'
+p414
+aS'additional'
+p415
+aS'following'
+p416
+aS'subscribes|subscribe'
+p417
+aS'ORAL ARGUMENT'
+p418
+aS'DENIAL'
+p419
+aS' ONE '
+p420
+aS'TWO'
+p421
+aS'THREE'
+p422
+aS' have'
+p423
+aS'unconstitutional'
+p424
+aS'follow'
+p425
+aS'chapter'
+p426
+aS'Before'
+p427
+aS'Per Curiam|Curiam'
+p428
+aS'causesubmitted'
+p429
+aS'on briefs|briefs|brief'
+p430
+aS'Division'
+p431
+aS'absent'
+p432
+aS' when'
+p433
+aS' inof'
+p434
+aS'Order'
+p435
+aS'other'
+p436
+ag432
+aS'tohis '
+p437
+aS'toother|TOOTHER|to other'
+p438
 a.

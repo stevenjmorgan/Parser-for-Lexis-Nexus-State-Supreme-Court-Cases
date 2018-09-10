@@ -500,7 +500,7 @@ for entry in dirlist:
 
 #dirlist = [file for file in dirlist if len(file) > 20]
 
-for entry in cleandirlist[0:1]: ## each entry is a txt file with an opinion
+for entry in cleandirlist: ## each entry is a txt file with an opinion
     # initialize all variables to be used
     infilepath = dirname + entry
     infilehandle = open(infilepath)
@@ -1490,7 +1490,7 @@ for entry in cleandirlist[0:1]: ## each entry is a txt file with an opinion
             with open("judgeslistofregexes.txt", "rb") as fp:   # Unpickling
                 list_regexes = pickle.load(fp)
             for s in list_regexes:
-                judges_string = re.sub(s, '', judges_string)
+                judges_string = re.sub(s, ' ', judges_string)
 
             judges_string = re.sub(" delivered the Opinion of the Court\.| DELIVERED THE OPINION OF THE COURT\.|Delivered the Opinion of the Court\.", ",", judges_string)
             #print judges_string
