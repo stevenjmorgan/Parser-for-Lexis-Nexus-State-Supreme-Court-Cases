@@ -1491,6 +1491,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 list_regexes = pickle.load(fp)
             for s in list_regexes:
                 judges_string = re.sub(s, ' ', judges_string)
+                #print judges_string
 
             judges_string = re.sub(" delivered the Opinion of the Court\.| DELIVERED THE OPINION OF THE COURT\.|Delivered the Opinion of the Court\.", ",", judges_string)
             #print judges_string
@@ -1555,6 +1556,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_string = re.sub("O'NEILL to|O'NEILLto", "O'NEILL", judges_string)#
             judges_string = re.sub("Boucier", "Bourcier", judges_string)#
             judges_string = re.sub("Ralmon", "Almon", judges_string)#
+            judges_string = re.sub("RALMON", 'Almon', judges_string)#
             judges_string = re.sub("Fabec", "Fabe", judges_string)#
             judges_string = re.sub("Estaugh", "Eastaugh", judges_string)#
             judges_string = re.sub("Lesson", "Leeson", judges_string) #
