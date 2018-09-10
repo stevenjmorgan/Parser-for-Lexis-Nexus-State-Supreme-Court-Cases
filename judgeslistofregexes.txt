@@ -1,0 +1,30 @@
+(lp0
+S'Judges:|Judges|JUDGES'
+p1
+aS'judge|Judge|JUDGE'
+p2
+aS' delivered the Opinion of the Court\\.| DELIVERED THE OPINION OF THE COURT\\.|Delivered the Opinion of the Court\\.'
+p3
+aS'BEFORE THE ENTIRE'
+p4
+aS'Court|court|COURT'
+p5
+aS' Sr\\.| SR\\.'
+p6
+aS' Jr\\.| JR\\.'
+p7
+aS' Mr\\.| MR\\.'
+p8
+aS' Sr| SR'
+p9
+aS' Jr| JR'
+p10
+aS' at the'
+p11
+aS' Mr| MR'
+p12
+aS'and in the judgment'
+p13
+aS'was an appointed'
+p14
+a.
