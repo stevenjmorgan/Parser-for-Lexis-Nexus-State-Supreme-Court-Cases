@@ -54,9 +54,20 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
             m = re.search('\\b(\\d{1,3})\\s([AFSNU]\\.\\s?[\\w\\.]+)\\s(\\d{1,4}|_{1,4})\\b', txtline)
             if m:
-                found = m.group()
-                print found
+                reporter_hn = m.group()
+                print reporter_hn
 
+            m2 = re.search('\\b(\\d{1,3})\\s[S]\\.\\s[C][t]\\.\\s(\\d{1,4}|_{1,4})\\b', txtline)
+            if m2:
+                sct_cite_hn = m2.group()
+
+                print repr(sct_cite_hn)
+
+            m3 = re.search('\\b(\\d{1,3})\\s([A-Z]\\.)\\s([A-Z][a-z]\\.)\\s(\\d[a-z])\\s(\\d{1,3}|_{1,3})\\b', txtline)
+            if m3:
+                lexis_cite_hn = m3.group()
+                print repr(lexis_cite_hn)
+                
             #subText = "([\s]Fed\.\sAppx\.|[\s]F\.3d|[\s]F\.[\s]|[\s]F\.2d|[\d] U.S. [\d]|[\s]App\.)"
             #start = FindSubString(txtline, subText, 0)
             #print start
