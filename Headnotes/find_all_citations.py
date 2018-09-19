@@ -52,13 +52,16 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             if re.search("([\s]Fed\.\sAppx\.|[\s]F\.3d|[\s]F\.[\s]|[\s]F\.2d|[\d] U.S. [\d]|[\s]App\.)", txtline):
                 print "FOUND IT"
 
+            m = re.search('\\b(\\d{1,3})\\s([AFSNU]\\.\\s?[\\w\\.]+)\\s(\\d{1,4}|_{1,4})\\b', txtline)
+            if m:
+                found = m.group()
+                print found
 
-
-            subText = "([\s]Fed\.\sAppx\.|[\s]F\.3d|[\s]F\.[\s]|[\s]F\.2d|[\d] U.S. [\d]|[\s]App\.)"
+            #subText = "([\s]Fed\.\sAppx\.|[\s]F\.3d|[\s]F\.[\s]|[\s]F\.2d|[\d] U.S. [\d]|[\s]App\.)"
             #start = FindSubString(txtline, subText, 0)
             #print start
 
-            print txtline.split(subText)[0]
+            #print txtline.split(subText)[0]
 
             #found = re.search('([\s]Fed\.\sAppx\.|[\s]F\.3d|[\s]F\.[\s]|[\s]F\.2d|[\d] U.S. [\d]|[\s]App\.)', txtline)#.group(1)
             #print found
