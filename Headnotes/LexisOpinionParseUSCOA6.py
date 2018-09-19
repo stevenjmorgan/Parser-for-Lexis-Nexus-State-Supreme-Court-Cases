@@ -17,6 +17,7 @@ import csv
 import string
 import operator
 import pickle
+import sys
 from sets import Set
 
 mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
@@ -205,8 +206,6 @@ def namesuffix(nstring):
 with open("agencyList.txt", "rb") as fp:   # Unpickling
     agencylist = pickle.load(fp)
 
-print type(agencylist)
-
 # .csv file where extracted metadata will be stored
 fout = open(mydir + "adminMetadata_AgencyCounts_Jun8_1.csv", "wb")
 outfilehandle = csv.writer(fout,
@@ -321,7 +320,7 @@ for entry in dirlist:
 #dirlist = [file for file in dirlist if len(file) > 20]
 
 # Use (uncomment) following line to test code on a small handful of cases
-cleandirlist = cleandirlist[339:349]
+cleandirlist = cleandirlist[42312:42313]
 
 for entry in cleandirlist: ## each entry is a txt file with an opinion
     print entry
@@ -906,9 +905,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 ##            core_terms_line = False
 ##            #print core_terms_string
 
-
-
-
         if (re.match("^DISPOSITION:|Disposition", txtline)):
             ## disposition of case
             disposition_line = True
@@ -956,9 +952,11 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         if (re.search("LexisNexis", txtline) and re.search("Headnotes", txtline)):
             headnote_line = True
             coreterms_line = False
+            #print repr(txtline)
         if (headnote_line and re.search(">", txtline)):
             #headnote_tmp = txtline + "|"
             headnote_string = headnote_string + txtline
+            #print repr(txtline)
             #print headnote_string
             #print headnote_tmp
             #print headnote_line
