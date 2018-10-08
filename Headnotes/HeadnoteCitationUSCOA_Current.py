@@ -97,28 +97,52 @@ localrow.append('circuit')
 localrow.append('Lexis_Cite')
 #localrow.append('Reporter')
 localrow.append("hdnote1")
+localrow.append("hdnote1_2")
+localrow.append("hdnote1_3")
 localrow.append("hdnote1_cites")
 localrow.append("hdnote2")
+localrow.append("hdnote2_2")
+localrow.append("hdnote2_3")
 localrow.append("hdnote2_cites")
 localrow.append("hdnote3")
+localrow.append("hdnote3_2")
+localrow.append("hdnote3_3")
 localrow.append("hdnote3_cites")
 localrow.append("hdnote4")
+localrow.append("hdnote4_2")
+localrow.append("hdnote4_3")
 localrow.append("hdnote4_cites")
 localrow.append("hdnote5")
+localrow.append("hdnote5_2")
+localrow.append("hdnote5_3")
 localrow.append("hdnote5_cites")
 localrow.append("hdnote6")
+localrow.append("hdnote6_2")
+localrow.append("hdnote6_3")
 localrow.append("hdnote6_cites")
 localrow.append("hdnote7")
+localrow.append("hdnote7_2")
+localrow.append("hdnote7_3")
 localrow.append("hdnote7_cites")
 localrow.append("hdnote8")
+localrow.append("hdnote8_2")
+localrow.append("hdnote8_3")
 localrow.append("hdnote8_cites")
 localrow.append("hdnote9")
+localrow.append("hdnote9_2")
+localrow.append("hdnote9_3")
 localrow.append("hdnote9_cites")
 localrow.append("hdnote10")
+localrow.append("hdnote10_2")
+localrow.append("hdnote10_3")
 localrow.append("hdnote10_cites")
 localrow.append("hdnote11")
+localrow.append("hdnote11_2")
+localrow.append("hdnote11_3")
 localrow.append("hdnote11_cites")
 localrow.append("hdnote12")
+localrow.append("hdnote12_2")
+localrow.append("hdnote12_3")
 localrow.append("hdnote12_cites")
 outfilehandle.writerow(localrow)
 
@@ -135,8 +159,8 @@ cleandirlist = cleandirlist #[42300:42313] 42000:
 
 entryCount = 0
 
-for entry in cleandirlist: ## each entry is a txt file with an opinion
-
+for entry in cleandirlist: ## each entry is a txt file with an opinion #[34854:34855]
+    #print(entry)
     infilepath = dirname + entry
     print entry
     entryCount += 1
@@ -166,7 +190,30 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     hn10_text = ''
     hn11_text = ''
     hn12_text = ''
-
+    hn1_text2 = ''
+    hn2_text2 = ''
+    hn3_text2 = ''
+    hn4_text2 = ''
+    hn5_text2 = ''
+    hn6_text2 = ''
+    hn7_text2 = ''
+    hn8_text2 = ''
+    hn9_text2 = ''
+    hn10_text2 = ''
+    hn11_text2 = ''
+    hn12_text2 = ''
+    hn1_text3 = ''
+    hn2_text3 = ''
+    hn3_text3 = ''
+    hn4_text3 = ''
+    hn5_text3 = ''
+    hn6_text3 = ''
+    hn7_text3 = ''
+    hn8_text3 = ''
+    hn9_text3 = ''
+    hn10_text3 = ''
+    hn11_text3 = ''
+    hn12_text3 = ''
     line_list = []
 
     ### Pull line before HN1 -> open separately but text after hn section not
@@ -214,50 +261,113 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     for index in hn1index_list[0:1]:
         hn1_text = line_list[index-1].strip()
         #print hn1_text
+        if re.search('>', line_list[index-2].strip()):
+            hn1_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn1_text3 = line_list[index-3].strip()
 
     for index in hn2index_list[0:1]:
         hn2_text = line_list[index-1].strip()
         #print hn2_text
+        if re.search('>', line_list[index-2].strip()):
+            hn2_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn2_text3 = line_list[index-3].strip()
 
     for index in hn3index_list[0:1]:
         hn3_text = line_list[index-1].strip()
         #print hn2_text
+        if re.search('>', line_list[index-2].strip()):
+            hn3_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn3_text3 = line_list[index-3].strip()
 
     for index in hn4index_list[0:1]:
         hn4_text = line_list[index-1].strip()
         #print hn4_text
+        if re.search('>', line_list[index-2].strip()):
+            hn4_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn4_text3 = line_list[index-3].strip()
 
     for index in hn5index_list[0:1]:
         hn5_text = line_list[index-1].strip()
         #print hn5_text
+        if re.search('>', line_list[index-2].strip()):
+            hn5_text2 = line_list[index-2].strip()
+            #print hn2_text2
+            if re.search('>', line_list[index-3].strip()):
+                hn5_text3 = line_list[index-3].strip()
+            #print hn5_text3
+        #else:
+
 
     for index in hn6index_list[0:1]:
         hn6_text = line_list[index-1].strip()
         #print hn6_text
+        if re.search('>', line_list[index-2].strip()):
+            hn6_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn6_text3 = line_list[index-3].strip()
 
     for index in hn7index_list[0:1]:
         hn7_text = line_list[index-1].strip()
         #print hn7_text
+        if re.search('>', line_list[index-2].strip()):
+            hn7_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn7_text3 = line_list[index-3].strip()
 
     for index in hn8index_list[0:1]:
         hn8_text = line_list[index-1].strip()
         #print hn8_text
+        if re.search('>', line_list[index-2].strip()):
+            hn8_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn8_text3 = line_list[index-3].strip()
 
     for index in hn9index_list[0:1]:
         hn9_text = line_list[index-1].strip()
         #print hn9_text
+        if re.search('>', line_list[index-2].strip()):
+            hn9_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn9_text3 = line_list[index-3].strip()
 
     for index in hn10index_list[0:1]:
         hn10_text = line_list[index-1].strip()
         #print hn10_text
+        if re.search('>', line_list[index-2].strip()):
+            hn10_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn10_text3 = line_list[index-3].strip()
 
     for index in hn11index_list[0:1]:
         hn11_text = line_list[index-1].strip()
         #print hn11_text
+        if re.search('>', line_list[index-2].strip()):
+            hn11_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn11_text3 = line_list[index-3].strip()
 
     for index in hn12index_list[0:1]:
         hn12_text = line_list[index-1].strip()
         #print hn12_text
+        if re.search('>', line_list[index-2].strip()):
+            hn12_text2 = line_list[index-2].strip()
+        #print hn2_text
+            if re.search('>', line_list[index-3].strip()):
+                hn12_text3 = line_list[index-3].strip()
 
     f.close()
 
@@ -511,8 +621,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 #appeals_pattern = re.compile('(\\b\\d{1,3}\\s[US]\\.\\s?[\\w\\.]+\\sApp\.\\sD\.C\.\\s\\d{1,3}\\s)') #305 U.S. App. D.C. 125
                 #appeals_match = appeals_pattern.findall(txtline)
 
-                lexis_pattern = re.compile('(\\b\\d{1,3}\\s[A-Z]\\.\\s[A-Z][a-z]\\.\\s\\d[a-z]\\s\\d{1,3}|_{1,3}\\b)') #167 L. Ed. 2d 248
+                lexis_pattern = re.compile('(\\b\\d{1,3}\\s[A-Z]\\.\\s[A-Z][a-z]\\.\\s\\d[a-z]\\s\\d{1,3}|_{1,3}\\b)|(\\b\d{1,3}\s[F].\d{1,2}d\s[a][t]\s\d{1,4}\\b)|(\\b\d{1,3}\s[P].\d{1,2}d\s\d{1,3}\\b)') #167 L. Ed. 2d 248
                 lexis_match = lexis_pattern.findall(txtline)
+                lexis_match = [(tuple(int(x) if x.isdigit() else x for x in _ if x)) for _ in lexis_match]
                 #lexis_match = filter(None, lexis_match)
                 #print lexis_match
 
@@ -570,7 +681,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
                 ### First 5000 cases are wonky; this should probably be done by year
                 #if entryCount <= 5000:
-                if int(year) < 1950:
+                if int(year) < 1950 or int(year) >1949:
 
                     if i == 1:
                         hn1_list.extend(report_match)
@@ -644,28 +755,52 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     localrow.append(Lexis_cite)
     #localrow.append(Fed_cite)
     localrow.append(hn1_text)
+    localrow.append(hn1_text2)
+    localrow.append(hn1_text3)
     localrow.append(hn1_list)
     localrow.append(hn2_text)
+    localrow.append(hn2_text2)
+    localrow.append(hn2_text3)
     localrow.append(hn2_list)
     localrow.append(hn3_text)
+    localrow.append(hn3_text2)
+    localrow.append(hn3_text3)
     localrow.append(hn3_list)
     localrow.append(hn4_text)
+    localrow.append(hn4_text2)
+    localrow.append(hn4_text3)
     localrow.append(hn4_list)
     localrow.append(hn5_text)
+    localrow.append(hn5_text2)
+    localrow.append(hn5_text3)
     localrow.append(hn5_list)
     localrow.append(hn6_text)
+    localrow.append(hn6_text2)
+    localrow.append(hn6_text3)
     localrow.append(hn6_list)
     localrow.append(hn7_text)
+    localrow.append(hn7_text2)
+    localrow.append(hn7_text3)
     localrow.append(hn7_list)
     localrow.append(hn8_text)
+    localrow.append(hn8_text2)
+    localrow.append(hn8_text3)
     localrow.append(hn8_list)
     localrow.append(hn9_text)
+    localrow.append(hn9_text2)
+    localrow.append(hn9_text3)
     localrow.append(hn9_list)
     localrow.append(hn10_text)
+    localrow.append(hn10_text2)
+    localrow.append(hn10_text3)
     localrow.append(hn10_list)
     localrow.append(hn11_text)
+    localrow.append(hn11_text2)
+    localrow.append(hn11_text3)
     localrow.append(hn11_list)
     localrow.append(hn12_text)
+    localrow.append(hn12_text2)
+    localrow.append(hn12_text3)
     localrow.append(hn12_list)
     outfilehandle.writerow(localrow)
 
