@@ -15,12 +15,16 @@
 ## Michael Nelson
 ## Summer, 2017
 
-import os, re, csv, string, operator, datetime
+import os
+import re
+import csv
+import string
+import operator
+import datetime
 
 #mydir = "C:/Users/Steve/Desktop/Summer_Work/"
-mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/mandarbScrapes/"
+mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
 
-## function to expand abbreviated month names
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
     mstring2 = re.sub("Feb\.", "February", mstring2)
@@ -33,7 +37,6 @@ def expandmonth(mstring2):
     mstring2 = re.sub("Dec\.", "December", mstring2)
     return mstring2
 
-## function to convert month names to numbers
 def month2number(mstring):
     mnumber = -999
     if (mstring == "January"):
@@ -62,35 +65,6 @@ def month2number(mstring):
         mnumber = "12"
     return mnumber
 
-## function to convert circuit names to numbers, DC Circuit == 12
-def circuit2number(ctstring):
-    cirnumber = -999
-    if (re.search("FIRST|First", ctstring)):
-        cirnumber = "1"
-    if (re.search("SECOND|Second", ctstring)):
-        cirnumber = "2"
-    if (re.search("THIRD|Third", ctstring)):
-        cirnumber = "3"
-    if (re.search("FOURTH|Fourth", ctstring)):
-        cirnumber = "4"
-    if (re.search("FIFTH|Fifth", ctstring)):
-        cirnumber = "5"
-    if (re.search("SIXTH|Sixth", ctstring)):
-        cirnumber = "6"
-    if (re.search("SEVENTH|Seventh", ctstring)):
-        cirnumber = "7"
-    if (re.search("EIGHTH|Eighth", ctstring)):
-        cirnumber = "8"
-    if (re.search("NINTH|Ninth", ctstring)):
-        cirnumber = "9"
-    if (re.search("TENTH|Tenth", ctstring)):
-        cirnumber = "10"
-    if (re.search("ELEVENTH|Eleventh", ctstring)):
-        cirnumber = "11"
-    if (re.search("COLUMBIA|Columbia", ctstring)):
-        cirnumber = "12"
-    return cirnumber
-
 def Capitalize(nstring):
     if(len(nstring) > 1 and not re.match("MC|Mc|Mac|MAC", nstring)): #O'|Van|VAN
         nstring = string.upper(nstring[0]) + string.lower(nstring[1:])
@@ -100,7 +74,7 @@ def Capitalize(nstring):
         nstring = string.upper(nstring[0]) + string.lower(nstring[1:3]) + string.upper(nstring[3]) + string.lower(nstring[4:])
     if(re.match("MACY|Macy|MacY", nstring)):
         nstring = string.upper(nstring[0]) + string.lower(nstring[1]) + string.upper(nstring[2]) + string.lower(nstring[3:])
-#    if(re.match("O\'", nstring)):
+ #    if(re.match("O\'", nstring)):
  #       nstring = string.upper(nstring[0]) + nstring[1] + string.upper(nstring[2]) + string.lower(nstring[3:])
     if(re.match("Van\s|VAN\s", nstring)):
         nstring = string.upper(nstring[0]) + string.lower(nstring[1:4]) + string.upper(nstring[4]) + string.lower(nstring[5:])
@@ -380,10 +354,14 @@ def state_ab(value):
         state_abbr = "WY"
         return state_abbr
 
-
 # .csv file where extracted metadata will be stored
 fout = open(mydir + "mand_arb.csv", "wb")
 outfilehandle = csv.writer(fout,
+                           delimiter=",",
+                           quotechar='"',
+                           quoting=csv.QUOTE_NONNUMERIC)
+check = open(mydir + "check_recusals.csv", "wb")
+recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
@@ -395,95 +373,52 @@ localrow = []
 localrow.append("Email")
 localrow.append("FirstName")
 localrow.append("LastName")
-#localrow.append("firstcite")
 localrow.append("court")
 localrow.append("date")
-#localrow.append("nonpanel_test")
 localrow.append("state")
 localrow.append("panel_state")
 localrow.append("parties")
-#localrow.append("petitioner")
-#localrow.append("respondent")
 localrow.append("docket")
 localrow.append("citestring")
 localrow.append("LexisCite")
 localrow.append("WestLaw")
-#localrow.append("actionstring")
-#localrow.append("Unpublished")
-#localrow.append("Prior History")
-#localrow.append("Sub History")
-#localrow.append("Petion for Rehearing")
-#localrow.append("disposition")
 localrow.append("attorneys")
-#localrow.append("publicDefender")
-#localrow.append("proSe")
-#localrow.append("appellee attorneys")
-#localrow.append("appellee public defender")
-#localrow.append("appellee pro se")
 localrow.append("judges")
-#localrow.append("judges participating")
 localrow.append("judgeNP")
-#localrow.append("judgeNP_name")
 localrow.append("Judge1_Last_Name")
-#localrow.append("Judge1_First_Name")
-#localrow.append("Judge1_Full_Name")
 localrow.append("Judge1_Vote")
 localrow.append("Judge1_code")
 localrow.append("Judge2_Last_Name")
-#localrow.append("Judge2_First_Name")
-#localrow.append("Judge2_Full_Name")
 localrow.append("Judge2_Vote")
 localrow.append("Judge2_code")
 localrow.append("Judge3_Last_Name")
-#localrow.append("Judge3_First_Name")
-#localrow.append("Judge3_Full_Name")
 localrow.append("Judge3_Vote")
 localrow.append("Judge3_code")
 localrow.append("Judge4_Last_Name")
-#localrow.append("Judge4_First_Name")
-#localrow.append("Judge4_Full_Name")
 localrow.append("Judge4_Vote")
 localrow.append("Judge4_code")
 localrow.append("Judge5_Last_Name")
-#localrow.append("Judge5_First_Name")
-#localrow.append("Judge5_Full_Name")
 localrow.append("Judge5_Vote")
 localrow.append("Judge5_code")
 localrow.append("Judge6_Last_Name")
-#localrow.append("Judge6_First_Name")
-#localrow.append("Judge6_Full_Name")
 localrow.append("Judge6_Vote")
 localrow.append("Judge6_code")
 localrow.append("Judge7_Last_Name")
-#localrow.append("Judge7_First_Name")
-#localrow.append("Judge7_Full_Name")
 localrow.append("Judge7_Vote")
 localrow.append("Judge7_code")
 localrow.append("Judge8_Last_Name")
-#localrow.append("Judge8_First_Name")
-#localrow.append("Judge8_Full_Name")
 localrow.append("Judge8_Vote")
 localrow.append("Judge8_code")
 localrow.append("Judge9_Last_Name")
-#localrow.append("Judge9_First_Name")
-#localrow.append("Judge9_Full_Name")
 localrow.append("Judge9_Vote")
 localrow.append("Judge9_code")
 localrow.append("Judge10_Last_Name")
-#localrow.append("Judge10_First_Name")
-#localrow.append("Judge10_Full_Name")
 localrow.append("Judge10_Vote")
 localrow.append("Judge10_code")
 localrow.append("Judge11_Last_Name")
-#localrow.append("Judge11_First_Name")
-#localrow.append("Judge11_Full_Name")
 localrow.append("Judge11_Vote")
 localrow.append("Judge11_code")
-#localrow.append("majority_name")
-#localrow.append("perCuriam")
-#localrow.append("unanimous")
 localrow.append("dissent")
-#localrow.append("unwrittenDissent")
 localrow.append("dissent_no")
 localrow.append("dissent_name")
 localrow.append("dissent_1")
@@ -494,9 +429,9 @@ localrow.append("dissent_5")
 localrow.append("concurrence")
 localrow.append("concur_no")
 localrow.append("concur_name")
-localrow.append("silent_dissent")
+localrow.append("check")
 outfilehandle.writerow(localrow)
-
+recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
 dirname = mydir + "mandArb/"
@@ -510,9 +445,8 @@ for entry in dirlist:
 #dirlist = [file for file in dirlist if len(file) > 20]
 
 # Use (uncomment) following line to test code on a small handful of cases
-#cleandirlist = cleandirlist[838:872] #cleandirlist[838:872]   #cleandirlist[0:443] + cleandirlist[746:776] + cleandirlist[903:931] #+ cleandirlist[1271:1334] #cleandirlist[0:443] + cleandirlist[746:776] + cleandirlist[903:931] +
-            #1527
-for entry in cleandirlist: ## each entry is a txt file with an opinion
+#cleandirlist = cleandirlist[838:872]
+for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     # initialize all variables to be used
     infilepath = dirname + entry
     infilehandle = open(infilepath)
@@ -578,9 +512,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     pubdef = 0
     prose = 0
     attorney_string = ""
-    #appellee_pubdef = ""
-    #appellee_prose = ""
-    #appellee_attorney_string = ""
     pc_holder = ""
     judges_string = ""
     judge1_ln = ""
@@ -720,7 +651,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     blank_after_court = False
     cite_line = False
     blank_after_cite = False
-    action_line = False #why is this set to false again? See line 337
+    action_line = False
     disposition_line = False
     prior_history_line = False
     headnotes_line = False
@@ -749,13 +680,10 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     num_dissent = 0
     num_concur = 0
     unwritten_dissent = 0
-    #dissent_check = 0
     firstcite_line = False
     firstcite_string = ""
     blank_after_firstcite = False
-    ###localrow = []
     caseid = str(re.split("\.", entry)[0])
-    #print caseid
     print "\n" + entry
     pet_str = ""
     res_str = ""
@@ -815,6 +743,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     MD_date = False
     dock = False
     docket = False
+    check_recuse = False
+    check_recuse_case = 0
 
 	# each txtline is one "line" in the text file: the end of a line is determined by \n
     for txtline in txtlines:
@@ -845,35 +775,23 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             blank_after_firstcite = False
             court_line = False
             blank_after_court = True
-            print txtline
+            #print txtline
             action_line = True
             if (len(action_string) < 1):
                 action_string = action_string + txtline
-            #print action_string
-            #MD_date = True
             dock = True
-            #print txtline
 
         if len(action_string) < 2:
             MD_date = True
 
         if state_abbr == "MD" and re.match("Jan|Feb|Mar|Apr|May|June|July|Aug|Sep|Oct|Nov|Dec", txtline) and MD_date == True:
-            #print txtline
             action_string = txtline
             MD_date = False
-            #print action_string
             blank_after_firstcite = False
             court_line = False
             blank_after_court = True
             #print txtline
             action_line = True
-
-        #if(blank_after_court and re.search("[\w]+", txtline)):
-            ## these lines give the date of some action ## no this gives the involved parties
-            #action_number += 1
-            #action_line = True
-            #action_string = action_string + txtline
-            #print action_string
 
         if(action_line): #and re.match("^[\s]+$", txtline)):
             # parse out unnecessary text from action string (Date and Procedural Documentation of Publication) for only the date to remain
@@ -928,24 +846,13 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             action_string = re.sub(", Filed", "", action_string)
             action_string = re.sub("Submitted Under Third Circuit Rule 12\(6\) ", "Submitted Under Third Circuit Rule 12(6), ", action_string)
             action_string = re.sub("Cause argued ", "Cause argued, ", action_string)
-            #print action_string
-
-
 
             split_action = re.split("\n", action_string)
             action1 = string.strip(split_action[0])
             action2 = string.strip(split_action[1])
             action2 = re.split(", ", action2)
             action1 = re.split(", ", action1)
-            #action1_month = re.split(" ", action1[0])[0]
-            #action1_day = re.split(" ", action1[0])[1]
-            #action1_year = action1[1]
-            #action1_date = str(month2number(action1_month)) + "-" + action1_day + "-" + action1_year
-            #if(len(split_action) > 2):
-            #action2 = re.split(", ", action2)
 
-
-   ##CHANGED < 3 to < 2
             if(len(split_action) < 2):
                 action1[1] = re.sub("\.", "", action1[1])
                 action1[1] = re.sub(",", "", action1[1])
@@ -969,8 +876,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 date = date + action2[0] + ", " + action2[1]
                 date = re.sub(",$", "", date)
                 date = re.sub("\.", "", date)
-            #date = date.split(',')[0]
-
 
             action_string = string.strip(action_string)
             action_string = re.sub("[\s]+", " ", action_string)
@@ -979,37 +884,31 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             # one case has incorrect formatting of the date and it causes the program to break when calling teh strptime function
             if action_string == "December 22 1995":
                 action_string = "December 22, 1995"
-            #print action_string
+
             # Dates from Maryland cases do not parse correctly
             if action_string != "Court of Appeals of Maryland":
                 x = re.search("\d{4}", action_string)
                 # store in x the position of the last digit of the year
                 x = x.end()
-                #x = action_string.find(r"\b(\d{4})\b")
-                #print x
                 if new_date == "":
                     date_bool = True
                 if(x != -1 and date_bool):
                     new_date = action_string[:x]
                     date_bool = False
-                    #print new_date
                 if(x == -1):
                     new_date = action_string
-            #print new_date
 
             if state_abbr != "MC":
                 # format dates so they match the format from the state judge master file
                 new_date = re.sub("April,", "April", new_date)
                 new_date = re.sub("On ", "", new_date)
                 date_format = datetime.datetime.strptime(new_date, '%B %d, %Y').date()
-                #print date_format
 
             elif state_abbr == "MC":
                 date_format = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
 
-
             # match state abbrevation and date decided from case and state master file to produce a list of judges who were on the bench at time of decision for cases heard in non-panel state
-            with open("States_MasterFile_Import.csv", "rb") as f:
+            with open(mydir + "States_MasterFile_Import.csv", "rb") as f:
                 reader = csv.reader(f)
                 next(f)
                 for row in reader:
@@ -1033,43 +932,14 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                             non_panel_judge_string = non_panel_judge_string + ", " + row[3]
                     if row[3] == judge1_ln:
                         judge1_code = row[1]
-                        print judge1_code
                     between = False
 
                 #judges_string = judges_string + ", " + non_panel_judge_string
                 non_panel_list = non_panel_judge_string.split(",")
                 non_panel_list.sort()
             master.close()
-            #action_string = action_string[:action_string.rfind(r"\D(\d{4})\D")]
-            #print action_string
-
-            ##print len(split_action)
-            #print split_action
-            #print action2
-            ##print action_string
-            #print date + "\n"
-            #print len(date)
-
-#        if (dock == True) and re.match("^\s", txtline) and state_abbr != "AL": #and state_abbr == "CA":
-#            print txtline
-#            dock = False
-            #docketnum = txtline
-            #docketnum = re.sub("\n", "", docketnum)
-            #print docketnum
-#            docket = True
-
-#        if docket == True and re.match("^\w", txtline):
-#            docket = False
-#            print txtline
-#            docketnum = txtline
-
-
 
         if (docketnum == "") or not re.search("[0-9]", docketnum):
-
-#            print "NO"
-	    # removed |Civ|Crim
-	    # blank_after_action and
 
             if(not re.search("LEXIS", txtline) and re.search("^([\d]+$|Docket|Misc|No\.|Nos\.|SC |File Nos. |File No. |Arizona Supreme Court No. |L. A. Nos. |SCWC-|Cause No. |Supreme Court Cause Number |S[\d][\d]|A[\d][\d]|S. Ct. NO. |[\d] Div. |CASE NO.:|L.A. No. |\[NO NUMBER|\[No number in original|[\w]-|Supreme Court Case |Supreme Court No. |Supreme Court No. |Supreme Court Case No. |Law Docket No. |SUPREME COURT DOCKET NO. |Record No. |SUPREME COURT DOCKET NO. |Sac. No. |\([\d]+\)|\(SC |NO|C\.A\.|\# [\d]|[\d][\d][\d][\d]-|SJC-|Decision No. |DA |CA |[\d][\d]-|91-|Opinion No\.|DOCKET|Case No|[\d][\d][\d][\d][\d][\d][\d], [\d][\d][\d][\d][\d][\d][\d]|S[\d][\d][\d][\d][\d][\d]|Yor-[\d][\d]|Cum-[\d][\d]|C[\d]-[\d]|Case Number:|S.C. No. |NO.|Appeal No. |Supreme Court Nos. |S.F. No. |SCCQ-[\d]|[\d][\d][\d][\d][\d]-|Indiana Supreme Court Cause No. |[\d]|[\d][\d][\d][\d][\d][\d][\d])", txtline) and not re.search("Supreme Court of Pennsylvania",txtline) and not re.search("Supreme Court of Delaware",txtline) and not re.search("Court of Appeals of New York",txtline) and not re.search("^1. ",txtline)  and not re.search("^2. ",txtline) and not re.search("^3. ",txtline) and not re.search("^4. ",txtline) and not re.search("^5. ",txtline)):
                 ## the docket number
@@ -1077,7 +947,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 action_line = False
                 blank_after_action = True
                 docketnum = docketnum + txtline
-                #print docketnum
 
         ##OLDER PA (and some DE) CASES DON'T HAVE DOCKETS.  THIS FIXES THE ISSUE
             elif(blank_after_action and not re.search("^([\d]+$|Docket|Misc|No\.|Nos\.|SC |File Nos. |File No. |Arizona Supreme Court No. |L. A. Nos. |SCWC-|Cause No. |Supreme Court Cause Number |S[\d][\d]|A[\d][\d]|S. Ct. NO. |[\d] Div. |CASE NO.:|L.A. No. |\[NO NUMBER|\[No number in original|[\w]-|Supreme Court Case |Supreme Court No. |Supreme Court No. |Supreme Court Case No. |Law Docket No. |SUPREME COURT DOCKET NO. |Record No. |SUPREME COURT DOCKET NO. |Sac. No. |\([\d]+\)|\(SC |NO|C\.A\.|\# [\d]|[\d][\d][\d][\d]-|SJC-|Decision No. |DA |CA |[\d][\d]-|91-|Opinion No\.|DOCKET|Case No|[\d][\d][\d][\d][\d][\d][\d], [\d][\d][\d][\d][\d][\d][\d]|S[\d][\d][\d][\d][\d][\d]|Yor-[\d][\d]|Cum-[\d][\d]|C[\d]-[\d]|Case Number:|S.C. No. |NO.|Appeal No. |Supreme Court Nos. |S.F. No. |SCCQ-[\d]|[\d][\d][\d][\d][\d]-|Indiana Supreme Court Cause No. |[\d]|[\d][\d][\d][\d][\d][\d].)", txtline) and re.search("Supreme Court of Pennsylvania",txtline) or re.search("Supreme Court of Delaware",txtline) or re.search("Court of Appeals of New York",txtline)):
@@ -1087,20 +956,13 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 action_line = False
                 blank_after_docket = True
 
-
-
-
         if(re.match("^Reporter", txtline) and not opinion_start):
             ## this is the "Reporter" line after docket number
             blank_after_action = False
             docket_line = False
             blank_after_docket = True
-            #print txtline
-            #docketnum = string.strip(docketnum)
             if(re.search(" > ", docketnum)):
                 docketnum = ""
-            #docketnum = re.sub("\s", "", docketnum)
-            #print docketnum
 
         # Store all citations listed by Lexis
         if((blank_after_docket) and re.search("LEXIS", txtline) and re.search("[\w]+", txtline) and not opinion_start):
@@ -1128,12 +990,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 Lexis_cite = string.strip(Lexis_cite[0])
             except:
                 print "Problem with citation"
-            #print Fed_cite
-            #print repr(Lexis_cite)
-
-
-
-
 
         if(blank_after_cite and re.match("[\w]+", txtline)):
             ## the parties
@@ -1148,26 +1004,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             parties_line = False
             blank_after_parties = True
             parties_string = re.sub("[\s]+", " ", parties_string)
-            ##print string.strip(parties_string)
-            #print parties_string
-
-
-
-
-
-#        if(blank_after_court and re.search("^[\s]+\*", txtline)):
-#            ## the citation block
-#            fn_line = True
-#            blank_after_court = False
-#            #fn_string = fn_string + txtline
-
-#        if(fn_line and re.match("^[\s]+$", txtline)):
-#            #blank_after_fn = True
-#            blank_after_court = True
-#            fn_line = False
-
-
-
 
         # Store text in Prior and Subsequent History lines
         if(re.match("^Subsequent History:", txtline)):
@@ -1183,7 +1019,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             prior_history_string = re.sub("\n|\r", " ", prior_history_string)
             prior_history_string = string.strip(prior_history_string)
             sub_history_line = False
-
 
         if(re.match("^Prior History:", txtline)):
             prior_history_line = True
@@ -1257,21 +1092,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             disposition_string = string.strip(disposition_string)
             #print disposition_string
             disposition_line = False
-
-            #if (re.search("affirm|Affirm|AFFIRM|reverse|Reverse|REVERSE", disposition_string)):
-            #    rehearing = "NO"
-
-            #if (re.search("vacate|Vacate|VACATE", disposition_string)):
-            #    rehearing = "NO"
-
-            #if (re.search("(P|p)etition for (R|r)ehearing", disposition_string) and rehearing != "NO"):
-            #    rehearing = "YES"
-
-        #if (re.search("Petition[s]* for Rehearing", txtline) and rehearing == ""):
-        #    rehearing = "CHECK"
-
-        #if (re.search("REHEARING", txtline) and rehearing != "YES"):
-        #    rehearing = "TRUNCATE"
 
         # Search for presence of Per Curiam opinion
         if re.search("^Opinion", txtline):
@@ -1354,13 +1174,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             other_dissent = re.sub("in part", "", other_dissent)
             other_dissent = re.sub("Part|part", "", other_dissent)
             dissent = 1
-            #other_dissent = other_dissent.split('"')[0]
-            #print other_dissent
             other_dissent_holder = other_dissent.split(",")
-            #print other_dissent_holder
             other_dissent_holder = filter(None, other_dissent_holder)
-            #print other_dissent_holder
-
 
         if (re.search("^<truncate>", txtline)):
             trunc_text = True
@@ -1370,10 +1185,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
         if (re.match("^Counsel:", txtline) and not opinion_line):
                 attorney_line = True
-
-        #if (attorney_line and re.search("^Judges|^Opinion", txtline) and re.search("not participating", txtline)):
-            #no_part_string = txtline
-            #print no_part_string
 
         # Store attorneys for appellee and appellant
         if (attorney_line and re.search("^Judges|^Opinion", txtline) and not opinion_start and not re.search("^Opinion No.",txtline)):
@@ -1398,15 +1209,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             attorney_string = string.strip(attorney_string)
             attorney_line = False
 
-
-			#if (attorney_line and re.match("^[\s]+$", txtline)):
-        #    attorney_string = re.sub("COUNSEL:\s+\[\*+[0-9]+\]\s+", "", attorney_string)
-        #    attorney_string = re.sub("COUNSEL:", "", attorney_string)
-        #    attorney_string = re.sub("\xa0", " ", attorney_string)
-        #    attorney_string = re.sub("\n|\r", " ", attorney_string)
-        #    attorney_string = string.strip(attorney_string)
-        #    attorney_line = False
-
             if (re.search("Public|public|PUBLIC|defender|DEFENDER|Defender", attorney_string)):
                 pubdef = 1
 
@@ -1419,29 +1221,28 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         if (judges_line and re.search("[\w]+", txtline)):
             ## judges lines with text
             judges_string = judges_string + txtline #+ ", " + non_panel_judge_string
-            #print judges_string
-
-
 
         if (judges_line and re.match("^[\s]+$", txtline)):
             # new line or some whitespace after judges line
+
 
 
             # Store and parse text of judges that recused themselves from the case
             if (re.search("((N|n)ot (P|p)articipat(e|ing)|(R|r)ecus(e|es|ed)|RECUSED|(T|t)ak(e|es) no part| sitting for| disqualified|took no part|NOT PARTICIPATING|sitting in lieu of)", judges_string)):
                 no_part = True
                 no_part_dich = 1
+
+                if len(re.findall('not participating|recusal|recused|disqualif', judges_string)) > 1:
+                    check_recuse = True
+                    check_recuse_case = 1
+
                 full_judges_holder = re.sub(", (J|JJ)\.", " ", judges_string)
                 full_judges_holder = re.sub(" O\.", "", full_judges_holder)
                 full_judges_holder = re.sub(" C\.", "", full_judges_holder)
                 full_judges_holder = re.sub(" W\.", "", full_judges_holder)
                 full_judges_holder = re.split("\. ", full_judges_holder)
-                #print full_judges_holder
                 no_part_string = [sentence for sentence in full_judges_holder if re.search("((N|n)ot (P|p)articipat(e|ing)|(R|r)ecus(e|es|ed)|RECUSED| sitting for| disqualified|took no part|(T|t)ak(e|es) no part)|NOT PARTICIPATING|sitting in lieu of", sentence)]
-#                print no_part_string
                 no_part_string = str(no_part_string)
-                #print no_part_string
-                #print "YES"
                 no_part_string = re.sub("(N|n)ot (P|p)articipat(e|ing).*", "", no_part_string)
                 no_part_string = re.sub("NOT PARTICIPATING", "", no_part_string)
                 no_part_string = re.sub("Recus(es|ed|e)", "", no_part_string)
@@ -1460,7 +1261,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                     no_part_string = no_part_string.split("Concurring", 1)[1]
                 no_part_string = re.sub("who is disqualified", "", no_part_string)
                 no_part_string = re.sub(", sitting for Justice", "", no_part_string)
-                #print no_part_string
                 no_part_string = re.sub("recus(es|ed|e)|RECUSED\n|RECUSED", "", no_part_string)
                 no_part_string = re.sub("^[\s]+", "", no_part_string)
                 no_part_string = re.sub("[\s]*\*[\s]*", "", no_part_string)
@@ -1499,31 +1299,31 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 no_part_string = re.sub("\.", "", no_part_string)
                 no_part_string = re.sub("Chief|CHIEF", "", no_part_string)
                 no_part_string = re.sub("\n|\\n", "", no_part_string)
-                #print no_part_string
-                #print repr(no_part_string)
+                no_part_string = re.sub("who take no part", "", no_part_string)
+                no_part_string = no_part_string.rstrip('\\n')
+                no_part_string = re.sub(' and', ',', no_part_string)
+                no_part_string = re.sub('deeming', '', no_part_string)
+                no_part_string = re.sub('disqualified', '', no_part_string)
+                no_part_string = no_part_string.strip()
+                no_part_string = no_part_string.upper()
                 judges_np = no_part_string
                 judges_np = re.sub("\\xc2", "", judges_np)
                 judges_np = re.sub("\xc2\xa0", "", judges_np)
                 judges_np = re.sub(" and", "", judges_np )
-                #print repr(judges_np)
-
                 judge_np_list = judges_np.split(" ")
                 judge_np_list = filter(None, judge_np_list)
-                #print judge_np_list
-                #judge_np_list = judges_np.split(" AND ")
-                #judge_np_list = judges_np.split("\s")
+                if len(judge_np_list) > 4:
+                    judge_np_list = judge_np_list[2]
+                    judges_np = judge_np_list
                 judge_np1 = ""
                 judge_np2 = ""
                 judge_np3 = ""
                 judge_np4 = ""
-                #print judge_np_list
 
-            #print judges_string
             # Parse judges text and store list of judges that decided case
             judges_string = re.sub("Judges:|Judges|JUDGES", "", judges_string)
             judges_string = re.sub("judge|Judge|JUDGE", "", judges_string)
             judges_string = re.sub(" delivered the Opinion of the Court\.| DELIVERED THE OPINION OF THE COURT\.|Delivered the Opinion of the Court\.", ",", judges_string)
-            #print judges_string
             judges_string = re.sub("BEFORE THE ENTIRE", "", judges_string)
             judges_string = re.sub("Court", "", judges_string)
             judges_string = re.sub("court", "", judges_string)
@@ -1557,7 +1357,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_string = re.sub("respect|RESPECT|Respect", "", judges_string)
             judges_string = re.sub("action was submitted", "", judges_string)
             judges_string = re.sub("Subscribing to the Opinion and Assigning Additional Reasons", "", judges_string)
-            #print judges_string
             judges_string = re.sub("Pursuant to Ariz\. Const\. art\. VI|pursuant to Ariz\. Const\. art\. VI|Pursuant to Ariz\. Const\. art\. 6|pursuant to Ariz\. Const\. art\. 6", "", judges_string)
             judges_string = re.sub("Arizona Constitution", "", judges_string)
             judges_string = re.sub("Pursuant to art\. VI\.|Pursuant to article VI", "", judges_string)
@@ -1661,24 +1460,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
             judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
             judges_string = re.sub("Sp\.J\.", "", judges_string)
-        #    if (re.search("not participating", judges_string)):
-        #        no_part_string = no_part_string + judges_string
-        #        print no_part_string
-        #        #print no_part_string
-        #        no_part_list = no_part_string.split(',')
-
-        #        for i,item in enumerate(no_part_list):
-        #            if 'not participating' in item:
-					#no_part_string = re.search("not participating", no_part_list)
-        #                judges_np = no_part_list[i-1]
-        #                print judges_np
-
-        #        judges_np = re.sub("Judges\.|Judges|Judge|judge|judges\.|judges|JUDGES\.|JUDGES|JUDGE", "", judges_np)
-        #        judges_np = re.sub("Associate Justce|Chief Justice", "", judges_np)
-        #        judges_np = re.sub("Justices\.|Justices|Justice|justice|justice\.|justices|JUSTICES\.|JUSTICES|JUSTICE", "", judges_np)
-        #        judges_np = re.sub("\[", "", judges_np)
-        #        judges_np = judges_np.strip()
-
             judges_string = re.sub("Part II\.A", "", judges_string)
             judges_string = re.sub("Part II\.B", "", judges_string)
             judges_string = re.sub("Parts II", "", judges_string)
@@ -1706,14 +1487,10 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_string = re.sub("\/", "", judges_string)
             judges_string = re.sub("\n|\r", " ", judges_string)
             judges_string = re.sub("\(see p", " ", judges_string)
-            #judges_string = re.sub("\(No\. \d\[7])", "", judges_string)
             judges_string = re.sub("\(\d\)", "", judges_string)
             judges_string = re.sub("\d", "", judges_string)
             judges_string = re.sub("\(", "", judges_string)
             judges_string = re.sub("\)", "", judges_string)
-            #judges_string = re.sub(", ,", ",", judges_string)
-            #judges_string = re.sub(",,", ",", judges_string)
-            #judges_string = re.sub(",,", ",", judges_string)
             judges_string = re.sub("\sI,", "", judges_string)
             judges_string = re.sub(" or ", "", judges_string)
             judges_string = re.sub("Saylor|SAYLOR", "Saylor, ", judges_string)
@@ -1722,12 +1499,11 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_string = re.sub("I;", "", judges_string)
             judges_string = re.sub("Voting|VOTING|voting", "", judges_string)
             judges_string = re.sub("Surrogate", "", judges_string)
-            judges_string = re.sub("\'", "", judges_string)			#makes matching of judge names easier: O'Connor -> OConnor
+            judges_string = re.sub("\'", "", judges_string)			#makes matching of judge names possible: O'Connor -> OConnor
             judges_string = re.sub("judgment", "", judges_string)
             judges_string = re.sub("SeeStuart|seestuart", "See, Stuart", judges_string)
             if(re.search("unanimous view of the court|unanimous", judges_string)):
                 unanimous = 1
-                #print "Unanimous"
             judges_string = re.sub("unanimous view of the court", "", judges_string)
             judges_string = re.sub("unanimous", "", judges_string)
             judges_string = re.sub("Took no|Took No|took no|TOOK NO", "", judges_string)
@@ -2031,23 +1807,20 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_string = re.sub("on briefs|briefs|brief", "", judges_string)
             judges_string = re.sub("Division", "", judges_string)
             judges_string = re.sub("absent", "", judges_string)
+            judges_string = re.sub(" IV,", "", judges_string)
             judges_string = re.sub(" when", "", judges_string)
             judges_string = re.sub(" inof", "", judges_string)
             judges_string = re.sub("Order", "", judges_string)
-            judges_string = re.sub("other", "", judges_string)
             judges_string = re.sub("absent", "", judges_string)
-            #print judges_string
-            #judges_string = re.sub(" ILL| ill", "ONEILL", judges_string)
+            judges_string = re.sub(" to ", "", judges_string)
             judges_string = re.sub("tohis ", "", judges_string)
             judges_string = re.sub("toother|TOOTHER|to other", "", judges_string)
-            #judges_string = re.sub(",,", ",", judges_string)
-            #judges_string = re.sub(", ,", "", judges_string)
-            #judges_string = re.sub(",  ,", "", judges_string)
-            #judges_string = re.sub(",   ,", "", judges_string)
             judges_string = string.strip(judges_string)
             judges_string = re.sub(", ,", ",", judges_string)
-            #judges_string = re.sub("\s,", "", judges_string)
-            #print judges_string
+            judges_string = re.sub("s V", "", judges_string)
+            judges_string = re.sub(" VI,", "", judges_string)
+            judges_string = re.sub('DENVIR STITH', 'Stith', judges_string)
+            judges_string = re.sub(' Wo,', '', judges_string)
             judges_line = False
             judges_part_string = first_sentence(judges_string)
             judges_holder = re.sub("\*|\d", "", judges_part_string)
@@ -2062,7 +1835,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_holder = re.sub("Administrative Justice", "", judges_holder)
             judges_holder = re.sub("Administrative Judge", "", judges_holder)
             judges_holder = re.sub("(P|p)ro (T|t)em", "", judges_holder)
-            judges_holder = re.sub(", (Jr\.|JR\.|Jr|jr)", "", judges_holder)    #this was causing severe problems with matching to dissents so I replaced with ""
+            judges_holder = re.sub(", (Jr\.|JR\.|Jr|jr)", "", judges_holder)
             judges_holder = re.sub(", (Sr\.|SR\.)", "Sr.", judges_holder)
             judges_holder = re.sub(", III", "III", judges_holder)
             judges_holder = re.sub(", II", "II", judges_holder)
@@ -2071,22 +1844,12 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_holder = re.sub(" and ", ", ", judges_holder)
             judges_holder = re.sub(" \. ", " ", judges_holder)
             judges_holder = re.sub("[\s]+", " ", judges_holder)
-            #judges_holder = re.sub(",,", ",", judges_holder)
-            #judges_holder = re.sub(", \.", " ", judges_holder)
             judges_holder = re.sub("C\.J\.,|Supr\. J\.|J\.P\.T\.|Sp\.J\.|S\.J\.|P\.JJ\.|JJ\.,|JJ\.|D\.J\.,|P\.J\.,|C\.J\.|J\.,|J\.|C\. J\.", ",", judges_holder)
             judges_holder = re.sub("\xc3\xa1", "a", judges_holder)
-            #print repr(judges_holder)
             judges_holder = re.split(",", judges_holder)
             judges_holder = judges_holder + non_panel_list
             judges_holder = [word for word in judges_holder if word != ""]
-            #print judges_holder
-            #judges_holder.sort()
             judges_holder = list(set(judges_holder))
-            #print judges_holder
-            #judges_holder = [x.strip(' ') for x in judges_holder]
-            #judges_holder = filter(lambda name: name.strip(), judges_holder)
-            #print judges_holder
-
 
             # Apply functions to judge names to format the names of each justice uniformly
             if (len(judges_holder) == 1):
@@ -2154,10 +1917,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
             if (len(judges_holder) > 4):
 
-                #print judges_holder[3]
-                #print judges_holder[4]
                 judge5_ln = lastname(judges_holder[4])
-                #print judge5_ln
                 judge5_fn = firstname(judges_holder[4])
                 judge5_mn = middlename(judges_holder[4])
                 judge5_suf = namesuffix(judges_holder[4])
@@ -2169,9 +1929,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                     judge5_vote = ""
 
             if (len(judges_holder) > 5):
-                #print judges_holder[5]
                 judge6_ln = lastname(judges_holder[5])
-                #print judge6_ln
                 judge6_fn = firstname(judges_holder[5])
                 judge6_mn = middlename(judges_holder[5])
                 judge6_suf = namesuffix(judges_holder[5])
@@ -2181,7 +1939,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 if len(judge6_ln) < 2:
                     judge6_ln = ""
                     judge6_vote = ""
-                #print judge6_ln
 
             if (len(judges_holder) > 6):
 
@@ -2234,7 +1991,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 if len(judge10_ln) < 2:
                     judge10_ln = ""
                     judge10_vote = ""
-                #print judge10_ln
             if (len(judges_holder) > 10):
 
                 judge11_ln = lastname(judges_holder[10])
@@ -2250,54 +2006,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
             if (len(judges_holder) > 11):
                 check_case = 1
-                #print judges_string
-            #print judge10_ln
-
-            #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln, judge8_ln, judge9_ln
-
-            #if (re.search("((N|n)ot (P|p)articipat(e|ing)|(R|r)ecus(e|es|ed)|(T|t)ak(e|es) no part)", judges_string)):
-            #    no_part = True
-            #    no_part_dich = 1
-            #     full_judges_holder = re.sub(", (J|JJ). ", "", judges_string)
-            #     full_judges_holder = re.split("\. ", full_judges_holder)
-            #     #print full_judges_holder
-            #     no_part_string = [sentence for sentence in full_judges_holder if re.search("((N|n)ot (P|p)articipat(e|ing)|(R|r)ecus(e|es|ed))", sentence)]
-            #    #print no_part_string
-            #    no_part_string = str(no_part_string)
-            #    no_part_string = re.sub("(N|n)ot (P|p)articipat(e|ing).*", "", no_part_string)
-            #    no_part_string = re.sub("Recus(ed|es|e)", "", no_part_string)
-            #    no_part_string = re.sub("recus(ed|es|e)", "", no_part_string)
-            #    no_part_string = re.sub("^[\s]+", "", no_part_string)
-            #    no_part_string = re.sub("[\s]*\*[\s]*", "", no_part_string)
-            #    no_part_string = re.sub("'", "", no_part_string)
-            #    no_part_string = re.sub("\[", "", no_part_string)
-            #    no_part_string = re.sub("\]", "", no_part_string)
-            #    no_part_string = re.sub("(Him|him|Her|her|Them|them)sel(f|ves)", "", no_part_string)
-            #    no_part_string = re.sub("(J|j)ustices,*", "", no_part_string)
-            #    no_part_string = re.sub("(J|j)ustice,*", "", no_part_string)
-            #    no_part_string = re.sub("JUSTIC(ES|E),*", "", no_part_string)
-            #    no_part_string = re.sub("[\s]*(did|does)[\s]*", "", no_part_string)
-            #    no_part_string = re.sub(", (J|JJ|C.J).,*", "", no_part_string)
-            #    no_part_string = re.sub("[\s] s[\s]*", "", no_part_string)
-            #    no_part_string = re.sub("[\s]$", "", no_part_string)
-            #    no_part_string = re.sub(",[\s]+(,|\.)$", "", no_part_string)
-            #    no_part_string = re.sub("\.[\s]*$", "", no_part_string)
-            #    no_part_string = re.sub(",[\s]*$", "", no_part_string)
-            #    no_part_string = re.sub(" s ", "", no_part_string)
-            #    print no_part_string
-            #    judges_np = no_part_string
-
-            #judge_np_list = judges_np.split("and")
-            #print judge_np_list
-            #judge_np_list = judges_np.split(" AND ")
-            #judge_np_list = judges_np.split("\s")
-            #judge_np1 = ""
-            #judge_np2 = ""
-            #judge_np3 = ""
-            #judge_np4 = ""
-            #print judge_np_list
-
-            #print judge_np_list
 
             if len(judge_np_list) == 0:
                 judge_np1 = ""
@@ -2308,14 +2016,12 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 judge_np1 = re.sub("\\xc2\\xa0", "", judge_np1)
                 if len(judge_np1) > 10:
                     judge_np1 = judge_np1.split(' ', 1)[0]
-                #print judge_np1
 
             elif len(judge_np_list) == 2:
                 judge_np1 = judge_np_list[0].strip()
                 judge_np1 = re.sub(",", "", judge_np1)
                 judge_np2 = judge_np_list[1].strip()
                 judge_np2 = re.sub(",", "", judge_np2)
-                #print judge_np1, judge_np2
 
             elif len(judge_np_list) > 2:
                 judge_np1 = judge_np_list[0].strip()
@@ -2324,7 +2030,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 judge_np2 = re.sub(",", "", judge_np2)
                 judge_np3 = judge_np_list[2].strip()
                 judge_np3 = re.sub(",", "", judge_np3)
-                #judge_np4 = judge_np_list[3]
 
             judge_np1 = re.sub("\.", "", judge_np1)
             judge_np2 = re.sub("\.", "", judge_np2)
@@ -2356,7 +2061,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judge_np1 = Capitalize(judge_np1)
             judge_np2 = Capitalize(judge_np2)
             judge_np3 = Capitalize(judge_np3)
-            #print repr(judge_np1)
 
             judge1_ln = lastname(judge1_ln)
             judge2_ln = lastname(judge2_ln)
@@ -2367,7 +2071,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judge7_ln = lastname(judge7_ln)
             judge8_ln = lastname(judge8_ln)
             judge9_ln = lastname(judge9_ln)
-            print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln
+            #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln
 
             # Remove justices that did not participate based on previously stored list of non-participating judges; remove votes from these justices as well
             if (judge1_ln == judge_np1 or judge1_ln == judge_np2 or judge1_ln == judge_np3 or judge1_ln == judge_np4):
@@ -2423,7 +2127,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 unanimous = 1
 
         if(unanimous == 1 and re.search("concurred\.", txtline)): ###build out to parse judge list into single judges
-            #print "Unanimous"
             new_judges = txtline
             new_judges = re.sub("C\.\sJ\.,", "", new_judges)
             new_judges = re.sub("J\.,", "", new_judges)
@@ -2432,10 +2135,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             new_judges = re.sub("\[\*+[0-9]+\]", "", new_judges)
             new_judges = re.sub("\s", "", new_judges)
             new_judges = new_judges.split(",")
-            #print new_judges
-            #print judges_holder
             judges_holder = [judges_holder.pop(0)] + new_judges
-            #print judges_holder
             if (len(judges_holder) > 1):
                 judge1_ln = lastname(judges_holder[0])
                 judge2_ln = lastname(judges_holder[1])
@@ -2453,7 +2153,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 judge8_ln = lastname(judges_holder[7])
             if (len(judges_holder) > 8):
                 judge9_ln = lastname(judges_holder[8])
-
 
         # Store name of justice writing the majority opinion and format name
         if (re.match("^Opinion by:", txtline) and not trunc_text):
@@ -2479,11 +2178,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             opin_by_string = re.sub("III", "", opin_by_string)
             opin_by_string = re.sub("\xc3\x81", "a", opin_by_string)
             opin_by_string = re.sub(" ILL| ill", "ONEILL", opin_by_string)
+            opin_by_string = re.sub('DENVIR STITH|DENVIRSTITH', 'Stith', opin_by_string)
             opin_by_string = string.strip(opin_by_string)
-            #print repr(opin_by_string)
-            #print "Opinion writer: " + opin_by_string + "\n"
             opin_by_line = False
-            #print opin_by_string
             author_ln = lastname(opin_by_string)
             author_fn = firstname(opin_by_string)
             author_mn = middlename(opin_by_string)
@@ -2491,10 +2188,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             author_full = author_ln + ", " + author_fn + " " + author_mn + " " + author_suf
             author_full = re.sub("[\s]+", " ", author_full)
             author_full = re.sub(", $", "", author_full)
-            #print author_full
-            #print repr(author_ln)
-            #print judge10_ln
-            #print author_ln
+
             if(Capitalize(judge1_ln) != Capitalize(author_ln)):
                 judge11_ln = judge10_ln
                 judge10_ln = judge9_ln
@@ -2518,10 +2212,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 judge3_vote = judge2_vote
                 judge2_vote = judge1_vote
                 judge1_vote = 1
-                #Alabama-1998-727.So.2d.txt
-            #print judge10_ln
-            #judges_holder = judges_holder + author_ln
-
 
         if (re.match("^Opinion", txtline) and not trunc_text and not blank_after_firstcite and not re.search("^Opinion No.",txtline)):
             opinion_line = True
@@ -2535,7 +2225,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             op_holder = re.sub("\xa0", " ", op_holder)
             op_holder = re.sub("\n|\r", " ", op_holder)
             op_holder = re.sub("\[\*+[0-9]+\]", " ", op_holder)
-            #op_holder = re.sub("No opinion\.", " ", op_holder)
             op_holder = string.strip(op_holder)
             op_holder = re.split("\s+", op_holder)
             op_holder = [word for word in op_holder if word != ""]
@@ -2546,7 +2235,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
         if (re.search("^Dissent", txtline)):
             dissent_line = True
-            #print txtline
 
         # If Lexis lists a line beginning with "Dissent:", store the justices listed after
         if (re.match("^Dissent by:|^DISSENT BY:", txtline) and not trunc_text):
@@ -2554,15 +2242,11 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             dissent = 1
         if (dissent_by_line and re.search("[\w]+", txtline)):
             dissent_by_string = dissent_by_string + txtline
-            #print dissent_by_string
 
         # Format dissenting justice names
         if (dissent_by_line and re.match("^[\s]+$", txtline)):
             silent_dissent = True
             dissent_by_string = string.strip(dissent_by_string)
-            #print dissent_by_string
-            #dissent_by_string = string.lstrip(dissent_by_string)
-            #dissent_by_string = string.rstrip(dissent_by_string)
             dissent_by_string = re.sub("\n", "", dissent_by_string)
             dissent_by_string = re.sub("Dissent by:|DISSENT BY:", "", dissent_by_string)
             dissent_by_string = re.sub("\[.+\]", "", dissent_by_string)
@@ -2593,20 +2277,15 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             dissent_by_string = re.sub("filed a", "", dissent_by_string)
             dissent_by_string = re.sub("\.", ",", dissent_by_string)
             dissent_by_string = re.sub("[\s]*;", ";", dissent_by_string)
-            #dissent_by_string = dissent_by_string + ", " + other_dissent
-            #print dissent_by_string
             dissent_holder = re.split(";|,", dissent_by_string)
             dissent_holder = filter(None, dissent_holder)
-            #print dissent_holder
             dissent_holder = [name for name in dissent_holder if name.strip()]
-            #print dissent_holder
             num_dissent = len(dissent_holder)
             dissent_by_line = False
             dissent1_ln = lastname(dissent_holder[0]).strip()
             dissent1_ln = dissent1_ln.strip()
             dissent1_ln = re.sub("\xa0", "", dissent1_ln)
             dissent1_ln = Capitalize(dissent1_ln)
-            #print dissent1_ln
             dissent1_fn = firstname(dissent_holder[0])
             dissent1_mn = middlename(dissent_holder[0])
             dissent1_suf = namesuffix(dissent_holder[0])
@@ -2615,7 +2294,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 dissent2_fn = firstname(dissent_holder[1])
                 dissent2_mn = middlename(dissent_holder[1])
                 dissent2_suf = namesuffix(dissent_holder[1])
-                #print dissent2_ln
             if (len(dissent_holder) > 2):
                 dissent3_ln = lastname(dissent_holder[2]).strip()
                 dissent3_fn = firstname(dissent_holder[2])
@@ -2650,12 +2328,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         # Store justices that concurred in dissenting opinions, format names, and store in a list
         if (silent_dissent == True and re.search("concurs\.$|concur\.$|concurred\.$", txtline)):
             other_dissent_string = txtline
-            #print other_dissent_string
-            #other_dissent_holder = other_dissent.split(",")
-            #other_dissent_string = other_dissent_string + ", " + other_dissent
             other_dissent_string = re.sub("\xa0", "", other_dissent_string)
             other_dissent_string = re.sub(" C\.J\.,| C\. J\.|JJ\.| J\.|C\.J\.", "", other_dissent_string)
-            #print other_dissent_string
             other_dissent_string = re.sub(" and", ",", other_dissent_string)
             other_dissent_string = re.sub("'", "", other_dissent_string)
             other_dissent_string = re.sub(" concurred\.", "", other_dissent_string)
@@ -2664,38 +2338,26 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             other_dissent_string = re.sub("whom", "", other_dissent_string)
             other_dissent_string = other_dissent_string.strip()
             other_dissent_judges = other_dissent_string.split(",")
-            #for elem in other_dissent_judges:
-            #    if len(elem) < 1:
-            #        other_dissent_judges = other_dissent_judges.remove(elem)
             other_dissent_judges[:] = [item for item in other_dissent_judges if item != '']
-			#other_dissent_judges = other_dissent_judges.remove('')
-            #print other_dissent_judges
             if len(other_dissent_judges) > 0:
                 silent_judge1 = other_dissent_judges[0].strip()
-                #print silent_judge1
                 dissent_by_string = dissent_by_string + ", " + Capitalize(lastname(silent_judge1))
-                #dissent_holder = dissent_holder.append([silent_judge1])
                 dissent_holder = dissent_holder + [silent_judge1]
-                #print dissent_holder
                 num_dissent += 1
             if len(other_dissent_judges) > 1:
                 silent_judge2 = other_dissent_judges[1].strip()
                 dissent_by_string = dissent_by_string + ", " + Capitalize(lastname(silent_judge2))
                 num_dissent += 1
                 dissent_holder = dissent_holder + [silent_judge2]
-                #print silent_judge2
-                #print dissent_holder
             if len(other_dissent_judges) > 2:
                 silent_judge3 = other_dissent_judges[2].strip()
                 dissent_by_string = dissent_by_string + ", " + Capitalize(lastname(silent_judge3))
                 num_dissent += 1
                 dissent_holder = dissent_holder + [silent_judge3]
-                #print silent_judge3
             if len(other_dissent_judges) > 3:
                 silent_judge4 = other_dissent_judges[3].strip()
                 dissent_by_string = dissent_by_string + ", " + Capitalize(lastname(silent_judge4))
                 num_dissent += 1
-                #print silent_judge4
                 dissent_holder = dissent_holder + [silent_judge4]
 
             if silent_judge4 == silent_judge1 or silent_judge4 == silent_judge2 or silent_judge4 == silent_judge3:
@@ -2707,11 +2369,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             if silent_judge2 == silent_judge1:
 			    silent_judge2 = ""
 
-            #print dissent_holder
-
             silent_dissent = False
-            #dissent_by_line = False
-
 
         # Search for concurring judge
         if (re.search("Concur", txtline)):
@@ -2725,8 +2383,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             concur_by_string = concur_by_string + txtline
         if (concur_by_line and re.match("^[\s]+$", txtline)):
             concur_by_string = string.strip(concur_by_string)
-            #concur_by_string = string.lstrip(concur_by_string)
-            #concur_by_string = string.rstrip(concur_by_string)
             concur_by_string = re.sub("\n", " ", concur_by_string)
             concur_by_string = re.sub("Concur by: ", "", concur_by_string)
             concur_by_string = re.sub("\[.+\]", "", concur_by_string)
@@ -2794,66 +2450,27 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             concur7_full = re.sub("[\s]+", " ", concur7_full)
             concur7_full = re.sub(", $", "", concur7_full)
 
-
-        #if (re.search("petition for rehearing", op_string)):
-        #    check_case = 1
-
-        #if (re.search("(DECISION WITHOUT PUBLISHED OPINION)|(NOT FOR PUBLICATION)", txtline)):
-        #    unpublished = 1
-
-        #dissent_check = (dissent - jud_dissent)
-        #if (dissent_check < 0):
-        #    unwritten_dissent = 1
-
-
-
-
-
-    #print concur_by_string
-    #print dissent_holder
-    #print concur_holder
-    #print dissent1_ln
-    #print dissent2_ln
-    #print dissent3_ln
-    #print dissent4_ln
-    #print concur_by_string
-    #print concur1_ln
-    #print concur2_ln
-    #print concur3_ln
-    #print concur4_ln
-    #print concur5_ln
-    #print concur6_ln
-    #print concur7_ln
-    #print concur
-    #print check_case
-
 	# Format all justices listed as dissenting (both those that wrote an opinion and those that signed on)
     dissent_holder = [word for word in dissent_holder if word != ""]
-    #print dissent_holder
     dissent_holder = dissent_holder + other_dissent_holder
     dissent_holder = [word.upper().strip() for word in dissent_holder]
     dissent_holder = list(set(dissent_holder))
-    #print dissent_holder
     if len(dissent_holder)==0:
-        #print ""
         dissent_author_1 = ""
         dissent_author_2 = ""
         dissent_author_3 = ""
         dissent_author_4 = ""
     if len(dissent_holder)==1:
         dissent_author_1 = dissent_holder[0].strip()
-        #dissent_author_1 = dissent_author_1[1:]
         dissent_author_1 = re.sub("\xa0*", "", dissent_author_1)
         dissent_author_1 = re.sub("\(In\s*part\)", "", dissent_author_1)
         dissent_author_1 = lastname(dissent_author_1)
         dissent_author_1 = Capitalize(dissent_author_1)
-        #print dissent_author_1
         dissent_author_2 = ""
         dissent_author_3 = ""
         dissent_author_4 = ""
     if len(dissent_holder)==2:
         dissent_author_1 = dissent_holder[0].strip()
-        #dissent_author_1 = dissent_author_1[1:]
         dissent_author_1 = dissent_author_1.strip()
         dissent_author_1 = re.sub("\xa0", "", dissent_author_1)
         dissent_author_1 = re.sub("\(In", "", dissent_author_1)
@@ -2861,7 +2478,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         dissent_author_1 = re.sub("J;", "", dissent_author_1)
         dissent_author_1 = Capitalize(lastname(dissent_author_1))
         dissent_author_2 = dissent_holder[1].strip()
-        #dissent_author_2 = dissent_author_2[1:]
         dissent_author_2 = re.sub("\xa0", "", dissent_author_2)
         dissent_author_2 = re.sub("\In\spart\)", "", dissent_author_2)
         dissent_author_2 = Capitalize(lastname(dissent_author_2))
@@ -2869,18 +2485,15 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         dissent_author_4 = ""
     if len(dissent_holder)==3:
         dissent_author_1 = dissent_holder[0].strip()
-        #dissent_author_1 = dissent_author_1[1:]
         dissent_author_1 = dissent_author_1.strip()
         dissent_author_1 = re.sub("[\xa0]*", "", dissent_author_1)
         dissent_author_1 = re.sub("\In\spart\)", "", dissent_author_1)
         dissent_author_1 = Capitalize(lastname(dissent_author_1))
         dissent_author_2 = dissent_holder[1].strip()
-        #dissent_author_2 = dissent_author_2[1:]
         dissent_author_2 = re.sub("\xa0", "", dissent_author_2)
         dissent_author_2 = re.sub("\In\spart\)", "", dissent_author_2)
         dissent_author_2 = Capitalize(lastname(dissent_author_2))
         dissent_author_3 = dissent_holder[2].strip()
-        #dissent_author_3 = dissent_author_3[1:]
         dissent_author_3 = dissent_author_3.strip()
         dissent_author_3 = re.sub("[\xa0]*", "", dissent_author_3)
         dissent_author_3 = re.sub("\In\spart\)", "", dissent_author_3)
@@ -2888,24 +2501,20 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         dissent_author_4 = ""
     if len(dissent_holder)==4:
         dissent_author_1 = dissent_holder[0].strip()
-        #dissent_author_1 = dissent_author_1[1:]
         dissent_author_1 = dissent_author_1.strip()
         dissent_author_1 = re.sub("[\xa0]*", "", dissent_author_1)
         dissent_author_1 = re.sub("\In\spart\)", "", dissent_author_1)
         dissent_author_1 = Capitalize(lastname(dissent_author_1))
         dissent_author_2 = dissent_holder[1].strip()
-        #dissent_author_2 = dissent_author_2[1:]
         dissent_author_2 = re.sub("\xa0", "", dissent_author_2)
         dissent_author_2 = re.sub("\In\spart\)", "", dissent_author_2)
         dissent_author_2 = Capitalize(lastname(dissent_author_2))
         dissent_author_3 = dissent_holder[2].strip()
-        #dissent_author_3 = dissent_author_3[1:]
         dissent_author_3 = dissent_author_3.strip()
         dissent_author_3 = re.sub("[\xa0]*", "", dissent_author_3)
         dissent_author_3 = re.sub("\In\spart\)", "", dissent_author_3)
         dissent_author_3 = Capitalize(lastname(dissent_author_3))
         dissent_author_4 = dissent_holder[3].strip()
-        #dissent_author_4 = dissent_author_4[1:]
         dissent_author_4 = dissent_author_4.strip()
         dissent_author_4 = re.sub("[\xa0]*", "", dissent_author_4)
         dissent_author_4 = re.sub("\In\spart\)", "", dissent_author_4)
@@ -2913,30 +2522,25 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         dissent_author_5 = ""
     if len(dissent_holder)==5:
         dissent_author_1 = dissent_holder[0].strip()
-        #dissent_author_1 = dissent_author_1[1:]
         dissent_author_1 = dissent_author_1.strip()
         dissent_author_1 = re.sub("[\xa0]*", "", dissent_author_1)
         dissent_author_1 = re.sub("\In\spart\)", "", dissent_author_1)
         dissent_author_1 = Capitalize(lastname(dissent_author_1))
         dissent_author_2 = dissent_holder[1].strip()
-        #dissent_author_2 = dissent_author_2[1:]
         dissent_author_2 = re.sub("\xa0", "", dissent_author_2)
         dissent_author_2 = re.sub("\In\spart\)", "", dissent_author_2)
         dissent_author_2 = Capitalize(lastname(dissent_author_2))
         dissent_author_3 = dissent_holder[2].strip()
-        #dissent_author_3 = dissent_author_3[1:]
         dissent_author_3 = dissent_author_3.strip()
         dissent_author_3 = re.sub("[\xa0]*", "", dissent_author_3)
         dissent_author_3 = re.sub("\In\spart\)", "", dissent_author_3)
         dissent_author_3 = Capitalize(lastname(dissent_author_3))
         dissent_author_4 = dissent_holder[3].strip()
-        #dissent_author_4 = dissent_author_4[1:]
         dissent_author_4 = dissent_author_4.strip()
         dissent_author_4 = re.sub("[\xa0]*", "", dissent_author_4)
         dissent_author_4 = re.sub("\In\spart\)", "", dissent_author_4)
         dissent_author_4 = Capitalize(lastname(dissent_author_4))
         dissent_author_5 = dissent_holder[4].strip()
-        #dissent_author_5 = dissent_author_5[1:]
         dissent_author_5 = dissent_author_5.strip()
         dissent_author_5 = re.sub("[\xa0]*", "", dissent_author_5)
         dissent_author_5 = re.sub("\In\s*part\)", "", dissent_author_5)
@@ -2957,7 +2561,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     if concur_line and concur==0:
         concur=1
         num_concur=1
-
 
     #Assign vote values for each justice based on dissenting judges values
     if dissent_author_1 == judge2_ln or dissent_author_2 == judge2_ln or dissent_author_3 == judge2_ln or dissent_author_4 == judge2_ln or dissent_author_5 == judge2_ln and len(judge2_ln) > 0:
@@ -3049,7 +2652,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     Lexis_cite = re.sub("\xa0", "", Lexis_cite)
     Lexis_cite = re.sub("\xc2", "", Lexis_cite)
 
-
     #Remove duplicate judges from judge last name columns
     if(judge9_ln == judge2_ln or judge9_ln == judge3_ln or judge9_ln == judge4_ln or judge9_ln == judge5_ln or judge9_ln == judge6_ln or judge9_ln == judge7_ln or judge9_ln == judge8_ln or judge9_ln == judge1_ln):
         judge9_ln = ""
@@ -3082,144 +2684,97 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge11_ln = ""
         judge11_vote = ""
 
-    #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln
-
     #Fix vote values for cases where Lexis only reports judges that author a dissenting opinion in the dissent line
     if(silent_judge1 == judge1_ln and len(silent_judge1) > 0):
             judge1_vote = 0
-            #print "This judge joins in the dissent"
     if(silent_judge1 == judge2_ln and len(silent_judge1) > 0):
         judge2_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge3_ln and len(silent_judge1) > 0):
         judge3_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge4_ln and len(silent_judge1) > 0):
         judge4_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge5_ln and len(silent_judge1) > 0):
         judge5_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge6_ln and len(silent_judge1) > 0):
         judge6_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge7_ln and len(silent_judge1) > 0):
         judge7_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge8_ln and len(silent_judge1) > 0):
         judge8_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge1 == judge9_ln and len(silent_judge1) > 0):
         judge9_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge1_ln and len(silent_judge2) > 0):
         judge1_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge2_ln and len(silent_judge2) > 0):
         judge2_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge3_ln and len(silent_judge2) > 0):
         judge3_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge4_ln and len(silent_judge2) > 0):
         judge4_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge5_ln and len(silent_judge2) > 0):
         judge5_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge6_ln and len(silent_judge2) > 0):
         judge6_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge7_ln and len(silent_judge2) > 0):
         judge7_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge8_ln and len(silent_judge2) > 0):
         judge8_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge2 == judge9_ln and len(silent_judge2) > 0):
         judge9_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge1_ln and len(silent_judge3) > 0):
         judge1_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge2_ln and len(silent_judge3) > 0):
         judge2_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge3_ln and len(silent_judge3) > 0):
         judge3_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge4_ln and len(silent_judge3) > 0):
         judge4_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge5_ln and len(silent_judge3) > 0):
         judge5_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge6_ln and len(silent_judge3) > 0):
         judge6_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge7_ln and len(silent_judge3) > 0):
         judge7_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge8_ln and len(silent_judge3) > 0):
         judge8_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge3 == judge9_ln and len(silent_judge3) > 0):
         judge9_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge1_ln and len(silent_judge4) > 0):
         judge1_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge2_ln and len(silent_judge4) > 0):
         judge2_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge3_ln and len(silent_judge4) > 0):
         judge3_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge4_ln and len(silent_judge4) > 0):
         judge4_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge5_ln and len(silent_judge4) > 0):
         judge5_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge6_ln and len(silent_judge4) > 0):
         judge6_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge7_ln and len(silent_judge4) > 0):
         judge7_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge8_ln and len(silent_judge4) > 0):
         judge8_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge4 == judge9_ln and len(silent_judge4) > 0):
         judge9_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge1_ln and len(silent_judge5) > 0):
             judge1_vote = 0
-            #print "This judge joins in the dissent"
     if(silent_judge5 == judge2_ln and len(silent_judge5) > 0):
         judge2_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge3_ln and len(silent_judge5) > 0):
         judge3_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge4_ln and len(silent_judge5) > 0):
         judge4_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge5_ln and len(silent_judge5) > 0):
         judge5_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge6_ln and len(silent_judge5) > 0):
         judge6_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge7_ln and len(silent_judge5) > 0):
         judge7_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge8_ln and len(silent_judge5) > 0):
         judge8_vote = 0
-        #print "This judge joins in the dissent"
     if(silent_judge5 == judge9_ln and len(silent_judge5) > 0):
         judge9_vote = 0
-        #print "This judge joins in the dissent"
 
     #Remove duplicate dissenting judge values from dissent columns
     if dissent_author_5 == dissent_author_1 or dissent_author_5 == dissent_author_2 or dissent_author_5 == dissent_author_3 or dissent_author_5 == dissent_author_4:
@@ -3254,7 +2809,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge10_ln = ""
     if judge11_ln == "Jr|Sr":
         judge11_ln = ""
-
 
     #Move judges and votes to the left to fix blank cells
     if judge1_ln == "" or len(judge1_ln) < 2:
@@ -3679,9 +3233,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge11_ln = ""
         judge11_vote = ""
 
-    #print len(judge2_ln)
-    if (((state_abbr == "AL" or state_abbr == "FL" or panel == 0 or state_abbr == "NH") and (state_abbr != "ME" or state_abbr != "MA") and (len(judge6_ln) > 2) or len(judge2_ln) < 2 or len(judge3_ln) < 2 or (len(judge5_ln) < 2 and panel == 0) and len(judge9_ln) < 2) or len(judge1_ln) < 2 and len(judge2_ln) < 2) or state_abbr != "AL" and len(judge7_ln) < 2:
-        with open("States_MasterFile_Import.csv", "rb") as f:
+    if (((state_abbr == "AL" or state_abbr == "FL" or panel == 0 or state_abbr == "NH") and state_abbr != "ME" and state_abbr != "MA" and (len(judge6_ln) > 2) or len(judge2_ln) < 2 or len(judge3_ln) < 2 or (len(judge5_ln) < 2 and panel == 0) and len(judge9_ln) < 2) or len(judge1_ln) < 2 and len(judge2_ln) < 2) or state_abbr != "AL" and len(judge7_ln) < 2:
+        with open(mydir + "States_MasterFile_Import.csv", "rb") as f:
             reader = csv.reader(f)
             next(f)
             for row in reader:
@@ -3713,22 +3266,10 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                     #print judge1_code
                 between = False
 
-                #judges_string = judges_string + ", " + non_panel_judge_string
             non_panel_list = non_panel_judge_string.split(",")
-        #    print non_panel_list
-			#non_panel_list.sort()
-			#print non_panel_list
         master.close()
         judges_AL = non_panel_list
-        #print judges_AL
-        #judges_AL = non_panel_list.append(judge1_ln)
-        #judges_AL = non_panel_list.append(judge2_ln)
-        #judges_AL = non_panel_list.append(judge3_ln)
-        #judges_AL = non_panel_list.append(judge4_ln)
-        #judges_AL = non_panel_list.append(judge5_ln)
-        #judges_AL = non_panel_list.append(judge6_ln)
-        #judges_AL = non_panel_list.append(judge7_ln)
-        #judges_AL = non_panel_list.append(judge8_ln)
+
         if "Jr" in judges_AL:
             judges_AL.remove('Jr')
         #judges_AL = list(set(judges_AL))
@@ -3758,10 +3299,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judges_AL.remove(judge_np3)
         if judge_np4 in judges_AL:
             judges_AL.remove(judge_np4)
-        #print judges_AL
 
         judges_AL = list(set(judges_AL))
-        #print judges_AL
 
         if len(judge1_ln) < 2 and len(judge2_ln) < 2 and len(judges_AL) > 0:
             judge1_ln = judges_AL[0]
@@ -3797,10 +3336,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             if len(judge9_ln) < 2 and len(judges_AL) > 8:
                 judge9_ln = judges_AL[8]
                 judge9_vote = 1
-        #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln, judge8_ln, judge9_ln
 
         if len(judge2_ln) < 2 and len(judges_AL) > 0:
-            #print judges_AL
             judge2_ln = judges_AL[0]
             judge2_vote = 1
             if len(judge3_ln) < 2 and len(judges_AL) > 1:
@@ -3822,7 +3359,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             if len(judge7_ln) < 2 and len(judges_AL) > 5:
                 judge7_ln = judges_AL[5]
                 judge7_vote = 1
-                #print judge7_ln
 
             if len(judge8_ln) < 2 and len(judges_AL) > 6:
                 judge8_ln = judges_AL[6]
@@ -3944,9 +3480,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judge9_ln = judges_AL[0]
             judge9_vote = 1
 
-        #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln
-
-
         if len(judge2_ln) < 2 and len(judge1_ln) > 2 and len(judges_AL) > 0 and state_abbr != "NH" and state_abbr != "NC" and state_abbr != "PA" and state_abbr != "RI" and state_abbr != "WV" and state_abbr != "WI" and state_abbr != "WY" and state_abbr != "AR" and state_abbr != "CO" and state_abbr != "GA" and state_abbr != "HI" and state_abbr != "MS" and state_abbr != "MO" and state_abbr != "MN":
             judge2_ln = judges_AL[0]
             judge3_ln = judges_AL[1]
@@ -3960,8 +3493,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             judge5_vote = 1
             judge6_vote = 1
             judge7_vote = 1
-        #print judge7_ln
-
 
         if len(judge2_ln) < 2 and len(judge1_ln) > 2 and len(judges_AL) > 0 and state_abbr != "NH" and state_abbr != "WV":
             judge2_ln = judges_AL[0]
@@ -4017,7 +3548,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 judge9_vote = 1
                 del judges_AL[0]
 
-        #print judge7_ln
     #Move over dissenting judges to remove blank cells
     if(dissent_author_1 == ""):
         dissent_author_1 = dissent_author_2
@@ -4047,7 +3577,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     if dissent_author_2 == dissent_author_1:
         dissent_author_2 = ""
 
-
     #Correct dissent_no
     if dissent_author_1 != "":
         num_dissent = 1
@@ -4062,10 +3591,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     if len(dissent_author_1) < 2:
         num_dissent = 0
 
-
     # Pull in judge codes from state master file by matching state abbrevation, justice name, and time in office
     if judge1_code == "":
-        with open("States_MasterFile_Import.csv", "rb") as f:
+        with open(mydir + "States_MasterFile_Import.csv", "rb") as f:
             reader = csv.reader(f)
             next(f)
             for row in reader:
@@ -4194,8 +3722,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge6_vote = ""
         judge6_code = ""
 
-
-
     if len(judge10_ln) < 2:
         judge10_ln = judge11_ln
         judge10_vote = judge11_vote
@@ -4220,7 +3746,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
     #Correct participating judges string
     part_judges = judge1_ln + ", " + judge2_ln + ", " + judge3_ln + ", " + judge4_ln + ", " + judge5_ln + ", " + judge6_ln + ", " + judge7_ln + ", " + judge8_ln + ", " + judge9_ln + ", " + judge10_ln + ", " + judge11_ln
-    #part_judges = re.sub(", ,", "", part_judges)
+    part_judges = re.sub(' ,', '', part_judges)
+    part_judges = part_judges.rstrip(', ').upper()
+    #print(part_judges)
 
     judge1_ln = judge1_ln.upper()
     judge2_ln = judge2_ln.upper()
@@ -4243,8 +3771,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge6_ln = ""
         judge6_vote = ""
         judge6_code = ""
-
-
 
     if judge2_ln == judge6_ln:
         judge6_ln = ""
@@ -4421,7 +3947,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge8_code = judge9_code
         judge9_code = judge10_code
 
-
     if len(judge6_ln) < 2:
         judge6_ln = judge7_ln
         judge7_ln = judge8_ln
@@ -4568,10 +4093,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge9_vote = judge10_vote
         judge9_code = judge10_code
 
-
-
-
-
     if state_abbr == "CA" or state_abbr == "IL" or state_abbr == "PA" or state_abbr == "FL" or state_abbr == "KY" or state_abbr == "LA" or state_abbr == "ME" or state_abbr == "OH" or state_abbr == "CT" or state_abbr == "MD" or state_abbr == "MI" or state_abbr == "CO" or state_abbr == "GA" or state_abbr == "IA" or state_abbr == "MO" or state_abbr == "NE" or state_abbr == "NJ" or state_abbr == "NY" or state_abbr == "NC" or state_abbr == "OH" or state_abbr == "WI" or state_abbr == "AZ" or state_abbr == "AR" or state_abbr == "MT":
         judge8_ln = ""
         judge8_code = ""
@@ -4599,7 +4120,6 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         judge11_vote = ""
         judge11_code = ""
 
-
     if len(dissent_by_string) > 2:
         dissent_by_string = dissent_by_string + " " + str(other_dissent_holder)
     if len(dissent_by_string) < 2:
@@ -4616,98 +4136,52 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     localrow.append("mjn15@psu.edu")
     localrow.append(Lexis_cite)
     localrow.append(entry)
-    #localrow.append(firstcite_string)
     localrow.append(court_string)
-    #localrow.append(action_string)
     localrow.append(new_date)
-    #localrow.append(non_panel_judge_string)
     localrow.append(state_abbr)
     localrow.append(panel)
     localrow.append(parties_string)
-    #localrow.append(pet_str)
-    #localrow.append(res_str)
     localrow.append(docketnum)
     localrow.append(cite_string)
     localrow.append(Lexis_cite)
     localrow.append(West_cite)
-    #localrow.append(action_string)
-    #localrow.append(unpublished)
-    #localrow.append(prior_history_string)
-    #localrow.append(sub_history_string)
-    #localrow.append(rehearing)
-    #localrow.append(disposition_string)
     localrow.append(attorney_string)
-    #localrow.append(pubdef)
-    #localrow.append(prose)
-    #localrow.append(appellee_attorney_string)
-    #localrow.append(appellee_pubdef)
-    #localrow.append(appellee_prose)
-    #localrow.append(judges_string)
     localrow.append(part_judges)
     localrow.append(judges_np)
-    #localrow.append(judges_part_string)
-    #localrow.append(no_part_dich)
-    #localrow.append(no_part_string)
     localrow.append(judge1_ln)
-    #localrow.append(judge1_fn)
-    #localrow.append(judge1_full)
     localrow.append(judge1_vote)
     localrow.append(judge1_code)
     localrow.append(judge2_ln)
-    #localrow.append(judge2_fn)
-    #localrow.append(judge2_full)
     localrow.append(judge2_vote)
     localrow.append(judge2_code)
     localrow.append(judge3_ln)
-    #localrow.append(judge3_fn)
-    #localrow.append(judge3_full)
     localrow.append(judge3_vote)
     localrow.append(judge3_code)
     localrow.append(judge4_ln)
-    #localrow.append(judge4_fn)
-    #localrow.append(judge4_full)
     localrow.append(judge4_vote)
     localrow.append(judge4_code)
     localrow.append(judge5_ln)
-    #localrow.append(judge5_fn)
-    #localrow.append(judge5_full)
     localrow.append(judge5_vote)
     localrow.append(judge5_code)
     localrow.append(judge6_ln)
-    #localrow.append(judge6_fn)
-    #localrow.append(judge6_full)
     localrow.append(judge6_vote)
     localrow.append(judge6_code)
     localrow.append(judge7_ln)
-    #localrow.append(judge7_fn)
-    #localrow.append(judge7_full)
     localrow.append(judge7_vote)
     localrow.append(judge7_code)
     localrow.append(judge8_ln)
-    #localrow.append(judge8_fn)
-    #localrow.append(judge8_full)
     localrow.append(judge8_vote)
     localrow.append(judge8_code)
     localrow.append(judge9_ln)
-    #localrow.append(judge9_fn)
-    #localrow.append(judge9_full)
     localrow.append(judge9_vote)
     localrow.append(judge9_code)
     localrow.append(judge10_ln)
-    #localrow.append(judge10_fn)
-    #localrow.append(judge10_full)
     localrow.append(judge10_vote)
     localrow.append(judge10_code)
     localrow.append(judge11_ln)
-    #localrow.append(judge11_fn)
-    #localrow.append(judge11_full)
     localrow.append(judge11_vote)
     localrow.append(judge11_code)
-    #localrow.append(opin_by_string)
-    #localrow.append(per_curiam)
-    #localrow.append(unanimous)
     localrow.append(dissent)
-    #localrow.append(unwritten_dissent)
     localrow.append(num_dissent)
     localrow.append(dissent_by_string.upper())
     localrow.append(dissent_author_1.upper())
@@ -4718,9 +4192,15 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
     localrow.append(concur)
     localrow.append(num_concur)
     localrow.append(concur_by_string.upper())
+    localrow.append(check_recuse_case)
     outfilehandle.writerow(localrow)
+
+    if check_recuse == True:
+        recuse_handle.writerow(localrow)
+    check_recuse = False
 
 # Finish writing to the .csv file and close it so the process is complete
 infilehandle.close()
+check.close()
 fout.close()
 master.close()

@@ -49,7 +49,7 @@ print(named_entities)
 
 exclude = set(string.punctuation)
 #sentence = 'Judges: Maddox, J., Hornsby, C.J., and Jones, Almon, Shores, Houston, Steagall, and Kennedy, JJ., concur.'
-sentence = 'Judges: Frederick J. Martone, Justice. CONCURRING: Thomas A. Zlaket, Chief Justice, Charles E. Jones, Vice Chief Justice, Stanley G. Feldman, Justice, Ruth V. McGregor, Justice.'
+sentence = 'Judges: Frederick J. Martone, Justice. CONCURRING: Thomas A. Zlaket, Chief Justice, Charles E. Jones, Vice Chief Justice, Stanley G. Feldman, Justice, Ruth V. McGregor, Justice.'
 print(sentence)
 sentence = re.sub(' J\.| JJ\.| C\.J\.|Chief Justice|Justice', '', sentence)
 sentence = re.sub(' A\.| E\.| G\.| V\.|', '', sentence)
@@ -70,7 +70,7 @@ print(names)
 
 
 
-sentence = 'Judges: Frederick J. Martone, Justice. CONCURRING: Thomas A. Zlaket, Chief Justice, Charles E. Jones, Vice Chief Justice, Stanley G. Feldman, Justice, Ruth V. McGregor, Justice.'
+sentence = 'Judges: Frederick J. Martone, Justice. CONCURRING: Thomas A. Zlaket, Chief Justice, Charles E. Jones, Vice Chief Justice, Stanley G. Feldman, Justice, Ruth V. McGregor, Justice.'
 sentence = ''.join(ch for ch in sentence if ch not in exclude)
 print(sentence)
 parse_tree = nltk.ne_chunk(nltk.tag.pos_tag(sentence.split()), binary=True)  # POS tagging before chunking!
@@ -80,3 +80,8 @@ for t in parse_tree.subtrees():
     print(t.label())
     if t.label() == 'NE':
         print(t)
+        
+
+sent = 'This judge is not participating. He really is not participating yo.'
+if len(re.findall('not participating|recusal|recused', sent)) > 1:
+    print("yes")

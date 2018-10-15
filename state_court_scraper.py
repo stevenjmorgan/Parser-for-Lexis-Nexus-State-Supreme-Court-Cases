@@ -24,7 +24,7 @@ import datetime
 import pickle
 
 #mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/mandarbScrapes/"
+mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
 
 ## function to expand abbreviated month names
 def expandmonth(mstring2):
