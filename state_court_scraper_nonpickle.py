@@ -15,15 +15,9 @@
 ## Michael Nelson
 ## Summer, 2017
 
-import os
-import re
-import csv
-import string
-import operator
-import datetime
-import pickle
+import os, re, csv, string, operator, datetime
 
-#mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
+#mydir = "C:/Users/Steve/Desktop/Summer_Work/"
 mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/mandarbScrapes/"
 
 ## function to expand abbreviated month names
@@ -237,7 +231,7 @@ def first_sentence(value):
     return sentence
 
 def state_ab(value):
-    #state_abbr = ""
+    #    state_abbr = ""
     if(re.search("Alabama", value)):
         state_abbr = "AL"
         return state_abbr
@@ -386,12 +380,14 @@ def state_ab(value):
         state_abbr = "WY"
         return state_abbr
 
+
 # .csv file where extracted metadata will be stored
 fout = open(mydir + "mand_arb.csv", "wb")
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
+
 master = open(mydir + "States_MasterFile_Import.csv", "rb")
 
 # Create your own label for each column of the metadata .csv file
@@ -412,7 +408,18 @@ localrow.append("docket")
 localrow.append("citestring")
 localrow.append("LexisCite")
 localrow.append("WestLaw")
+#localrow.append("actionstring")
+#localrow.append("Unpublished")
+#localrow.append("Prior History")
+#localrow.append("Sub History")
+#localrow.append("Petion for Rehearing")
+#localrow.append("disposition")
 localrow.append("attorneys")
+#localrow.append("publicDefender")
+#localrow.append("proSe")
+#localrow.append("appellee attorneys")
+#localrow.append("appellee public defender")
+#localrow.append("appellee pro se")
 localrow.append("judges")
 #localrow.append("judges participating")
 localrow.append("judgeNP")
@@ -490,6 +497,7 @@ localrow.append("concur_name")
 localrow.append("silent_dissent")
 outfilehandle.writerow(localrow)
 
+
 # Name of folder where all cases are located (and nothing else)
 dirname = mydir + "mandArb/"
 dirlist = os.listdir(dirname)
@@ -501,6 +509,9 @@ for entry in dirlist:
 
 #dirlist = [file for file in dirlist if len(file) > 20]
 
+# Use (uncomment) following line to test code on a small handful of cases
+#cleandirlist = cleandirlist[838:872] #cleandirlist[838:872]   #cleandirlist[0:443] + cleandirlist[746:776] + cleandirlist[903:931] #+ cleandirlist[1271:1334] #cleandirlist[0:443] + cleandirlist[746:776] + cleandirlist[903:931] +
+            #1527
 for entry in cleandirlist: ## each entry is a txt file with an opinion
     # initialize all variables to be used
     infilepath = dirname + entry
@@ -919,6 +930,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             action_string = re.sub("Cause argued ", "Cause argued, ", action_string)
             #print action_string
 
+
+
             split_action = re.split("\n", action_string)
             action1 = string.strip(split_action[0])
             action2 = string.strip(split_action[1])
@@ -932,7 +945,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             #action2 = re.split(", ", action2)
 
 
-   ## Changed < 3 to < 2
+   ##CHANGED < 3 to < 2
             if(len(split_action) < 2):
                 action1[1] = re.sub("\.", "", action1[1])
                 action1[1] = re.sub(",", "", action1[1])
@@ -996,7 +1009,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
 
             # match state abbrevation and date decided from case and state master file to produce a list of judges who were on the bench at time of decision for cases heard in non-panel state
-            with open(mydir + "States_MasterFile_Import.csv", "rb") as f:
+            with open("States_MasterFile_Import.csv", "rb") as f:
                 reader = csv.reader(f)
                 next(f)
                 for row in reader:
@@ -1074,6 +1087,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
                 action_line = False
                 blank_after_docket = True
 
+
+
+
         if(re.match("^Reporter", txtline) and not opinion_start):
             ## this is the "Reporter" line after docket number
             blank_after_action = False
@@ -1104,16 +1120,26 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             cite_line = False
             blank_after_cite = True
             all_cites = re.split(" [\|] ", cite_string)
+            ####print all_cites
+            ##Fed_cite = [cite for cite in all_cites if re.search("[\s]F\.(2|3)d", cite)]
             Lexis_cite = [cite for cite in all_cites if re.search("LEXIS", cite)]
             try:
+            ##    Fed_cite = string.strip(Fed_cite[0])
                 Lexis_cite = string.strip(Lexis_cite[0])
             except:
                 print "Problem with citation"
+            #print Fed_cite
+            #print repr(Lexis_cite)
+
+
+
+
 
         if(blank_after_cite and re.match("[\w]+", txtline)):
             ## the parties
             parties_line = True
             parties_string = parties_string + txtline
+            #print txtline.replace("\n", "")
 
         # Store names of parties to the case
         if (parties_line and re.match("^[\s]+$", txtline)):
@@ -1122,6 +1148,12 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
             parties_line = False
             blank_after_parties = True
             parties_string = re.sub("[\s]+", " ", parties_string)
+            ##print string.strip(parties_string)
+            #print parties_string
+
+
+
+
 
 #        if(blank_after_court and re.search("^[\s]+\*", txtline)):
 #            ## the citation block
@@ -1488,21 +1520,147 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
             #print judges_string
             # Parse judges text and store list of judges that decided case
-            with open("judgeslistofregexes.txt", "rb") as fp:   # Unpickling
-                list_regexes = pickle.load(fp)
-            for s in list_regexes:
-                judges_string = re.sub(s, ' ', judges_string)
-                #print judges_string
-
+            judges_string = re.sub("Judges:|Judges|JUDGES", "", judges_string)
+            judges_string = re.sub("judge|Judge|JUDGE", "", judges_string)
             judges_string = re.sub(" delivered the Opinion of the Court\.| DELIVERED THE OPINION OF THE COURT\.|Delivered the Opinion of the Court\.", ",", judges_string)
             #print judges_string
-            judges_string = re.sub("\xc3\x8d", "i", judges_string) #
-            judges_string = re.sub("F\.X\. HENNESSEY", "HENNESSY", judges_string) ##
+            judges_string = re.sub("BEFORE THE ENTIRE", "", judges_string)
+            judges_string = re.sub("Court", "", judges_string)
+            judges_string = re.sub("court", "", judges_string)
+            judges_string = re.sub("\xc3\x8d", "i", judges_string)
+            judges_string = re.sub(" Sr\.| SR\.", "", judges_string)
+            judges_string = re.sub(" Jr\.| JR\.", "", judges_string)
+            judges_string = re.sub(" Mr\.| MR\.", "", judges_string)
+            judges_string = re.sub(" Sr| SR", "", judges_string)
+            judges_string = re.sub(" Jr| JR", "", judges_string)
+            judges_string = re.sub(" at the", "", judges_string)
+            judges_string = re.sub(" Mr| MR", "", judges_string)
+            judges_string = re.sub("F\.X\. HENNESSEY", "HENNESSY", judges_string)
+            judges_string = re.sub("and in the judgment", "", judges_string)
+            judges_string = re.sub("was an appointed", "", judges_string)
+            judges_string = re.sub("S93A0786", "", judges_string)
+            judges_string = re.sub("S93X0787", "", judges_string)
+            judges_string = re.sub("III-A", "", judges_string)
+            judges_string = re.sub("I-V", "", judges_string)
+            judges_string = re.sub(" VII", "", judges_string)
+            judges_string = re.sub("Parts V\(C\), VI, VII and VIII", "", judges_string)
+            judges_string = re.sub("Parts V\(C\), VI, VII, and VIII", "", judges_string)
+            judges_string = re.sub("Parts I, II, IV and V\(A\)", "", judges_string)
+            judges_string = re.sub("Part III and V\(B\)", "", judges_string)
+            judges_string = re.sub("Parts V\(C\), VI, VII and VIII", "", judges_string)
+            judges_string = re.sub("Messrs\.", "", judges_string)
+            judges_string = re.sub("stead", "", judges_string)
+            judges_string = re.sub("MOTION FOR EXPEDITED APPEAL IS GRANTED", "", judges_string)
+            judges_string = re.sub("REQUEST FOR ORAL ARGUMENT IS DENIED", "", judges_string)
+            judges_string = re.sub("Section IV\(D\)", "", judges_string)
+            judges_string = re.sub("parts I, II, and III", "", judges_string)
+            judges_string = re.sub("respect|RESPECT|Respect", "", judges_string)
+            judges_string = re.sub("action was submitted", "", judges_string)
+            judges_string = re.sub("Subscribing to the Opinion and Assigning Additional Reasons", "", judges_string)
+            #print judges_string
+            judges_string = re.sub("Pursuant to Ariz\. Const\. art\. VI|pursuant to Ariz\. Const\. art\. VI|Pursuant to Ariz\. Const\. art\. 6|pursuant to Ariz\. Const\. art\. 6", "", judges_string)
+            judges_string = re.sub("Arizona Constitution", "", judges_string)
+            judges_string = re.sub("Pursuant to art\. VI\.|Pursuant to article VI", "", judges_string)
+            judges_string = re.sub("pursuant|Pursuant", "", judges_string)
+            judges_string = re.sub(" and Justices", ",", judges_string)
+            judges_string = re.sub("None", "", judges_string)
+            judges_string = re.sub("\xe2\x80\x94", "", judges_string)
+            judges_string = re.sub("PANEL: ", "", judges_string)
+            judges_string = re.sub("\$110W\.", "", judges_string)
+            judges_string = re.sub(" but, on administrative leave,", "", judges_string)
+            judges_string = re.sub("Ex parte Reneau L\. Gates \(re\: v\. Palm Harbor Homes\, Inc\.\, et al\.\)", "", judges_string)
             judges_string = re.sub("We Concur|WE CONCUR|We concur", ", ", judges_string)
-            judges_string = re.sub("Chief Justice", ",", judges_string) ##
-            judges_string = re.sub("--", ",", judges_string) ##
-            judges_string = re.sub("PELICONES|Pelicones", "", judges_string) ##Mispelling of SC CJ??
-            judges_string = re.sub("\xc3\xa9", "e", judges_string) ##
+            judges_string = re.sub("All the|all the|ALL THE", "", judges_string)
+            judges_string = re.sub("Circuit|circuit|CIRCUIT", "", judges_string)
+            judges_string = re.sub("except", "", judges_string)
+            judges_string = re.sub("Special Justices", "", judges_string)
+            judges_string = re.sub("Terminix International v\. Jackson", "", judges_string)
+            judges_string = re.sub("Special Justice", "", judges_string)
+            judges_string = re.sub("Associate Justice", "", judges_string)
+            judges_string = re.sub("Point II", "", judges_string)
+            judges_string = re.sub("Special Chief Justice", "", judges_string)
+            judges_string = re.sub("Chief Justice", "", judges_string)
+            judges_string = re.sub("Justice\.", "", judges_string)
+            judges_string = re.sub("affirmance|Affirmance|AFFIRMANCE", "", judges_string)
+            judges_string = re.sub("'s|'S", "", judges_string)
+            judges_string = re.sub("\(No\.\s\d*\)", "", judges_string)
+            judges_string = re.sub("AFFIRMED|Affirmed|affirmed", "", judges_string)
+            judges_string = re.sub("AFFIRM|Affirm|affirm", "", judges_string)
+            judges_string = re.sub("grant the petition", "", judges_string)
+            judges_string = re.sub("petition|Petition|PETITION", "", judges_string)
+            judges_string = re.sub("Granted|granted|GRANTED", "", judges_string)
+            judges_string = re.sub("abstaining|Abstaining|ABSTAINING", "", judges_string)
+            judges_string = re.sub("No\.\s\d*", "", judges_string)
+            judges_string = re.sub("Senior", "", judges_string)
+            judges_string = re.sub("Supr\.|Supr", "", judges_string)
+            judges_string = re.sub("\xe2\x80\x94", "", judges_string)
+            judges_string = re.sub("Chief Justice", ",", judges_string)
+            judges_string = re.sub("Chief Judge", "", judges_string)
+            judges_string = re.sub("--", ",", judges_string)
+            judges_string = re.sub(" but ", "", judges_string)
+            judges_string = re.sub("Justices|JUSTICES|justices", "", judges_string)
+            judges_string = re.sub("JUSTICE\.", "", judges_string)
+            judges_string = re.sub("JUSTICE|Justice|justice", "", judges_string)
+            judges_string = re.sub("announced|Announced|ANNOUNCED", "", judges_string)
+            judges_string = re.sub("\*Link to the text of the note", "", judges_string)
+            judges_string = re.sub("Ariz\.Const\.", "", judges_string)
+            judges_string = re.sub("art\. VI", "", judges_string)
+            judges_string = re.sub(" art\.", "", judges_string)
+            judges_string = re.sub("Link to the text of the note", "", judges_string)
+            judges_string = re.sub("to the", "", judges_string)
+            judges_string = re.sub("prior", "", judges_string)
+            judges_string = re.sub("oral argument|argument", "", judges_string)
+            judges_string = re.sub("resigned", "", judges_string)
+            judges_string = re.sub("chief|Chief|CHIEF", "", judges_string)
+            judges_string = re.sub("AUTHOR", "", judges_string)
+            judges_string = re.sub("nonrecusal|NONRECUSAL|Nonrecusal", "", judges_string)
+            judges_string = re.sub("deeming", "", judges_string)
+            judges_string = re.sub("temporary", "", judges_string)
+            judges_string = re.sub("filed:", "", judges_string)
+            judges_string = re.sub("filed a|file a", "", judges_string)
+            judges_string = re.sub("President", "", judges_string)
+            judges_string = re.sub("Intermediate|intermediate|INTERMEDIATE", "", judges_string)
+            judges_string = re.sub("Associate|ASSOCIATE|associate", "", judges_string)
+            judges_string = re.sub("reasons|REASONS|Reasons|reason|REASON|Reason", "", judges_string)
+            judges_string = re.sub("Superior", "", judges_string)
+            judges_string = re.sub("constituting the", "", judges_string)
+            judges_string = re.sub("En Banc|en Banc", "", judges_string)
+            judges_string = re.sub("In Banc", "", judges_string)
+            judges_string = re.sub("cases|Cases|CASES", "", judges_string)
+            judges_string = re.sub("agreement|Agreement|AGREEMENT", "", judges_string)
+            judges_string = re.sub('"', "", judges_string)
+            judges_string = re.sub(" all | All | ALL ", "", judges_string)
+            judges_string = re.sub("Present|PRESENT|present", "", judges_string)
+            judges_string = re.sub("APPEALS", "", judges_string)
+            judges_string = re.sub(" THE", "", judges_string)
+            judges_string = re.sub("\xc3\x81", "a", judges_string)
+            judges_string = re.sub("WITHOUT", "", judges_string)
+            judges_string = re.sub("WITH", "", judges_string)
+            judges_string = re.sub("ASSIGNED BY REASON OF VACANCY|VACANCY|Vacancy", "", judges_string)
+            judges_string = re.sub("THIS", "", judges_string)
+            judges_string = re.sub("PELICONES|Pelicones", "", judges_string)
+            judges_string = re.sub("member|Member|MEMBER", "", judges_string)
+            judges_string = re.sub("disposition|Disposition|DISPOSITION", "", judges_string)
+            judges_string = re.sub(" right| Right| RIGHT", "", judges_string)
+            judges_string = re.sub("DISSENTS", "", judges_string)
+            judges_string = re.sub("WRITTEN|written|Written", "", judges_string)
+            judges_string = re.sub("WITHOUT|without", "", judges_string)
+            judges_string = re.sub("\xc3\xa9", "e", judges_string)
+            judges_string = re.sub(" took| TOOK| Took", "", judges_string)
+            judges_string = re.sub("Rule IV", "", judges_string)
+            judges_string = re.sub(" IV", "", judges_string)
+            judges_string = re.sub("C\. J\.,", "", judges_string)
+            judges_string = re.sub(" J\.,", "", judges_string)
+            judges_string = re.sub("assigned|Assigned|ASSIGNED|ASSIGNS|Assigns|assigns", "", judges_string)
+            judges_string = re.sub(" as ", "", judges_string)
+            judges_string = re.sub('"Agreement to Arbitrate"', "", judges_string)
+            judges_string = re.sub("Arbitrate\"", "", judges_string)
+            judges_string = re.sub("files a", "", judges_string)
+            judges_string = re.sub("former|Former|FORMER", "", judges_string)
+            judges_string = re.sub("C\.J\.,|Sp\.JJ|Sp\.J\.|Sp\. J\.|C\.J,|J\.P\.T\.|CJ,||A\.J\.V\.C\.J\.,|JJ\.,|Sp\.J\.|Js,|JS,|JJ\.,|JJ,|D\.J\.,|P\.J\.,|P\.\sJ\.,|C\.J\.,|J\.,|J\.| J,|C\. J\.,", "", judges_string)
+            judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
+            judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
+            judges_string = re.sub("Sp\.J\.", "", judges_string)
         #    if (re.search("not participating", judges_string)):
         #        no_part_string = no_part_string + judges_string
         #        print no_part_string
@@ -1521,49 +1679,367 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
         #        judges_np = re.sub("\[", "", judges_np)
         #        judges_np = judges_np.strip()
 
+            judges_string = re.sub("Part II\.A", "", judges_string)
+            judges_string = re.sub("Part II\.B", "", judges_string)
+            judges_string = re.sub("Parts II", "", judges_string)
+            judges_string = re.sub("Parts I", "", judges_string)
+            judges_string = re.sub("Part II", "", judges_string)
+            judges_string = re.sub("Part I", "", judges_string)
+            judges_string = re.sub("WoWe", "", judges_string)
+            judges_string = re.sub("foregoing|Foregoing|FOREGOING", "", judges_string)
+            judges_string = re.sub(" for| For| FOR", "", judges_string)
+            judges_string = re.sub("", "", judges_string)
+            judges_string = re.sub("[\(\[].*?[\)\]]", "", judges_string)
+            judges_string = re.sub("III", "", judges_string)
+            judges_string = re.sub("II\(\w\)", "", judges_string)
+            judges_string = re.sub("III\(\w\)", "", judges_string)
+            judges_string = re.sub(" II", "", judges_string)
+            judges_string = re.sub("III", "", judges_string)
+            judges_string = re.sub("Associate", "", judges_string)
+            judges_string = re.sub("Vice", "", judges_string)
+            judges_string = re.sub("\[\**\d*\]", "", judges_string)
+            judges_string = re.sub("Arbitrate|arbitrate|ARBITRATE", "", judges_string)
+            judges_string = re.sub("\xc2", "", judges_string)
+            judges_string = re.sub("BENCH|Bench|bench", "", judges_string)
+            judges_string = re.sub("(Before: |BEFORE: )", "", judges_string)
             judges_string = re.sub("\xa0", " ", judges_string)
-            judges_string = re.sub("\n|\r", " ", judges_string) #
+            judges_string = re.sub("\/", "", judges_string)
+            judges_string = re.sub("\n|\r", " ", judges_string)
             judges_string = re.sub("\(see p", " ", judges_string)
             #judges_string = re.sub("\(No\. \d\[7])", "", judges_string)
+            judges_string = re.sub("\(\d\)", "", judges_string)
+            judges_string = re.sub("\d", "", judges_string)
+            judges_string = re.sub("\(", "", judges_string)
+            judges_string = re.sub("\)", "", judges_string)
             #judges_string = re.sub(", ,", ",", judges_string)
             #judges_string = re.sub(",,", ",", judges_string)
             #judges_string = re.sub(",,", ",", judges_string)
-            judges_string = re.sub("Saylor|SAYLOR", "Saylor, ", judges_string)#
-            judges_string = re.sub("SeeStuart|seestuart", "See, Stuart", judges_string)#
+            judges_string = re.sub("\sI,", "", judges_string)
+            judges_string = re.sub(" or ", "", judges_string)
+            judges_string = re.sub("Saylor|SAYLOR", "Saylor, ", judges_string)
+            judges_string = re.sub(" BY", "", judges_string)
+            judges_string = re.sub(" FOR", "", judges_string)
+            judges_string = re.sub("I;", "", judges_string)
+            judges_string = re.sub("Voting|VOTING|voting", "", judges_string)
+            judges_string = re.sub("Surrogate", "", judges_string)
+            judges_string = re.sub("\'", "", judges_string)			#makes matching of judge names easier: O'Connor -> OConnor
+            judges_string = re.sub("judgment", "", judges_string)
+            judges_string = re.sub("SeeStuart|seestuart", "See, Stuart", judges_string)
             if(re.search("unanimous view of the court|unanimous", judges_string)):
                 unanimous = 1
                 #print "Unanimous"
+            judges_string = re.sub("unanimous view of the court", "", judges_string)
+            judges_string = re.sub("unanimous", "", judges_string)
+            judges_string = re.sub("Took no|Took No|took no|TOOK NO", "", judges_string)
+            judges_string = re.sub(" No,", "", judges_string)
+            judges_string = re.sub("separately|Separately|SEPARATELY", "", judges_string)
+            judges_string = re.sub("separate|Separate|SEPARATE", "", judges_string)
+            judges_string = re.sub("in place of", "", judges_string)
+            judges_string = re.sub("sections,", "", judges_string)
+            judges_string = re.sub("Sections,", "", judges_string)
+            judges_string = re.sub("sections", "", judges_string)
+            judges_string = re.sub("section,", "", judges_string)
+            judges_string = re.sub("Section,", "", judges_string)
+            judges_string = re.sub("section", "", judges_string)
+            judges_string = re.sub("constituting,", "", judges_string)
+            judges_string = re.sub("en banc,|en banc|En banc|En Banc|EN BANC", "", judges_string)
+            judges_string = re.sub("\[", "", judges_string)
             judges_string = re.sub("\]", ",", judges_string)
-            judges_string = re.sub("concur in part and dissent in part|CONCUR IN PART AND DISSENT IN PART", " ", judges_string) ##
-            judges_string = re.sub("concurs in part and dissents in part|CONCURS IN PART AND DISSENTS IN PART", " ", judges_string) ##
-            judges_string = re.sub("concurs", ",", judges_string) #
+            judges_string = re.sub("concur in part and dissent in part|CONCUR IN PART AND DISSENT IN PART", " ", judges_string)
+            judges_string = re.sub("concurs in part and dissents in part|CONCURS IN PART AND DISSENTS IN PART", " ", judges_string)
+            judges_string = re.sub("concurs in the result, without opinion\.", "", judges_string)
+            judges_string = re.sub("all concurring", "", judges_string)
+            judges_string = re.sub("See separate opinion", "", judges_string)
+            judges_string = re.sub("concurring|Concurring|CONCURRING", "", judges_string)
+            judges_string = re.sub("concurrence|Concurrence|CONCURRENCE|Concurrence:", "", judges_string)
+            judges_string = re.sub("concurs", ",", judges_string)
             judges_string = re.sub("concurred", ",", judges_string)
-            judges_string = re.sub("concur\.", ",", judges_string) ##
-            judges_string = re.sub("CONCUR", ",", judges_string) ##
-            judges_string = re.sub("dissent\.", ",", judges_string) ##
+            judges_string = re.sub("concur in", "", judges_string)
+            judges_string = re.sub("Concurs:|CONCURs:", "", judges_string)
+            judges_string = re.sub("concurs|Concurs|CONCURS", "", judges_string)
+            judges_string = re.sub("concur\.", ",", judges_string)
+            judges_string = re.sub("concur|Concur", "", judges_string)
+            judges_string = re.sub("CONCUR", ",", judges_string)
+            judges_string = re.sub("does", "", judges_string)
+            judges_string = re.sub("consideration", "", judges_string)
+            judges_string = re.sub("Md\.", "", judges_string)
+            judges_string = re.sub("Temporarily", "", judges_string)
+            judges_string = re.sub("Link to, text thee", "", judges_string)
+            judges_string = re.sub("assigns reasons", "", judges_string)
+            judges_string = re.sub("Appeals", "", judges_string)
+            judges_string = re.sub("retired|RETIRED|Retired|Ret|ret\.", "", judges_string)
+            judges_string = re.sub("assigned|Assigned|ASSIGNED|assignment|Assignment|ASSIGNNMENT", "", judges_string)
+            judges_string = re.sub("The ", "", judges_string)
+            judges_string = re.sub(" sat", "", judges_string)
+            judges_string = re.sub("delivered", "", judges_string)
+            judges_string = re.sub("PARTICIPATING", "", judges_string)
+            judges_string = re.sub("participating", "", judges_string)
+            judges_string = re.sub("PARTICIPATING", "", judges_string)
+            judges_string = re.sub("participating", "", judges_string)
+            judges_string = re.sub("Participating", "", judges_string)
+            judges_string = re.sub("did not participate", "", judges_string)
+            judges_string = re.sub("did not sit", "", judges_string)
+            judges_string = re.sub("did not", "", judges_string)
+            judges_string = re.sub("Maricopa County", "", judges_string)
+            judges_string = re.sub("County", "", judges_string)
+            judges_string = re.sub("WRITTEN BY:|Written by:", "", judges_string)
+            judges_string = re.sub("herein", "", judges_string)
+            judges_string = re.sub("not participate", "", judges_string)
+            judges_string = re.sub("participate", "", judges_string)
+            judges_string = re.sub("Presiding|PRESIDING", "", judges_string)
+            judges_string = re.sub("specially|Specially|SPECIALLY", "", judges_string)
+            judges_string = re.sub("special|Special|SPECIAL", "", judges_string)
+            judges_string = re.sub("pro-tem|Pro-Tem|PRO-TEM", "", judges_string)
+            judges_string = re.sub("concurring", "", judges_string)
+            judges_string = re.sub("Concurring", "", judges_string)
+            judges_string = re.sub("concurs in the result, without opinion\.", "", judges_string)
+            judges_string = re.sub("no opinion", "", judges_string)
+            judges_string = re.sub("opinion\.", ",", judges_string)
+            judges_string = re.sub("OPINIONS|OPINIONs|opinions|Opinions", "", judges_string)
+            judges_string = re.sub("opinion", "", judges_string)
+            judges_string = re.sub("Opinion", "", judges_string)
+            judges_string = re.sub(" full ", "", judges_string)
+            judges_string = re.sub("statement", "", judges_string)
+            judges_string = re.sub("files|file|FILES|FILE", "", judges_string)
+            judges_string = re.sub("Judicial Circuit", "", judges_string)
+            judges_string = re.sub("Part III", "", judges_string)
+            judges_string = re.sub("no part|NO PART|No Part", "", judges_string)
+            judges_string = re.sub("part", "", judges_string)
+            judges_string = re.sub("Part", "", judges_string)
+            judges_string = re.sub("PART", "", judges_string)
+            judges_string = re.sub("which|Which|WHICH", "", judges_string)
+            judges_string = re.sub("DENIED|denied", "", judges_string)
+            judges_string = re.sub("Majority|majority|MAJORITY", "", judges_string)
+            judges_string = re.sub("Heard|heard|HEARD", "", judges_string)
+            judges_string = re.sub("joining|JOINING|Joining", "", judges_string)
+            judges_string = re.sub("joined|JOINED|Joined", "", judges_string)
+            judges_string = re.sub("joins|JOINS|Joins", "", judges_string)
+            judges_string = re.sub("join|JOIN|Join", "", judges_string)
+            judges_string = re.sub("takes|taking|Taking|TAKING", "", judges_string)
+            judges_string = re.sub(" that", "", judges_string)
+            judges_string = re.sub("as to the rationale", "", judges_string)
+            judges_string = re.sub("the judgment", "", judges_string)
+            judges_string = re.sub("rationale", "", judges_string)
+            judges_string = re.sub("T\.Y\.|T\. Y\.", "", judges_string)
+            judges_string = re.sub("A\.M\.", "", judges_string)
+            judges_string = re.sub("F\.E\.", "", judges_string)
+            judges_string = re.sub("N\.C\.", "", judges_string)
+            judges_string = re.sub("Paul H\.", "", judges_string)
+            judges_string = re.sub("Russell A\.", "", judges_string)
+            judges_string = re.sub("G\. Barry", "", judges_string)
+            judges_string = re.sub(" A\.| B\.| C\.| D\.| E\.| F\.| G\.| H\.| I\.| J\.| K\.| L\.| M\.| N\.| O\.| P\.| Q\.| R\.| S\.| T\.| U\.| V\.| W\.| X\.| Y\.| Z\.|", "", judges_string)
+            judges_string = re.sub(" A\.| B\.| C\.| D\.| E\.| F\.| G\.| H\.| I\.| J\.| K\.| L\.| M\.| N\.| O\.| P\.| Q\.| R\.| S\.| T\.| U\.| V\.| W\.| X\.| Y\.| Z\.|", "", judges_string)
+            judges_string = re.sub(" A\.| B\.| C\.| D\.| E\.| F\.| G\.| H\.| I\.| J\.| K\.| L\.| M\.| N\.| O\.| P\.| Q\.| R\.| S\.| T\.| U\.| V\.| W\.| X\.| Y\.| Z\.|", "", judges_string)
+            judges_string = re.sub(" A\.| B\.| C\.| D\.| E\.| F\.| G\.| H\.| I\.| J\.| K\.| L\.| M\.| N\.| O\.| P\.| Q\.| R\.| S\.| T\.| U\.| V\.| W\.| X\.| Y\.| Z\.|", "", judges_string)
+            judges_string = re.sub(" A\.| B\.| C\.| D\.| E\.| F\.| G\.| H\.| I\.| J\.| K\.| L\.| M\.| N\.| O\.| P\.| Q\.| R\.| S\.| T\.| U\.| V\.| W\.| X\.| Y\.| Z\.|", "", judges_string)
+            judges_string = re.sub("\.", ",", judges_string)
+            judges_string = re.sub("BEFORE", "", judges_string)
+            judges_string = re.sub("would", "", judges_string)
+            judges_string = re.sub("this", "", judges_string)
+            judges_string = re.sub("only", "", judges_string)
+            judges_string = re.sub("without", "", judges_string)
+            judges_string = re.sub("with", "", judges_string)
+            judges_string = re.sub(" out", "", judges_string)
+            judges_string = re.sub("also", "", judges_string)
+            judges_string = re.sub(" of", "", judges_string)
+            judges_string = re.sub(" view", "", judges_string)
+            judges_string = re.sub(" Not", "", judges_string)
+            judges_string = re.sub(" not", "", judges_string)
+            judges_string = re.sub(" NOT", "", judges_string)
+            judges_string = re.sub(" whom", "", judges_string)
+            judges_string = re.sub(" who", "", judges_string)
+            judges_string = re.sub("filed", "", judges_string)
+            judges_string = re.sub("expressing", "", judges_string)
+            judges_string = re.sub("but dissents", "", judges_string)
+            judges_string = re.sub("but dissent", "", judges_string)
+            judges_string = re.sub("but not the dissent", "", judges_string)
+            judges_string = re.sub("dissented", "", judges_string)
+            judges_string = re.sub("issued", ",", judges_string)
+            judges_string = re.sub("foregoing", "", judges_string)
+            judges_string = re.sub("agree", "", judges_string)
+            judges_string = re.sub("Opposed|opposed|OPPOSED", "", judges_string)
+            judges_string = re.sub("dissents", "", judges_string)
+            judges_string = re.sub("dissenting", "", judges_string)
+            judges_string = re.sub("DISSENTING", "", judges_string)
+            judges_string = re.sub("ENTIRE COURT", "", judges_string)
+            judges_string = re.sub(" as", "", judges_string)
+            judges_string = re.sub("reversal", "", judges_string)
+            judges_string = re.sub("none", "", judges_string)
+            judges_string = re.sub("Twelfth|Eleventh|Fifth|Tenth|Ninth|Eigth|Seventh|Sixth", "", judges_string)
+            judges_string = re.sub("Mr", "", judges_string)
+            judges_string = re.sub("remand", "", judges_string)
+            judges_string = re.sub("overruling", "", judges_string)
+            judges_string = re.sub("rehearing", "", judges_string)
+            judges_string = re.sub("OPINION", "", judges_string)
+            judges_string = re.sub("COURT", "", judges_string)
+            judges_string = re.sub("ONLY", "", judges_string)
+            judges_string = re.sub("IN RESULT", "", judges_string)
+            judges_string = re.sub(" IN ", "", judges_string)
+            judges_string = re.sub("Dissenting", "", judges_string)
+            judges_string = re.sub("Dissents", "", judges_string)
+            judges_string = re.sub("dissent\.", ",", judges_string)
+            judges_string = re.sub("dissent", "", judges_string)
+            judges_string = re.sub("Dissent", "", judges_string)
+            judges_string = re.sub("recuses|RECUSES|Recuses", "", judges_string)
+            judges_string = re.sub("recused|RECUSED|Recused", "", judges_string)
+            judges_string = re.sub("recuse|RECUSE|Recuse", "", judges_string)
+            judges_string = re.sub("SEPARATELY", "", judges_string)
+            judges_string = re.sub("PRO-TEM", "", judges_string)
+            judges_string = re.sub("reserves", "", judges_string)
+            judges_string = re.sub("is disqualified|disqualified|disqualification", "", judges_string)
+            judges_string = re.sub("recused themselves", "", judges_string)
+            judges_string = re.sub("recused", "", judges_string)
+            judges_string = re.sub("Recused", "", judges_string)
+            judges_string = re.sub("deceased", "", judges_string)
+            judges_string = re.sub("in the result", "", judges_string)
+            judges_string = re.sub("the result", "", judges_string)
+            judges_string = re.sub("result|Result|RESULT", "", judges_string)
+            judges_string = re.sub(" acting ", "", judges_string)
             judges_string = re.sub(" and ", ",", judges_string)
             judges_string = re.sub(" AND ", ",", judges_string)
             judges_string = re.sub(" an", ",", judges_string)
-            judges_string = re.sub("application|Application|APPLICATION", ", ", judges_string) ##
-            judges_string = re.sub("dismissed|Dismissed|DISMISSED", ", ", judges_string)##
+            judges_string = re.sub("application|Application|APPLICATION", ", ", judges_string)
+            judges_string = re.sub("dismissed|Dismissed|DISMISSED", ", ", judges_string)
             judges_string = re.sub("entitled|Entitled|ENTITLED", ", ", judges_string)
             judges_string = re.sub("appeal|Appeal|APPEAL", ", ", judges_string)
             judges_string = re.sub(" the ", ", ", judges_string)
             judges_string = re.sub(" as to", ", ", judges_string)
             judges_string = re.sub("decision", ", ", judges_string)
-            judges_string = re.sub("final", ", ", judges_string)#
-            judges_string = re.sub("DENVIRSTITH", "STITH", judges_string)#
-            judges_string = re.sub("Cavanaugh|CAVANAUGH", "Cavanagh", judges_string)##
-            judges_string = re.sub("O'NEILL to|O'NEILLto", "O'NEILL", judges_string)#
-            judges_string = re.sub("Boucier", "Bourcier", judges_string)#
-            judges_string = re.sub("Ralmon", "Almon", judges_string)#
-            judges_string = re.sub("RALMON", 'Almon', judges_string)#
-            judges_string = re.sub("Fabec", "Fabe", judges_string)#
-            judges_string = re.sub("Estaugh", "Eastaugh", judges_string)#
-            judges_string = re.sub("Lesson", "Leeson", judges_string) #
-
+            judges_string = re.sub("final", ", ", judges_string)
+            judges_string = re.sub(" in a", "", judges_string)
+            judges_string = re.sub("in the", "", judges_string)
+            judges_string = re.sub(" In | in ", "", judges_string)
+            judges_string = re.sub(" in,", "", judges_string)
+            judges_string = re.sub(" of", "", judges_string)
+            judges_string = re.sub(" OF", "", judges_string)
+            judges_string = re.sub(" from", "", judges_string)
+            judges_string = re.sub("herself", "", judges_string)
+            judges_string = re.sub("himself", "", judges_string)
+            judges_string = re.sub("themselves", "", judges_string)
+            judges_string = re.sub("expresses", "", judges_string)
+            judges_string = re.sub("ii", "", judges_string)
+            judges_string = re.sub(" cases| Cases", "", judges_string)
+            judges_string = re.sub("case", "", judges_string)
+            judges_string = re.sub("Case", "", judges_string)
+            judges_string = re.sub(" by", "", judges_string)
+            judges_string = re.sub("heard", "", judges_string)
+            judges_string = re.sub("DENVIRSTITH", "STITH", judges_string)
+            judges_string = re.sub("considered", "", judges_string)
+            judges_string = re.sub("decided", "", judges_string)
+            judges_string = re.sub("time", "", judges_string)
+            judges_string = re.sub("submission", "", judges_string)
+            judges_string = re.sub("\&", "", judges_string)
+            judges_string = re.sub("were designated", "", judges_string)
+            judges_string = re.sub("is designated|designated|designation", "", judges_string)
+            judges_string = re.sub(" All |ALL ", "", judges_string)
+            judges_string = re.sub("is sitting", "", judges_string)
+            judges_string = re.sub("sitting|SITTING|Sitting", "", judges_string)
+            judges_string = re.sub(" sit", "", judges_string)
+            judges_string = re.sub(" superior", "", judges_string)
+            judges_string = re.sub(" under", "", judges_string)
+            judges_string = re.sub("Cavanaugh|CAVANAUGH", "Cavanagh", judges_string)
+            judges_string = re.sub("WHOLE|Whole|whole", "", judges_string)
+            judges_string = re.sub("deny", "", judges_string)
+            judges_string = re.sub("Matter|MATTER|matter", "", judges_string)
+            judges_string = re.sub(" otherwise|Otherwise|OTHERWISE", "", judges_string)
+            judges_string = re.sub(" leave", "", judges_string)
+            judges_string = re.sub(" others| other| Other| OTHER", "", judges_string)
+            judges_string = re.sub(" vote|votes to", "", judges_string)
+            judges_string = re.sub("RSA", "", judges_string)
+            judges_string = re.sub("memorandum", "", judges_string)
+            judges_string = re.sub("took no", "", judges_string)
+            judges_string = re.sub("syllabus", "", judges_string)
+            judges_string = re.sub("Appellate District", "", judges_string)
+            judges_string = re.sub("District|district", "", judges_string)
+            judges_string = re.sub("Administrative", "", judges_string)
+            judges_string = re.sub("i-v", "", judges_string)
+            judges_string = re.sub("follows", "", judges_string)
+            judges_string = re.sub("Judicial", "", judges_string)
+            judges_string = re.sub("By:", "", judges_string)
+            judges_string = re.sub("Panel:", "", judges_string)
+            judges_string = re.sub(":\s", "", judges_string)
+            judges_string = re.sub(":", "", judges_string)
+            judges_string = re.sub("authored|Authored|AUTHORED", "", judges_string)
+            judges_string = re.sub(" to ", "", judges_string)
+            judges_string = re.sub("DISSENT", "", judges_string)
+            judges_string = re.sub(" each", "", judges_string)
+            judges_string = re.sub("Jr|jr|JR", "", judges_string)
+            judges_string = re.sub("denial", "", judges_string)
+            judges_string = re.sub("Sr|sr|SR", "", judges_string)
+            judges_string = re.sub("Deceased|deceased|DECEASED", "", judges_string)
+            judges_string = re.sub("lead|LEAD|Lead", "", judges_string)
+            judges_string = re.sub(" was | WAS | Was", "", judges_string)
+            judges_string = re.sub(" other", "", judges_string)
+            judges_string = re.sub("writing", "", judges_string)
+            judges_string = re.sub("Writ|writ|WRIT", "", judges_string)
+            judges_string = re.sub("take|TAKE|Take", "", judges_string)
+            judges_string = re.sub("Issued|issued|ISSUED", "", judges_string)
+            judges_string = re.sub("Madame|MADAME|madame", "", judges_string)
+            judges_string = re.sub("Visiting|VISITING|visiting", "", judges_string)
+            judges_string = re.sub("acting|ACTING|Acting", "", judges_string)
+            judges_string = re.sub("having|Having|HAVING", "", judges_string)
+            judges_string = re.sub("reverse", "", judges_string)
+            judges_string = re.sub("O'NEILL to|O'NEILLto", "O'NEILL", judges_string)
+            judges_string = re.sub(" is ", "", judges_string)
+            judges_string = re.sub("Third", "", judges_string)
+            judges_string = re.sub(" John ", "", judges_string)
+            judges_string = re.sub("Boucier", "Bourcier", judges_string)
+            judges_string = re.sub(" to ", "", judges_string)
+            judges_string = re.sub(",to ", "", judges_string)
+            judges_string = re.sub("Ralmon", "Almon", judges_string)
+            judges_string = re.sub("Fabec", "Fabe", judges_string)
+            judges_string = re.sub(" ir ", "", judges_string)
+            judges_string = re.sub("Estaugh", "Eastaugh", judges_string)
+            judges_string = re.sub("Modification", "", judges_string)
+            judges_string = re.sub("Vacation", "", judges_string)
+            judges_string = re.sub(",d,", "", judges_string)
+            judges_string = re.sub("Division Two|Two", "", judges_string)
+            judges_string = re.sub("dS", "", judges_string)
+            judges_string = re.sub("NOTE", "", judges_string)
+            judges_string = re.sub("dI", "", judges_string)
+            judges_string = re.sub("dX", "", judges_string)
+            judges_string = re.sub("were", "", judges_string)
+            judges_string = re.sub("pursuant", "", judges_string)
+            judges_string = re.sub("determination ", "", judges_string)
+            judges_string = re.sub("Division One", "", judges_string)
+            judges_string = re.sub("article IV", "", judges_string)
+            judges_string = re.sub("Article|ARTICLE|article", "", judges_string)
+            judges_string = re.sub("Arizona", "", judges_string)
+            judges_string = re.sub("Second", "", judges_string)
+            judges_string = re.sub("Council", "", judges_string)
+            judges_string = re.sub("Chairperson", "", judges_string)
+            judges_string = re.sub("not on panel|on panel|panel", "", judges_string)
+            judges_string = re.sub("Division Four", "", judges_string)
+            judges_string = re.sub("to conviction|conviction", "", judges_string)
+            judges_string = re.sub("to sentence|sentence", "", judges_string)
+            judges_string = re.sub("additional", "", judges_string)
+            judges_string = re.sub("following", "", judges_string)
+            judges_string = re.sub("subscribes|subscribe", "", judges_string)
+            judges_string = re.sub("ORAL ARGUMENT", "", judges_string)
+            judges_string = re.sub("DENIAL", "", judges_string)
+            judges_string = re.sub(" ONE ", "", judges_string)
+            judges_string = re.sub("TWO", "", judges_string)
+            judges_string = re.sub("THREE", "", judges_string)
+            judges_string = re.sub(" have", "", judges_string)
+            judges_string = re.sub("unconstitutional", "", judges_string)
+            judges_string = re.sub("follow", "", judges_string)
+            judges_string = re.sub("chapter", "", judges_string)
+            judges_string = re.sub("Lesson", "Leeson", judges_string)
+            judges_string = re.sub("Before", "", judges_string)
+            judges_string = re.sub("Per Curiam|Curiam", "", judges_string)
+            judges_string = re.sub("causesubmitted", "", judges_string)
+            judges_string = re.sub("on briefs|briefs|brief", "", judges_string)
+            judges_string = re.sub("Division", "", judges_string)
+            judges_string = re.sub("absent", "", judges_string)
+            judges_string = re.sub(" when", "", judges_string)
+            judges_string = re.sub(" inof", "", judges_string)
+            judges_string = re.sub("Order", "", judges_string)
+            judges_string = re.sub("other", "", judges_string)
+            judges_string = re.sub("absent", "", judges_string)
             #print judges_string
             #judges_string = re.sub(" ILL| ill", "ONEILL", judges_string)
+            judges_string = re.sub("tohis ", "", judges_string)
+            judges_string = re.sub("toother|TOOTHER|to other", "", judges_string)
             #judges_string = re.sub(",,", ",", judges_string)
             #judges_string = re.sub(", ,", "", judges_string)
             #judges_string = re.sub(",  ,", "", judges_string)
@@ -3205,7 +3681,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
     #print len(judge2_ln)
     if (((state_abbr == "AL" or state_abbr == "FL" or panel == 0 or state_abbr == "NH") and (state_abbr != "ME" or state_abbr != "MA") and (len(judge6_ln) > 2) or len(judge2_ln) < 2 or len(judge3_ln) < 2 or (len(judge5_ln) < 2 and panel == 0) and len(judge9_ln) < 2) or len(judge1_ln) < 2 and len(judge2_ln) < 2) or state_abbr != "AL" and len(judge7_ln) < 2:
-        with open(mydir + "States_MasterFile_Import.csv", "rb") as f:
+        with open("States_MasterFile_Import.csv", "rb") as f:
             reader = csv.reader(f)
             next(f)
             for row in reader:
@@ -3589,7 +4065,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion
 
     # Pull in judge codes from state master file by matching state abbrevation, justice name, and time in office
     if judge1_code == "":
-        with open(mydir + "States_MasterFile_Import.csv", "rb") as f:
+        with open("States_MasterFile_Import.csv", "rb") as f:
             reader = csv.reader(f)
             next(f)
             for row in reader:
