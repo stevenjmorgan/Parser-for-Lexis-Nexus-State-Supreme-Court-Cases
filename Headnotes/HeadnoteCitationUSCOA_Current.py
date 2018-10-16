@@ -3,7 +3,7 @@
 
 # This code takes .txt case files as input, parses case level data,
 # w/ emphasis on headnotes and headnote citations. Outputs to .csv.
-# Last updated 09-24-18
+# Last updated 10-16-18
 
 import os
 import re
@@ -257,6 +257,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion #[34854:3
             if re.search('HN12',line):
                 hn12index_list.append(index)
                 break
+
     # Enumerate based on line before HN1, store headnote text
     for index in hn1index_list[0:1]:
         hn1_text = line_list[index-1].strip()
