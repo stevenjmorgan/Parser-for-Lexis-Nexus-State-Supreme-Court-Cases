@@ -22,8 +22,8 @@ import string
 import operator
 import datetime
 
-#mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
+#mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
 
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
@@ -342,12 +342,12 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-fout = open(mydir + "mand_arb.csv", "wb")
+fout = open(mydir + "election.csv", "wb")
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir + "check_recusals.csv", "wb")
+check = open(mydir + "check_recusals_election.csv", "wb")
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -421,7 +421,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "mandArb/"
+dirname = mydir + "election_law/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
