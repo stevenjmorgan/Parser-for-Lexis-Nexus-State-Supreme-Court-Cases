@@ -433,7 +433,7 @@ for entry in dirlist:
 
 # Use (uncomment) following line to test code on a small handful of cases
 #cleandirlist = cleandirlist[838:872]
-for entry in cleandirlist[1286:1287]: ## each entry is a txt file with an opinion 0:1025
+for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     # initialize all variables to be used
     infilepath = dirname + entry
     infilehandle = open(infilepath)
@@ -889,7 +889,10 @@ for entry in cleandirlist[1286:1287]: ## each entry is a txt file with an opinio
                 # format dates so they match the format from the state judge master file
                 new_date = re.sub("April,", "April", new_date)
                 new_date = re.sub("On ", "", new_date)
-                date_format = datetime.datetime.strptime(new_date, '%B %d, %Y').date()
+                try:
+                    date_format = datetime.datetime.strptime(new_date, '%B %d, %Y').date()
+                except:
+                    date_format = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
 
             elif state_abbr == "MC":
                 date_format = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
@@ -1814,7 +1817,7 @@ for entry in cleandirlist[1286:1287]: ## each entry is a txt file with an opinio
             judges_string = re.sub(' Eighth', '', judges_string)
             judges_string = re.sub('its entirety', '', judges_string)
             judges_string = re.sub('entirety', '', judges_string)
-            print judges_string
+            #print judges_string
             judges_line = False
             judges_part_string = first_sentence(judges_string)
             judges_holder = re.sub("\*|\d", "", judges_part_string)
@@ -4128,7 +4131,7 @@ for entry in cleandirlist[1286:1287]: ## each entry is a txt file with an opinio
     if state_abbr == "ID":
         panel = 0
 
-    print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln, judge8_ln, judge9_ln
+    #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln, judge8_ln, judge9_ln
     # For each case, write a row to the .csv file which contains the desired variables.
     localrow = []
     localrow.append("mjn15@psu.edu")
