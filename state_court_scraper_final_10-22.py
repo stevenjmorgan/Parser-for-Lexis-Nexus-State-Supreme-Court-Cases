@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 ## reads and extracts info from txt files of published opinions from USCOA
 ## downloaded from LexisNexis
 ## written for python 2.6.*
@@ -342,12 +344,12 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-fout = open(mydir + "GRPost1990.csv", "wb")
+fout = open(mydir + "EAWPost1990.csv", "wb")
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir + "check_recusals_GRPost1990.csv", "wb")
+check = open(mydir + "check_recusals_EAWPost1990.csv", "wb")
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -1238,6 +1240,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
                 no_part_string = re.sub("Recus(es|ed|e)", "", no_part_string)
                 no_part_string = re.sub("took no part in the consideration or decision of this case", "", no_part_string)
                 no_part_string = re.sub("took no part in the decison", "", no_part_string)
+                no_part_string = re.sub('sat but', '', no_part_string)
                 if re.search("except", no_part_string):
                     no_part_string = no_part_string.split("except", 1)[1]
                 if re.search("in place of", no_part_string):
@@ -1317,6 +1320,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("judge|Judge|JUDGE", "", judges_string)
             judges_string = re.sub(" delivered the Opinion of the Court\.| DELIVERED THE OPINION OF THE COURT\.|Delivered the Opinion of the Court\.", ",", judges_string)
             judges_string = re.sub("BEFORE THE ENTIRE", "", judges_string)
+            judges_string = re.sub("Supreme Court", "", judges_string)
             judges_string = re.sub("Court", "", judges_string)
             judges_string = re.sub("court", "", judges_string)
             judges_string = re.sub("\xc3\x8d", "i", judges_string)
@@ -1326,8 +1330,14 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub(" Sr| SR", "", judges_string)
             judges_string = re.sub(" Jr| JR", "", judges_string)
             judges_string = re.sub(" at the", "", judges_string)
+            judges_string = re.sub('S94X1612', '', judges_string)
+            judges_string = re.sub('CDK, BJJ, JPV', '', judges_string)
+            judges_string = re.sub('AD HOC|Ad Hoc|ad hoc', '', judges_string)
+            judges_string = re.sub('reasons to be assigned|reason to be assigned', '', judges_string)
             judges_string = re.sub(" Mr| MR", "", judges_string)
             judges_string = re.sub("F\.X\. HENNESSEY", "HENNESSY", judges_string)
+            judges_string = re.sub("are of the opinion", "", judges_string)
+            judges_string = re.sub("should be granted", "", judges_string)
             judges_string = re.sub("and in the judgment", "", judges_string)
             judges_string = re.sub("was an appointed", "", judges_string)
             judges_string = re.sub("S93A0786", "", judges_string)
@@ -1442,12 +1452,17 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub(" IV", "", judges_string)
             judges_string = re.sub("C\. J\.,", "", judges_string)
             judges_string = re.sub(" J\.,", "", judges_string)
+            judges_string = re.sub("assigning", "", judges_string)
+            judges_string = re.sub("assigned", "", judges_string)
+            judges_string = re.sub("assigns", "", judges_string)
+            judges_string = re.sub("assign", "", judges_string)
             judges_string = re.sub("assigned|Assigned|ASSIGNED|ASSIGNS|Assigns|assigns", "", judges_string)
             judges_string = re.sub(" as ", "", judges_string)
             judges_string = re.sub('"Agreement to Arbitrate"', "", judges_string)
             judges_string = re.sub("Arbitrate\"", "", judges_string)
             judges_string = re.sub("files a", "", judges_string)
             judges_string = re.sub("former|Former|FORMER", "", judges_string)
+            judges_string = re.sub("Hon\. J\.", "", judges_string)
             judges_string = re.sub("C\.J\.,|Sp\.JJ|Sp\.J\.|Sp\. J\.|C\.J,|J\.P\.T\.|CJ,||A\.J\.V\.C\.J\.,|JJ\.,|Sp\.J\.|Js,|JS,|JJ\.,|JJ,|D\.J\.,|P\.J\.,|P\.\sJ\.,|C\.J\.,|J\.,|J\.| J,|C\. J\.,", "", judges_string)
             judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
             judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
@@ -1557,6 +1572,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("Presiding|PRESIDING", "", judges_string)
             judges_string = re.sub("specially|Specially|SPECIALLY", "", judges_string)
             judges_string = re.sub("special|Special|SPECIAL", "", judges_string)
+            judges_string = re.sub("Pro Tempore", "", judges_string)
             judges_string = re.sub("pro-tem|Pro-Tem|PRO-TEM", "", judges_string)
             judges_string = re.sub("concurring", "", judges_string)
             judges_string = re.sub("Concurring", "", judges_string)
@@ -1762,6 +1778,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("Vacation", "", judges_string)
             judges_string = re.sub(",d,", "", judges_string)
             judges_string = re.sub("Division Two|Two", "", judges_string)
+            judges_string = re.sub("Division Six", "", judges_string)
             judges_string = re.sub("dS", "", judges_string)
             judges_string = re.sub("NOTE", "", judges_string)
             judges_string = re.sub("dI", "", judges_string)
@@ -1817,6 +1834,42 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub(' Eighth', '', judges_string)
             judges_string = re.sub('its entirety', '', judges_string)
             judges_string = re.sub('entirety', '', judges_string)
+            judges_string = re.sub('holdings', '', judges_string)
+            judges_string = re.sub(' SPL ', '', judges_string)
+            judges_string = re.sub(' Five', '', judges_string)
+            judges_string = re.sub('APPENDIX', '', judges_string)
+            judges_string = re.sub(' Votes', '', judges_string)
+            judges_string = re.sub('Chancellor', '', judges_string)
+            judges_string = re.sub(' guilt', '', judges_string)
+            judges_string = re.sub(' the ', '', judges_string)
+            judges_string = re.sub(' the,', '', judges_string)
+            judges_string = re.sub('issuance', '', judges_string)
+            judges_string = re.sub(' inin', '', judges_string)
+            judges_string = re.sub('Process', '', judges_string)
+            judges_string = re.sub('transfer', '', judges_string)
+            judges_string = re.sub('Indiana', '', judges_string)
+            judges_string = re.sub('emphasize', '', judges_string)
+            judges_string = re.sub('non-hearsay', '', judges_string)
+            judges_string = re.sub('hearsay', '', judges_string)
+            judges_string = re.sub('Section II|Section', '', judges_string)
+            judges_string = re.sub('section|SECTION', '', judges_string)
+            judges_string = re.sub('impermissible', '', judges_string)
+            judges_string = re.sub('excellent|Excellent|Excellence|excellence', '', judges_string)
+            judges_string = re.sub('sexually predatory', '', judges_string)
+            judges_string = re.sub('Ten Broeck', '', judges_string)
+            judges_string = re.sub(' First', '', judges_string)
+            judges_string = re.sub('error', '', judges_string)
+            judges_string = re.sub('believings|believing', '', judges_string)
+            judges_string = re.sub('Doctor|doctor', '', judges_string)
+            judges_string = re.sub('dsigning', '', judges_string)
+            judges_string = re.sub('Plurality', '', judges_string)
+            judges_string = re.sub('Maryland', '', judges_string)
+            judges_string = re.sub('question|Question|QUESTION', '', judges_string)
+            judges_string = re.sub('before|Before|BEFORE', '', judges_string)
+            judges_string = re.sub(' Yes | yes ', '', judges_string)
+            judges_string = re.sub(' Yes,| yes,', '', judges_string)
+            if state != 'Alabama':
+                judges_string = re.sub(' See| see', '', judges_string)
             #print judges_string
             judges_line = False
             judges_part_string = first_sentence(judges_string)
@@ -1846,8 +1899,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_holder = re.split(",", judges_holder)
             judges_holder = judges_holder + non_panel_list
             judges_holder = [word for word in judges_holder if word != ""]
-            judges_holder = [word.strip() for word in judges_holder if word != ""]
-            judges_holder = [word.upper() for word in judges_holder if word != ""]
+            judges_holder = [word.strip() for word in judges_holder]
+            judges_holder = [word.upper() for word in judges_holder]
+            judges_holder = [word for word in judges_holder if len(word) > 2]
             judges_holder = list(set(judges_holder))
 
             # Apply functions to judge names to format the names of each justice uniformly
@@ -4143,9 +4197,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     localrow.append(panel)
     localrow.append(parties_string)
     localrow.append(docketnum)
-    localrow.append(cite_string)
-    localrow.append(Lexis_cite)
-    localrow.append(West_cite)
+    localrow.append(cite_string.strip())
+    localrow.append(Lexis_cite.strip())
+    localrow.append(West_cite.strip())
     localrow.append(attorney_string)
     localrow.append(part_judges)
     localrow.append(judges_np)
