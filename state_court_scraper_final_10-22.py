@@ -342,12 +342,12 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-fout = open(mydir + "election.csv", "wb")
+fout = open(mydir + "GRPost1990.csv", "wb")
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir + "check_recusals_election.csv", "wb")
+check = open(mydir + "check_recusals_GRPost1990.csv", "wb")
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -421,7 +421,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "election_law/"
+dirname = mydir + "GRPost1990/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
