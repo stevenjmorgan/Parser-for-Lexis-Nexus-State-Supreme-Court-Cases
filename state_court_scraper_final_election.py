@@ -22,8 +22,8 @@ import string
 import operator
 import datetime
 
-mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-#mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+#mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
+mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
 
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
@@ -1215,11 +1215,11 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
 
 
             # Store and parse text of judges that recused themselves from the case
-            if (re.search("((N|n)ot (P|p)articipat(e|ing)|(R|r)ecus(e|es|ed)|RECUSED|(T|t)ak(e|es) no part| sitting for| disqualified|took no part|NOT PARTICIPATING|sitting in lieu of)", judges_string)):
+            if (re.search("((N|n)ot (P|p)articipat(e|ing)|(R|r)ecus(e|es|ed)|RECUSED|(T|t)ak(e|es) no part| sitting for| disqualified|took no part|NOT PARTICIPATING|sitting in lieu of|sitting for)", judges_string)):
                 no_part = True
                 no_part_dich = 1
 
-                if len(re.findall('not participating|recusal|recused|disqualif', judges_string)) > 1:
+                if len(re.findall('not participating|recusal|recused|disqualif|sitting for', judges_string)) > 1 or (re.search('not participating|recusal|recused|disqualif|sitting for', judges_string) and len(judges_string) > 300):
                     check_recuse = True
                     check_recuse_case = 1
 
@@ -1234,6 +1234,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
                 no_part_string = re.sub("NOT PARTICIPATING", "", no_part_string)
                 no_part_string = re.sub("Recus(es|ed|e)", "", no_part_string)
                 no_part_string = re.sub("took no part in the consideration or decision of this case", "", no_part_string)
+                no_part_string = re.sub("took no part in the decison", "", no_part_string)
                 if re.search("except", no_part_string):
                     no_part_string = no_part_string.split("except", 1)[1]
                 if re.search("in place of", no_part_string):
@@ -1291,6 +1292,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
                 no_part_string = re.sub(' and', ',', no_part_string)
                 no_part_string = re.sub('deeming', '', no_part_string)
                 no_part_string = re.sub('disqualified', '', no_part_string)
+                no_part_string = re.sub('retired', '', no_part_string)
                 no_part_string = no_part_string.strip()
                 no_part_string = no_part_string.upper()
                 judges_np = no_part_string
@@ -1534,7 +1536,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("assigned|Assigned|ASSIGNED|assignment|Assignment|ASSIGNNMENT", "", judges_string)
             judges_string = re.sub("The ", "", judges_string)
             judges_string = re.sub(" sat", "", judges_string)
-            judges_string = re.sub("delivered", "", judges_string)
+            judges_string = re.sub("delivered|delivers|Delivers|Delivered", "", judges_string)
             judges_string = re.sub("PARTICIPATING", "", judges_string)
             judges_string = re.sub("participating", "", judges_string)
             judges_string = re.sub("PARTICIPATING", "", judges_string)
@@ -1807,7 +1809,12 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("s V", "", judges_string)
             judges_string = re.sub(" VI,", "", judges_string)
             judges_string = re.sub('DENVIR STITH', 'Stith', judges_string)
+            judges_string = re.sub('remainder|Remainder|REMAINDER', '', judges_string)
             judges_string = re.sub(' Wo,', '', judges_string)
+            judges_string = re.sub(' Eighth', '', judges_string)
+            judges_string = re.sub('its entirety', '', judges_string)
+            judges_string = re.sub('entirety', '', judges_string)
+            #print judges_string
             judges_line = False
             judges_part_string = first_sentence(judges_string)
             judges_holder = re.sub("\*|\d", "", judges_part_string)
@@ -1836,6 +1843,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_holder = re.split(",", judges_holder)
             judges_holder = judges_holder + non_panel_list
             judges_holder = [word for word in judges_holder if word != ""]
+            judges_holder = [word.strip() for word in judges_holder if word != ""]
+            judges_holder = [word.upper() for word in judges_holder if word != ""]
             judges_holder = list(set(judges_holder))
 
             # Apply functions to judge names to format the names of each justice uniformly
@@ -2058,7 +2067,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judge7_ln = lastname(judge7_ln)
             judge8_ln = lastname(judge8_ln)
             judge9_ln = lastname(judge9_ln)
-            #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln
+            #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln, judge8_ln, judge9_ln
 
             # Remove justices that did not participate based on previously stored list of non-participating judges; remove votes from these justices as well
             if (judge1_ln == judge_np1 or judge1_ln == judge_np2 or judge1_ln == judge_np3 or judge1_ln == judge_np4):
@@ -2165,6 +2174,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             opin_by_string = re.sub("III", "", opin_by_string)
             opin_by_string = re.sub("\xc3\x81", "a", opin_by_string)
             opin_by_string = re.sub(" ILL| ill", "ONEILL", opin_by_string)
+            opin_by_string = re.sub("Justice|JUSTICE", "", opin_by_string)
             opin_by_string = re.sub('DENVIR STITH|DENVIRSTITH', 'Stith', opin_by_string)
             opin_by_string = string.strip(opin_by_string)
             opin_by_line = False
@@ -4118,6 +4128,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     if state_abbr == "ID":
         panel = 0
 
+    #print judge1_ln, judge2_ln, judge3_ln, judge4_ln, judge5_ln, judge6_ln, judge7_ln, judge8_ln, judge9_ln
+
     # For each case, write a row to the .csv file which contains the desired variables.
     localrow = []
     localrow.append("mjn15@psu.edu")
@@ -4180,7 +4192,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     localrow.append(num_concur)
     localrow.append(concur_by_string.upper())
     localrow.append(check_recuse_case)
-    outfilehandle.writerow(localrow)
+    if check_recuse == False:
+        outfilehandle.writerow(localrow)
 
     if check_recuse == True:
         recuse_handle.writerow(localrow)
