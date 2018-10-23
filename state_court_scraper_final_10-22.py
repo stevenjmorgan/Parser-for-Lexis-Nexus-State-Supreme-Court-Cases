@@ -24,8 +24,8 @@ import string
 import operator
 import datetime
 
-#mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
+#mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
 
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
@@ -344,12 +344,12 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-fout = open(mydir + "GRPost1990.csv", "wb") #EAWPost1990
+fout = open(mydir + "GRPost1990_10-22.csv", "wb") #EAWPost1990
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir + "check_recusals_GRPost1990.csv", "wb") #EAWPost1990
+check = open(mydir + "check_recusals_GRPost1990_10-22.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -1334,11 +1334,13 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub('CDK, BJJ, JPV', '', judges_string)
             judges_string = re.sub('AD HOC|Ad Hoc|ad hoc', '', judges_string)
             judges_string = re.sub('reasons to be assigned|reason to be assigned', '', judges_string)
+            judges_string = re.sub('Procedural Due Process', '', judges_string)
             judges_string = re.sub(" Mr| MR", "", judges_string)
             judges_string = re.sub("F\.X\. HENNESSEY", "HENNESSY", judges_string)
             judges_string = re.sub("are of the opinion", "", judges_string)
             judges_string = re.sub("should be granted", "", judges_string)
             judges_string = re.sub("and in the judgment", "", judges_string)
+            judges_string = re.sub("and the judgment", "", judges_string)
             judges_string = re.sub("was an appointed", "", judges_string)
             judges_string = re.sub("S93A0786", "", judges_string)
             judges_string = re.sub("S93X0787", "", judges_string)
@@ -1452,6 +1454,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub(" IV", "", judges_string)
             judges_string = re.sub("C\. J\.,", "", judges_string)
             judges_string = re.sub(" J\.,", "", judges_string)
+            judges_string = re.sub("assignment|Assignment|ASSIGNMENT", "", judges_string)
             judges_string = re.sub("assigning", "", judges_string)
             judges_string = re.sub("assigned", "", judges_string)
             judges_string = re.sub("assigns", "", judges_string)
@@ -1462,6 +1465,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("Arbitrate\"", "", judges_string)
             judges_string = re.sub("files a", "", judges_string)
             judges_string = re.sub("former|Former|FORMER", "", judges_string)
+            judges_string = re.sub(" Hon.", "", judges_string)
             judges_string = re.sub("Hon\. J\.", "", judges_string)
             judges_string = re.sub("C\.J\.,|Sp\.JJ|Sp\.J\.|Sp\. J\.|C\.J,|J\.P\.T\.|CJ,||A\.J\.V\.C\.J\.,|JJ\.,|Sp\.J\.|Js,|JS,|JJ\.,|JJ,|D\.J\.,|P\.J\.,|P\.\sJ\.,|C\.J\.,|J\.,|J\.| J,|C\. J\.,", "", judges_string)
             judges_string = re.sub("C\.J\.|C\.J|CJ|JJ\.|Js|JS|JJ\.|JJ|D\.J\.|P\.J\.|P\.\sJ\.|C\.J\.|J\.|J\.|C\. J\.", "", judges_string)
@@ -1473,6 +1477,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("Parts I", "", judges_string)
             judges_string = re.sub("Part II", "", judges_string)
             judges_string = re.sub("Part I", "", judges_string)
+            judges_string = re.sub("Part XII", "", judges_string)
             judges_string = re.sub("WoWe", "", judges_string)
             judges_string = re.sub("foregoing|Foregoing|FOREGOING", "", judges_string)
             judges_string = re.sub(" for| For| FOR", "", judges_string)
@@ -1507,7 +1512,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub("Voting|VOTING|voting", "", judges_string)
             judges_string = re.sub("Surrogate", "", judges_string)
             judges_string = re.sub("\'", "", judges_string)			#makes matching of judge names possible: O'Connor -> OConnor
-            judges_string = re.sub("judgment", "", judges_string)
+            judges_string = re.sub("judgment|JUDGMENT", "", judges_string)
             judges_string = re.sub("SeeStuart|seestuart", "See, Stuart", judges_string)
             if(re.search("unanimous view of the court|unanimous", judges_string)):
                 unanimous = 1
@@ -1868,6 +1873,14 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             judges_string = re.sub('before|Before|BEFORE', '', judges_string)
             judges_string = re.sub(' Yes | yes ', '', judges_string)
             judges_string = re.sub(' Yes,| yes,', '', judges_string)
+            judges_string = re.sub('unanimouns', '', judges_string)
+            judges_string = re.sub('circumstance|Circumstances|CIRCUMSTANCES', '', judges_string)
+            judges_string = re.sub(' action', '', judges_string)
+            judges_string = re.sub('concludes', '', judges_string)
+            judges_string = re.sub('addressed', '', judges_string)
+            judges_string = re.sub(' commit', '', judges_string)
+            judges_string = re.sub(' was | was,', '', judges_string)
+            judges_string = re.sub(' and ', '', judges_string)
             if state != 'Alabama':
                 judges_string = re.sub(' See| see', '', judges_string)
             #print judges_string
