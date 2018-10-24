@@ -2396,9 +2396,12 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             dissent1_ln = dissent1_ln.strip()
             dissent1_ln = re.sub("\xa0", "", dissent1_ln)
             dissent1_ln = Capitalize(dissent1_ln)
-            dissent1_fn = firstname(dissent_holder[0])
-            dissent1_mn = middlename(dissent_holder[0])
-            dissent1_suf = namesuffix(dissent_holder[0])
+            try:
+                dissent1_fn = firstname(dissent_holder[0])
+                dissent1_mn = middlename(dissent_holder[0])
+                dissent1_suf = namesuffix(dissent_holder[0])
+            except:
+                pass
             if (len(dissent_holder) > 1):
                 dissent2_ln = lastname(dissent_holder[1]).strip()
                 dissent2_fn = firstname(dissent_holder[1])
