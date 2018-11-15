@@ -159,7 +159,7 @@ cleandirlist = cleandirlist #[42300:42313] 42000:
 
 entryCount = 0
 
-for entry in cleandirlist: ## each entry is a txt file with an opinion #[34854:34855]
+for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opinion #[34854:34855]
     #print(entry)
     infilepath = dirname + entry
     print entry
