@@ -294,7 +294,7 @@ localrow.append("hn27")
 localrow.append("hn28")
 localrow.append("hn29")
 localrow.append("hn30")
-localrow.append("hnSovImmunity")
+#localrow.append("hnSovImmunity")
 localrow.append("opinion_words") ## number of words in all opinions
 #localrow.append("Short Opinion text")
 #localrow.append("Designation")

@@ -21,8 +21,9 @@ for entry in dirlist:
 cleandirlist = cleandirlist
 
 entryCount = 0
+all_head = {}
 
-for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opinion #[34854:34855]
+for entry in cleandirlist: ## each entry is a txt file with an opinion #[34854:34855]
     #print(entry)
     infilepath = dirname + entry
     print entry
@@ -118,4 +119,16 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
                 #break
                 pass
 
-        print('This file contains: ' + str(betterCounter) + ' headnotes.') # Should say 21 headnoteCounter
+        #print('This file contains: ' + str(betterCounter) + ' headnotes.') # Should say 21 headnoteCounter
+
+        all_head[str(entry)] = betterCounter
+
+
+#print(all_head)
+max_case = max(all_head, key=all_head.get)
+print('\n')
+print(max_case, all_head[max_case])
+
+print('\n')
+newA = dict(sorted(all_head.iteritems(), key=operator.itemgetter(1), reverse=True)[:5])
+print(newA)

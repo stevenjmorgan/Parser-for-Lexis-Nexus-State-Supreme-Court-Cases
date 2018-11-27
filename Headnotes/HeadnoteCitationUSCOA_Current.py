@@ -144,6 +144,103 @@ localrow.append("hdnote12")
 localrow.append("hdnote12_2")
 localrow.append("hdnote12_3")
 localrow.append("hdnote12_cites")
+localrow.append("hdnote13")
+localrow.append("hdnote13_2")
+localrow.append("hdnote13_3")
+localrow.append("hdnote13_cites")
+localrow.append("hdnote14")
+localrow.append("hdnote14_2")
+localrow.append("hdnote14_3")
+localrow.append("hdnote14_cites")
+localrow.append("hdnote15")
+localrow.append("hdnote15_2")
+localrow.append("hdnote15_3")
+localrow.append("hdnote15_cites")
+localrow.append("hdnote16")
+localrow.append("hdnote16_2")
+localrow.append("hdnote16_3")
+localrow.append("hdnote16_cites")
+localrow.append("hdnote17")
+localrow.append("hdnote17_2")
+localrow.append("hdnote17_3")
+localrow.append("hdnote17_cites")
+localrow.append("hdnote18")
+localrow.append("hdnote18_2")
+localrow.append("hdnote18_3")
+localrow.append("hdnote18_cites")
+localrow.append("hdnote19")
+localrow.append("hdnote19_2")
+localrow.append("hdnote19_3")
+localrow.append("hdnote19_cites")
+localrow.append("hdnote20")
+localrow.append("hdnote20_2")
+localrow.append("hdnote20_3")
+localrow.append("hdnote20_cites")
+localrow.append("hdnote21")
+localrow.append("hdnote21_2")
+localrow.append("hdnote21_3")
+localrow.append("hdnote21_cites")
+localrow.append("hdnote22")
+localrow.append("hdnote22_2")
+localrow.append("hdnote22_3")
+localrow.append("hdnote22_cites")
+
+localrow.append("hdnote22")
+localrow.append("hdnote22_2")
+localrow.append("hdnote22_3")
+localrow.append("hdnote22_cites")
+localrow.append("hdnote23")
+localrow.append("hdnote23_2")
+localrow.append("hdnote23_3")
+localrow.append("hdnote23_cites")
+localrow.append("hdnote24")
+localrow.append("hdnote24_2")
+localrow.append("hdnote24_3")
+localrow.append("hdnote24_cites")
+localrow.append("hdnote25")
+localrow.append("hdnote25_2")
+localrow.append("hdnote25_3")
+localrow.append("hdnote25_cites")
+localrow.append("hdnote26")
+localrow.append("hdnote26_2")
+localrow.append("hdnote26_3")
+localrow.append("hdnote26_cites")
+localrow.append("hdnote27")
+localrow.append("hdnote27_2")
+localrow.append("hdnote27_3")
+localrow.append("hdnote27_cites")
+localrow.append("hdnote28")
+localrow.append("hdnote28_2")
+localrow.append("hdnote28_3")
+localrow.append("hdnote28_cites")
+localrow.append("hdnote29")
+localrow.append("hdnote29_2")
+localrow.append("hdnote29_3")
+localrow.append("hdnote29_cites")
+localrow.append("hdnote30")
+localrow.append("hdnote30_2")
+localrow.append("hdnote30_3")
+localrow.append("hdnote30_cites")
+localrow.append("hdnote31")
+localrow.append("hdnote31_2")
+localrow.append("hdnote31_3")
+localrow.append("hdnote31_cites")
+localrow.append("hdnote32")
+localrow.append("hdnote32_2")
+localrow.append("hdnote32_3")
+localrow.append("hdnote32_cites")
+localrow.append("hdnote33")
+localrow.append("hdnote33_2")
+localrow.append("hdnote33_3")
+localrow.append("hdnote33_cites")
+localrow.append("hdnote34")
+localrow.append("hdnote34_2")
+localrow.append("hdnote34_3")
+localrow.append("hdnote34_cites")
+localrow.append("hdnote35")
+localrow.append("hdnote35_2")
+localrow.append("hdnote35_3")
+localrow.append("hdnote35_cites")
 outfilehandle.writerow(localrow)
 
 dirname = mydir + "AdminTxt/"
@@ -159,7 +256,7 @@ cleandirlist = cleandirlist #[42300:42313] 42000:
 
 entryCount = 0
 
-for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opinion #[34854:34855]
+for entry in cleandirlist: ## each entry is a txt file with an opinion #[34854:34855]
     #print(entry)
     infilepath = dirname + entry
     print entry
@@ -177,6 +274,29 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     hn10index_list = []
     hn11index_list = []
     hn12index_list = []
+    hn13index_list = []
+    hn14index_list = []
+    hn15index_list = []
+    hn16index_list = []
+    hn17index_list = []
+    hn18index_list = []
+    hn19index_list = []
+    hn20index_list = []
+    hn21index_list = []
+    hn22index_list = []
+    hn23index_list = []
+    hn24index_list = []
+    hn25index_list = []
+    hn26index_list = []
+    hn27index_list = []
+    hn28index_list = []
+    hn29index_list = []
+    hn30index_list = []
+    hn31index_list = []
+    hn32index_list = []
+    hn33index_list = []
+    hn34index_list = []
+    hn35index_list = []
 
     hn1_text = ''
     hn2_text = ''
@@ -190,6 +310,30 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     hn10_text = ''
     hn11_text = ''
     hn12_text = ''
+    hn13_text = ''
+    hn14_text = ''
+    hn15_text = ''
+    hn16_text = ''
+    hn17_text = ''
+    hn18_text = ''
+    hn19_text = ''
+    hn20_text = ''
+    hn21_text = ''
+    hn22_text = ''
+    hn23_text = ''
+    hn24_text = ''
+    hn25_text = ''
+    hn26_text = ''
+    hn27_text = ''
+    hn28_text = ''
+    hn29_text = ''
+    hn30_text = ''
+    hn31_text = ''
+    hn32_text = ''
+    hn33_text = ''
+    hn34_text = ''
+    hn35_text = ''
+
     hn1_text2 = ''
     hn2_text2 = ''
     hn3_text2 = ''
@@ -202,6 +346,30 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     hn10_text2 = ''
     hn11_text2 = ''
     hn12_text2 = ''
+    hn13_text2 = ''
+    hn14_text2 = ''
+    hn15_text2 = ''
+    hn16_text2 = ''
+    hn17_text2 = ''
+    hn18_text2 = ''
+    hn19_text2 = ''
+    hn20_text2 = ''
+    hn21_text2 = ''
+    hn22_text2 = ''
+    hn23_text2 = ''
+    hn24_text2 = ''
+    hn25_text2 = ''
+    hn26_text2 = ''
+    hn27_text2 = ''
+    hn28_text2 = ''
+    hn29_text2 = ''
+    hn30_text2 = ''
+    hn31_text2 = ''
+    hn32_text2 = ''
+    hn33_text2 = ''
+    hn34_text2 = ''
+    hn35_text2 = ''
+
     hn1_text3 = ''
     hn2_text3 = ''
     hn3_text3 = ''
@@ -214,6 +382,30 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     hn10_text3 = ''
     hn11_text3 = ''
     hn12_text3 = ''
+    hn13_text3 = ''
+    hn14_text3 = ''
+    hn15_text3 = ''
+    hn16_text3 = ''
+    hn17_text3 = ''
+    hn18_text3 = ''
+    hn19_text3 = ''
+    hn20_text3 = ''
+    hn21_text3 = ''
+    hn22_text3 = ''
+    hn23_text3 = ''
+    hn24_text3 = ''
+    hn25_text3 = ''
+    hn26_text3 = ''
+    hn27_text3 = ''
+    hn28_text3 = ''
+    hn29_text3 = ''
+    hn30_text3 = ''
+    hn31_text3 = ''
+    hn32_text3 = ''
+    hn33_text3 = ''
+    hn34_text3 = ''
+    hn35_text3 = ''
+
     line_list = []
 
     ### Pull line before HN1 -> open separately but text after hn section not
@@ -256,6 +448,76 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
                 pass
             if re.search('HN12',line):
                 hn12index_list.append(index)
+                pass
+            if re.search('HN13',line):
+                hn13index_list.append(index)
+                pass
+            if re.search('HN14',line):
+                hn14index_list.append(index)
+                pass
+            if re.search('HN15',line):
+                hn15index_list.append(index)
+                pass
+            if re.search('HN16',line):
+                hn16index_list.append(index)
+                pass
+            if re.search('HN17',line):
+                hn17index_list.append(index)
+                pass
+            if re.search('HN18',line):
+                hn18index_list.append(index)
+                pass
+            if re.search('HN19',line):
+                hn19index_list.append(index)
+                pass
+            if re.search('HN20',line):
+                hn20index_list.append(index)
+                pass
+            if re.search('HN21',line):
+                hn21index_list.append(index)
+                pass
+            if re.search('HN22',line):
+                hn22index_list.append(index)
+                pass
+
+            if re.search('HN23',line):
+                hn23index_list.append(index)
+                pass
+            if re.search('HN24',line):
+                hn24index_list.append(index)
+                pass
+            if re.search('HN25',line):
+                hn25index_list.append(index)
+                pass
+            if re.search('HN26',line):
+                hn26index_list.append(index)
+                pass
+            if re.search('HN27',line):
+                hn27index_list.append(index)
+                pass
+            if re.search('HN28',line):
+                hn28index_list.append(index)
+                pass
+            if re.search('HN29',line):
+                hn29index_list.append(index)
+                pass
+            if re.search('HN30',line):
+                hn30index_list.append(index)
+                pass
+            if re.search('HN31',line):
+                hn31index_list.append(index)
+                pass
+            if re.search('HN32',line):
+                hn32index_list.append(index)
+                pass
+            if re.search('HN33',line):
+                hn33index_list.append(index)
+                pass
+            if re.search('HN34',line):
+                hn34index_list.append(index)
+                pass
+            if re.search('HN35',line):
+                hn35index_list.append(index)
                 break
 
     # Enumerate based on line before HN1, store headnote text
@@ -370,6 +632,167 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
             if re.search('>', line_list[index-3].strip()):
                 hn12_text3 = line_list[index-3].strip()
 
+    for index in hn13index_list[0:1]:
+        hn13_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn13_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn13_text3 = line_list[index-3].strip()
+
+    for index in hn14index_list[0:1]:
+        hn14_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn143_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn14_text3 = line_list[index-3].strip()
+
+    for index in hn15index_list[0:1]:
+        hn15_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn15_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn15_text3 = line_list[index-3].strip()
+
+    for index in hn16index_list[0:1]:
+        hn16_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn16_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn16_text3 = line_list[index-3].strip()
+
+    for index in hn17index_list[0:1]:
+        hn17_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn17_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn17_text3 = line_list[index-3].strip()
+
+    for index in hn18index_list[0:1]:
+        hn18_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn18_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn18_text3 = line_list[index-3].strip()
+
+    for index in hn19index_list[0:1]:
+        hn19_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn19_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn19_text3 = line_list[index-3].strip()
+
+    for index in hn20index_list[0:1]:
+        hn20_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn20_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn20_text3 = line_list[index-3].strip()
+
+    for index in hn21index_list[0:1]:
+        hn21_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn21_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn21_text3 = line_list[index-3].strip()
+
+    for index in hn22index_list[0:1]:
+        hn22_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn22_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn22_text3 = line_list[index-3].strip()
+
+    for index in hn23index_list[0:1]:
+        hn23_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn23_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn23_text3 = line_list[index-3].strip()
+
+    for index in hn24index_list[0:1]:
+        hn24_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn24_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn24_text3 = line_list[index-3].strip()
+
+    for index in hn25index_list[0:1]:
+        hn25_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn25_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn25_text3 = line_list[index-3].strip()
+
+    for index in hn26index_list[0:1]:
+        hn26_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn26_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn26_text3 = line_list[index-3].strip()
+
+    for index in hn27index_list[0:1]:
+        hn27_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn27_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn27_text3 = line_list[index-3].strip()
+
+    for index in hn28index_list[0:1]:
+        hn28_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn28_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn28_text3 = line_list[index-3].strip()
+
+    for index in hn29index_list[0:1]:
+        hn29_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn29_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn29_text3 = line_list[index-3].strip()
+
+    for index in hn30index_list[0:1]:
+        hn30_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn30_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn30_text3 = line_list[index-3].strip()
+
+    for index in hn31index_list[0:1]:
+        hn31_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn31_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn31_text3 = line_list[index-3].strip()
+
+    for index in hn32index_list[0:1]:
+        hn32_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn32_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn32_text3 = line_list[index-3].strip()
+
+    for index in hn33index_list[0:1]:
+        hn33_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn33_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn33_text3 = line_list[index-3].strip()
+
+    for index in hn34index_list[0:1]:
+        hn34_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn34_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn34_text3 = line_list[index-3].strip()
+
+    for index in hn35index_list[0:1]:
+        hn35_text = line_list[index-1].strip()
+        if re.search('>', line_list[index-2].strip()):
+            hn35_text2 = line_list[index-2].strip()
+            if re.search('>', line_list[index-3].strip()):
+                hn35_text3 = line_list[index-3].strip()
+
     f.close()
 
     # Open file and store text in memory
@@ -388,6 +811,29 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     hn10_list = []
     hn11_list = []
     hn12_list = []
+    hn13_list = []
+    hn14_list = []
+    hn15_list = []
+    hn16_list = []
+    hn17_list = []
+    hn18_list = []
+    hn19_list = []
+    hn20_list = []
+    hn21_list = []
+    hn22_list = []
+    hn23_list = []
+    hn24_list = []
+    hn25_list = []
+    hn26_list = []
+    hn27_list = []
+    hn28_list = []
+    hn29_list = []
+    hn30_list = []
+    hn31_list = []
+    hn32_list = []
+    hn33_list = []
+    hn34_list = []
+    hn35_list = []
     localrow = []
     case = ''
 
@@ -599,7 +1045,7 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
 
 
 
-    for i in range(1,13):
+    for i in range(1,36):
 
         hnCounter = 'HN' + str(i) + ' '
 
@@ -643,42 +1089,77 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
                             cite = re.split('\(',re.split(elem, txtline)[1])[0].strip()
                         except:
                             pass
-                        #print cite
 
                         if i == 1:
                             hn1_list.append(cite)
-
                         if i == 2:
                             hn2_list.append(cite)
-
                         if i == 3:
                             hn3_list.append(cite)
-
                         if i == 4:
                             hn4_list.append(cite)
-
                         if i == 5:
                             hn5_list.append(cite)
-
                         if i == 6:
                             hn6_list.append(cite)
-
                         if i == 7:
                             hn7_list.append(cite)
-
                         if i == 8:
                             hn8_list.append(cite)
-
                         if i == 9:
                             hn9_list.append(cite)
-
                         if i == 10:
                             hn10_list.append(cite)
-
                         if i == 11:
                             hn11_list.append(cite)
                         if i == 12:
                             hn12_list.append(cite)
+                        if i == 13:
+                            hn13_list.append(cite)
+                        if i == 14:
+                            hn14_list.append(cite)
+                        if i == 15:
+                            hn15_list.append(cite)
+                        if i == 16:
+                            hn16_list.append(cite)
+                        if i == 17:
+                            hn17_list.append(cite)
+                        if i == 18:
+                            hn18_list.append(cite)
+                        if i == 19:
+                            hn19_list.append(cite)
+                        if i == 20:
+                            hn20_list.append(cite)
+                        if i == 21:
+                            hn21_list.append(cite)
+                        if i == 22:
+                            hn22_list.append(cite)
+                        if i == 23:
+                            hn23_list.append(cite)
+                        if i == 24:
+                            hn24_list.append(cite)
+                        if i == 25:
+                            hn25_list.append(cite)
+                        if i == 26:
+                            hn26_list.append(cite)
+                        if i == 27:
+                            hn27_list.append(cite)
+                        if i == 28:
+                            hn28_list.append(cite)
+                        if i == 29:
+                            hn29_list.append(cite)
+                        if i == 30:
+                            hn30_list.append(cite)
+                        if i == 31:
+                            hn31_list.append(cite)
+                        if i == 32:
+                            hn32_list.append(cite)
+                        if i == 33:
+                            hn33_list.append(cite)
+                        if i == 34:
+                            hn34_list.append(cite)
+                        if i == 35:
+                            hn35_list.append(cite)
 
                 ### First 5000 cases are wonky; this should probably be done by year
                 #if entryCount <= 5000:
@@ -732,6 +1213,99 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
                         hn12_list.extend(report_match)
                         hn12_list.extend(sct_match)
                         hn12_list.extend(lexis_match)
+                    if i == 13:
+                        hn13_list.extend(report_match)
+                        hn13_list.extend(sct_match)
+                        hn13_list.extend(lexis_match)
+                    if i == 14:
+                        hn14_list.extend(report_match)
+                        hn14_list.extend(sct_match)
+                        hn14_list.extend(lexis_match)
+                    if i == 15:
+                        hn15_list.extend(report_match)
+                        hn15_list.extend(sct_match)
+                        hn15_list.extend(lexis_match)
+                    if i == 16:
+                        hn16_list.extend(report_match)
+                        hn16_list.extend(sct_match)
+                        hn16_list.extend(lexis_match)
+                    if i == 17:
+                        hn17_list.extend(report_match)
+                        hn17_list.extend(sct_match)
+                        hn17_list.extend(lexis_match)
+                    if i == 18:
+                        hn18_list.extend(report_match)
+                        hn18_list.extend(sct_match)
+                        hn18_list.extend(lexis_match)
+                    if i == 19:
+                        hn19_list.extend(report_match)
+                        hn19_list.extend(sct_match)
+                        hn19_list.extend(lexis_match)
+                    if i == 20:
+                        hn20_list.extend(report_match)
+                        hn20_list.extend(sct_match)
+                        hn20_list.extend(lexis_match)
+                    if i == 21:
+                        hn21_list.extend(report_match)
+                        hn21_list.extend(sct_match)
+                        hn21_list.extend(lexis_match)
+                    if i == 22:
+                        hn22_list.extend(report_match)
+                        hn22_list.extend(sct_match)
+                        hn22_list.extend(lexis_match)
+                    if i == 23:
+                        hn23_list.extend(report_match)
+                        hn23_list.extend(sct_match)
+                        hn23_list.extend(lexis_match)
+                    if i == 24:
+                        hn24_list.extend(report_match)
+                        hn24_list.extend(sct_match)
+                        hn24_list.extend(lexis_match)
+                    if i == 25:
+                        hn25_list.extend(report_match)
+                        hn25_list.extend(sct_match)
+                        hn25_list.extend(lexis_match)
+                    if i == 26:
+                        hn26_list.extend(report_match)
+                        hn26_list.extend(sct_match)
+                        hn26_list.extend(lexis_match)
+                    if i == 27:
+                        hn27_list.extend(report_match)
+                        hn27_list.extend(sct_match)
+                        hn27_list.extend(lexis_match)
+                    if i == 28:
+                        hn28_list.extend(report_match)
+                        hn28_list.extend(sct_match)
+                        hn28_list.extend(lexis_match)
+                    if i == 29:
+                        hn29_list.extend(report_match)
+                        hn29_list.extend(sct_match)
+                        hn29_list.extend(lexis_match)
+                    if i == 30:
+                        hn30_list.extend(report_match)
+                        hn30_list.extend(sct_match)
+                        hn30_list.extend(lexis_match)
+                    if i == 31:
+                        hn31_list.extend(report_match)
+                        hn31_list.extend(sct_match)
+                        hn31_list.extend(lexis_match)
+                    if i == 32:
+                        hn32_list.extend(report_match)
+                        hn32_list.extend(sct_match)
+                        hn32_list.extend(lexis_match)
+                    if i == 33:
+                        hn33_list.extend(report_match)
+                        hn33_list.extend(sct_match)
+                        hn33_list.extend(lexis_match)
+                    if i == 34:
+                        hn34_list.extend(report_match)
+                        hn34_list.extend(sct_match)
+                        hn34_list.extend(lexis_match)
+                    if i == 35:
+                        hn35_list.extend(report_match)
+                        hn35_list.extend(sct_match)
+                        hn35_list.extend(lexis_match)
+
 
     hn1_list = CleanCells(hn1_list)
     hn2_list = CleanCells(hn2_list)
@@ -745,6 +1319,29 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     hn10_list = CleanCells(hn10_list)
     hn11_list = CleanCells(hn11_list)
     hn12_list = CleanCells(hn12_list)
+    hn13_list = CleanCells(hn13_list)
+    hn14_list = CleanCells(hn14_list)
+    hn15_list = CleanCells(hn15_list)
+    hn16_list = CleanCells(hn16_list)
+    hn17_list = CleanCells(hn17_list)
+    hn18_list = CleanCells(hn18_list)
+    hn19_list = CleanCells(hn19_list)
+    hn20_list = CleanCells(hn20_list)
+    hn21_list = CleanCells(hn21_list)
+    hn22_list = CleanCells(hn22_list)
+    hn23_list = CleanCells(hn23_list)
+    hn24_list = CleanCells(hn24_list)
+    hn25_list = CleanCells(hn25_list)
+    hn26_list = CleanCells(hn26_list)
+    hn27_list = CleanCells(hn27_list)
+    hn28_list = CleanCells(hn28_list)
+    hn29_list = CleanCells(hn29_list)
+    hn30_list = CleanCells(hn30_list)
+    hn31_list = CleanCells(hn31_list)
+    hn32_list = CleanCells(hn32_list)
+    hn33_list = CleanCells(hn33_list)
+    hn34_list = CleanCells(hn34_list)
+    hn35_list = CleanCells(hn35_list)
 
     localrow = []
 
@@ -803,6 +1400,99 @@ for entry in cleandirlist[34854:34855]: ## each entry is a txt file with an opin
     localrow.append(hn12_text2)
     localrow.append(hn12_text3)
     localrow.append(hn12_list)
+    localrow.append(hn13_text)
+    localrow.append(hn13_text2)
+    localrow.append(hn13_text3)
+    localrow.append(hn13_list)
+    localrow.append(hn14_text)
+    localrow.append(hn14_text2)
+    localrow.append(hn14_text3)
+    localrow.append(hn14_list)
+    localrow.append(hn15_text)
+    localrow.append(hn15_text2)
+    localrow.append(hn15_text3)
+    localrow.append(hn15_list)
+    localrow.append(hn16_text)
+    localrow.append(hn16_text2)
+    localrow.append(hn16_text3)
+    localrow.append(hn16_list)
+    localrow.append(hn17_text)
+    localrow.append(hn17_text2)
+    localrow.append(hn17_text3)
+    localrow.append(hn17_list)
+    localrow.append(hn18_text)
+    localrow.append(hn18_text2)
+    localrow.append(hn18_text3)
+    localrow.append(hn18_list)
+    localrow.append(hn19_text)
+    localrow.append(hn19_text2)
+    localrow.append(hn19_text3)
+    localrow.append(hn19_list)
+    localrow.append(hn20_text)
+    localrow.append(hn20_text2)
+    localrow.append(hn20_text3)
+    localrow.append(hn20_list)
+    localrow.append(hn21_text)
+    localrow.append(hn21_text2)
+    localrow.append(hn21_text3)
+    localrow.append(hn21_list)
+    localrow.append(hn22_text)
+    localrow.append(hn22_text2)
+    localrow.append(hn22_text3)
+    localrow.append(hn22_list)
+
+    localrow.append(hn23_text)
+    localrow.append(hn23_text2)
+    localrow.append(hn23_text3)
+    localrow.append(hn23_list)
+    localrow.append(hn24_text)
+    localrow.append(hn24_text2)
+    localrow.append(hn24_text3)
+    localrow.append(hn24_list)
+    localrow.append(hn25_text)
+    localrow.append(hn25_text2)
+    localrow.append(hn25_text3)
+    localrow.append(hn25_list)
+    localrow.append(hn26_text)
+    localrow.append(hn26_text2)
+    localrow.append(hn26_text3)
+    localrow.append(hn26_list)
+    localrow.append(hn27_text)
+    localrow.append(hn27_text2)
+    localrow.append(hn27_text3)
+    localrow.append(hn27_list)
+    localrow.append(hn28_text)
+    localrow.append(hn28_text2)
+    localrow.append(hn28_text3)
+    localrow.append(hn28_list)
+    localrow.append(hn29_text)
+    localrow.append(hn29_text2)
+    localrow.append(hn29_text3)
+    localrow.append(hn29_list)
+    localrow.append(hn30_text)
+    localrow.append(hn30_text2)
+    localrow.append(hn30_text3)
+    localrow.append(hn30_list)
+    localrow.append(hn31_text)
+    localrow.append(hn31_text2)
+    localrow.append(hn31_text3)
+    localrow.append(hn31_list)
+    localrow.append(hn32_text)
+    localrow.append(hn32_text2)
+    localrow.append(hn32_text3)
+    localrow.append(hn32_list)
+    localrow.append(hn33_text)
+    localrow.append(hn33_text2)
+    localrow.append(hn33_text3)
+    localrow.append(hn33_list)
+    localrow.append(hn34_text)
+    localrow.append(hn34_text2)
+    localrow.append(hn34_text3)
+    localrow.append(hn34_list)
+    localrow.append(hn35_text)
+    localrow.append(hn35_text2)
+    localrow.append(hn35_text3)
+    localrow.append(hn35_list)
     outfilehandle.writerow(localrow)
 
 infilehandle.close()
