@@ -344,12 +344,13 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-fout = open(mydir + "EAWPost1990_final.csv", "wb") #EAWPost1990
+mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
+fout = open(mydir2 + "EAWPost1990_final.csv", "wb") #EAWPost1990    ############################
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir + "check_recusals_EAWPost1990_final.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_EAWPost1990_final.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
