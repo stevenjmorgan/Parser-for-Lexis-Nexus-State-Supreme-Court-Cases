@@ -25,7 +25,8 @@ import operator
 import datetime
 
 #mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+#mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+mydir = "C:/Users/steve/Dropbox/PSU2018-2019/RA/Scraper/"
 
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
@@ -344,13 +345,14 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
-fout = open(mydir2 + "EAWPost1990_final.csv", "wb") #EAWPost1990    ############################
+#mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
+mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
+fout = open(mydir2 + "MissingKnownCases_final.csv", "wb") #EAWPost1990    ############################
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir2 + "check_recusals_EAWPost1990_final.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_MissingKnownCases_final.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -424,7 +426,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "EAWPost1990/"
+dirname = mydir + "6-19-2019_MissingKnownCasesToScrape/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
