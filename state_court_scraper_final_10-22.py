@@ -25,8 +25,8 @@ import operator
 import datetime
 
 #mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-#mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/steve/Dropbox/PSU2018-2019/RA/Scraper/"
+mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+#mydir = "C:/Users/steve/Dropbox/PSU2018-2019/RA/Scraper/"
 
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
@@ -345,14 +345,14 @@ def state_ab(value):
         return state_abbr
 
 # .csv file where extracted metadata will be stored
-#mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
-mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
-fout = open(mydir2 + "MissingKnownCases_final.csv", "wb") #EAWPost1990    ############################
+mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
+#mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
+fout = open(mydir2 + "DamageCaps_final.csv", "wb") #EAWPost1990    ############################
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir2 + "check_recusals_MissingKnownCases_final.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_DamageCaps_final.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -426,7 +426,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "6-19-2019_MissingKnownCasesToScrape/"
+dirname = mydir + "DamageCapsKnown/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
@@ -737,6 +737,9 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     docket = False
     check_recuse = False
     check_recuse_case = 0
+    start = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
+    end = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
+    date_format = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
 
 	# each txtline is one "line" in the text file: the end of a line is determined by \n
     for txtline in txtlines:
