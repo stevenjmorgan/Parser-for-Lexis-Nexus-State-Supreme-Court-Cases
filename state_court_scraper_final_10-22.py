@@ -737,8 +737,8 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     docket = False
     check_recuse = False
     check_recuse_case = 0
-    start = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
-    end = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
+    #start = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
+    #end = datetime.datetime.strptime('12/31/2100', '%m/%d/%Y').date()
     date_format = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
 
 	# each txtline is one "line" in the text file: the end of a line is determined by \n
@@ -917,6 +917,7 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
                     if len(row[5]) == 4 and row[0] != "MC": #and (panel == 0 or ((state_abbr == "AL" or state_abbr == "FL"))) and len(judge6_ln) > 2 and len(judge9_ln) < 2:
                         row[5] = "1/1/" + row[5]
                         #print state_abbr
+                    #print(len(row[4]))
                     if len(row[4]) != 4 and row[0] != "MC" and (panel == 0 or ((state_abbr == "AL" or state_abbr == "FL" or state_abbr == "NH"))) and ((len(judge6_ln) > 2 or len(judge3_ln) < 2) and len(judge9_ln) < 2) and state_abbr:
                         start = datetime.datetime.strptime(row[4], '%m/%d/%Y').date()
                         end = datetime.datetime.strptime(row[5], '%m/%d/%Y').date()
@@ -3373,10 +3374,18 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             for row in reader:
                 state = row[0]
                 name = row[3]
+                
+                #start = datetime.datetime.strptime(row[4], '%m/%d/%Y').date()
+                #end = datetime.datetime.strptime(row[5], '%m/%d/%Y').date() + datetime.timedelta(30)
+                
                 if len(row[4]) == 4 and row[0] != "MC":
                     row[4] = "1/1/" + row[4]
                 if len(row[5]) == 4 and row[0] != "MC":
                     row[5] = "1/1/" + row[5]
+                #print(len(row[4]), row[4])
+                #if len(row[4]) == 8:
+                #    start = datetime.datetime.strptime(row[4], '%m/%d/%Y').date()
+                #    end = datetime.datetime.strptime(row[5], '%m/%d/%Y').date() + datetime.timedelta(30)
                 if len(row[4]) != 4 and row[0] != "MC" and state_abbr != "AK" and (panel == 0 or ((state_abbr == "AL" or state_abbr == "FL" or state_abbr == "NH") and (len(judge6_ln) > 2) and len(judge9_ln) < 2 or len(judge3_ln) < 3) or len(judge5_ln) < 2) and state_abbr:
                     start = datetime.datetime.strptime(row[4], '%m/%d/%Y').date()
                     end = datetime.datetime.strptime(row[5], '%m/%d/%Y').date() + datetime.timedelta(30)
