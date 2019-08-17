@@ -23,11 +23,12 @@ import csv
 import string
 import operator
 import datetime
+import time
 
 #mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
 #mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
 #mydir = "C:/Users/steve/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/steve/Desktop/"
+mydir = "C:/Users/steve/OneDrive/Desktop/"
 
 def expandmonth(mstring2):
     mstring2 = re.sub("Jan\.", "January", mstring2)
@@ -345,16 +346,18 @@ def state_ab(value):
         state_abbr = "WY"
         return state_abbr
 
+#time.sleep(600)
+
 # .csv file where extracted metadata will be stored
 #mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
-mydir2 = 'C:/Users/steve/Desktop/'
+mydir2 = 'C:/Users/steve/OneDrive/Desktop/'
 #mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
-fout = open(mydir2 + "HCPost1990.csv", "wb") #EAWPost1990    ############################
+fout = open(mydir2 + "election_law.csv", "wb") #EAWPost1990    ############################
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir2 + "check_recusals_HCPost1990.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_election_law.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -428,7 +431,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "HCPost1990/"
+dirname = mydir + "election_law/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
@@ -440,7 +443,7 @@ for entry in dirlist:
 
 # Use (uncomment) following line to test code on a small handful of cases
 #cleandirlist = cleandirlist[838:872]
-for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
+for entry in cleandirlist[1395:]: ## each entry is a txt file with an opinion 0:1025
     # initialize all variables to be used
     infilepath = dirname + entry
     infilehandle = open(infilepath)
@@ -886,7 +889,10 @@ for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
             if action_string != "Court of Appeals of Maryland":
                 x = re.search("\d{4}", action_string)
                 # store in x the position of the last digit of the year
-                x = x.end()
+                try:
+                    x = x.end()
+                except:
+                    pass
                 if new_date == "":
                     date_bool = True
                 if(x != -1 and date_bool):
