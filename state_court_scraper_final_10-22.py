@@ -352,12 +352,12 @@ def state_ab(value):
 #mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
 mydir2 = 'C:/Users/steve/OneDrive/Desktop/'
 #mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
-fout = open(mydir2 + "cb_8-17.csv", "wb") #EAWPost1990    ############################
+fout = open(mydir2 + "SchFin_8-17.csv", "wb") #EAWPost1990    ############################
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir2 + "check_recusals_cb_8-17.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_SchFin_8-17.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -431,7 +431,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "CB_Post1990/"
+dirname = mydir + "SchFin/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
@@ -443,7 +443,7 @@ for entry in dirlist:
 
 # Use (uncomment) following line to test code on a small handful of cases
 #cleandirlist = cleandirlist[838:872]
-for entry in cleandirlist[1395:]: ## each entry is a txt file with an opinion 0:1025
+for entry in cleandirlist: ## each entry is a txt file with an opinion 0:1025
     # initialize all variables to be used
     infilepath = dirname + entry
     infilehandle = open(infilepath)
@@ -742,8 +742,8 @@ for entry in cleandirlist[1395:]: ## each entry is a txt file with an opinion 0:
     docket = False
     check_recuse = False
     check_recuse_case = 0
-    #start = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
-    #end = datetime.datetime.strptime('12/31/2100', '%m/%d/%Y').date()
+    start = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
+    end = datetime.datetime.strptime('12/31/2100', '%m/%d/%Y').date()
     date_format = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y').date()
 
 	# each txtline is one "line" in the text file: the end of a line is determined by \n
