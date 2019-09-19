@@ -352,12 +352,12 @@ def state_ab(value):
 mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
 #mydir2 = 'C:/Users/steve/OneDrive/Desktop/'
 #mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
-fout = open(mydir2 + "AFPost1990_9-7.csv", "wb") #EAWPost1990    ############################
+fout = open(mydir2 + "mandArb_9-7.csv", "wb") #EAWPost1990    ############################
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir2 + "check_recusals_AFPost1990_9-7.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_mandArb_9-7.csv", "wb") #EAWPost1990
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -431,7 +431,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "AFPost1990/"
+dirname = mydir + "mandArb/"
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
