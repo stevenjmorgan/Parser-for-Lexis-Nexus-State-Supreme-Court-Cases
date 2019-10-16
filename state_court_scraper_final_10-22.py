@@ -26,7 +26,7 @@ import datetime
 import time
 
 #mydir = "C:/Users/Steve/Dropbox/PSU2018-2019/RA/Scraper/"
-mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/"
+mydir = "C:/Users/sum410/Dropbox/PSU2018-2019/RA/Scraper/" ########### Where state master file csv is located
 #mydir = "C:/Users/steve/Dropbox/PSU2018-2019/RA/Scraper/"
 #mydir = "C:/Users/steve/OneDrive/Desktop/"
 
@@ -349,15 +349,15 @@ def state_ab(value):
 #time.sleep(600)
 
 # .csv file where extracted metadata will be stored
-mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'
+mydir2 = 'C:/Users/sum410/Dropbox/PSU2018-2019/Summer/MN/'  ########### Change to where csv will be saved to
 #mydir2 = 'C:/Users/steve/OneDrive/Desktop/'
 #mydir2 = 'C:/Users/steve/Dropbox/PSU2018-2019/Summer/MN/'
-fout = open(mydir2 + "DCKnownPost1990_9-7.csv", "wb") #EAWPost1990    ############################
+fout = open(mydir2 + "DCKnownPost1990_9-7.csv", "wb") ########### Name csv file (parsing output)
 outfilehandle = csv.writer(fout,
                            delimiter=",",
                            quotechar='"',
                            quoting=csv.QUOTE_NONNUMERIC)
-check = open(mydir2 + "check_recusals_DCKnownPost1990_9-7.csv", "wb") #EAWPost1990
+check = open(mydir2 + "check_recusals_DCKnownPost1990_9-7.csv", "wb") ########### Name csv file (recusals)
 recuse_handle = csv.writer(check,
                            delimiter=",",
                            quotechar='"',
@@ -431,7 +431,7 @@ outfilehandle.writerow(localrow)
 recuse_handle.writerow(localrow)
 
 # Name of folder where all cases are located (and nothing else)
-dirname = mydir + "DCKnownPost1990/"
+dirname = mydir + "DCKnownPost1990/" ########### Change to where txt files are located
 dirlist = os.listdir(dirname)
 cleandirlist = []
 for entry in dirlist:
